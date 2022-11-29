@@ -53,6 +53,14 @@
     justify-content: end;
 }
 
+.actu__plus__button{
+    transition: transform .3s ease-in-out;
+}
+
+.actu__plus__button:hover {
+    transform: scale(1.05);
+}
+
 .actu__item__date {
     text-align: right;
     color: var(--white);

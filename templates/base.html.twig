@@ -1,19 +1,84 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+<head>
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
-    </head>
-    <body>
+    <!-- BASIC HEAD -->
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- TITLE -->
+    <title>{% block title %}Master IA - URCA{% endblock %}</title>
+
+    <!-- PERSONAL CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/side/left__side.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/side/right__side.css') }}"/>
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+
+    <!-- BOX ICONS -->
+    <link
+            href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+            rel="stylesheet"
+    />
+
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+<div class="left">
+    <div class="left__content">
+        <div class="left__top">
+            <a href="#"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
+        </div>
+        <div class="left__center">
+            <ul>
+                <li>
+                    <a href="#">
+                        <i class="bx bx-info-circle"></i>
+                        Informations
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bx bx-bullseye"></i>
+                        Découvrir
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <i class="bx bx-question-mark"></i>
+                        F.A.Q
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="left__bottom">
+            <p>
+                <i class="bx bx-log-in-circle"></i>
+                Se connecter
+            </p>
+        </div>
+    </div>
+</div>
+<div class="right">
+    <div class="right__content">
         {% block body %}{% endblock %}
-    </body>
+        <div class="right__bottom">
+            <p>
+                <i class="bx bx-code-curly"></i>
+                Développé par SuntoryDev
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- SCRIPT -->
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+
+</body>
 </html>
