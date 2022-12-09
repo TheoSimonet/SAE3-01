@@ -11,13 +11,14 @@
     <title>{% block title %}Master IA - URCA{% endblock %}</title>
 
     <!-- PERSONAL CSS -->
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/css/side/left__side.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('assets/css/side/right__side.css') }}"/>
 
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
+
+    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/side/left__side.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/side/right__side.css') }}"/>
 
     <!-- BOX ICONS -->
     <link
@@ -33,7 +34,7 @@
 <div class="left">
     <div class="left__content">
         <div class="left__top">
-            <a href="#"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
+            <a href="{{ path('app_accueil') }}"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
         </div>
         <div class="left__center">
             <ul>

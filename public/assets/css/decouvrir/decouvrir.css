@@ -1,7 +1,6 @@
 .right__center {
-    justify-content: center;
+    padding: 15px 0px;
 }
-
 .actu__item {
     display: flex;
     flex-direction: column;
