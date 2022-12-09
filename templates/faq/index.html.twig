@@ -3,7 +3,11 @@
 {% block title %}Master IA - URCA{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/actus/actus__item.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/faq/faq.css') }}"/>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('assets/js/faq.js') }}"></script>
 {% endblock %}
 
 {% block body %}
@@ -14,43 +18,27 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="actu__item">
-            <div class="actu__item__title">
-                <p>Foires aux questions</p>
-            </div>
-            <div class="actu__item__content">
-                <div class="content__text">
-                    <p>
-                        <ul>
-                            <li class="deroulant">Quelles compétences sont nécessaires pour rejoindre la formation ?</li>
-                                <ul class="sous">
-                                    <li>Il faut avoir un bac+3 en informatique et surtout avoir envie de travailler.</li>
-                                </ul>
-                            <br>
-                            <li class="deroulant">Comment s'inscrire à la formation ?</li>
-                                <ul class="sous">
-                                    <li>Pour vous inscrire il faut passer par la plateforme nationale eCandidat.</li>
-                                    <li>Ou par le biais du dispositif Etudes en France.</li>
-                                </ul>
-                            <br>
-                            <li class="deroulant">Est-il possible d'effectuer son master en alternance ?</li>
-                                <ul class="sous">
-                                    <li>Il est effectivement possible de faire une alternance. Les étudiants travaillent et suivent leurs études en même temps.</li>
-                                </ul>
-                        </ul>
-                    <div class="voir__plus">
-                        <a href="#" class="actu__plus__button">
-                            <i class="bx bx-plus-medical"></i>
-                            Voir plus
-                        </a>
-                    </div>
+        <div class="faq__item">
+            <div class="faq__item__content">
+                <div class="faq__content__text">
+                    <p class="faq__question"><i class='bx bxs-right-arrow'></i> Quelles compétences sont nécessaires pour rejoindre la formation ?</p>
+                    <p class="faq__reponse hide">Il faut avoir un bac+3 en informatique et surtout avoir envie de travailler.</p>
                 </div>
             </div>
-            <div class="actu__item__date">
-                <p>
-                    <i class="bx bx-time-five"></i>
-                    Moidifié le 07/08/2022
-                </p>
+        </div>
+        <div class="faq__item">
+            <div class="faq__item__content">
+                <div class="faq__content__text">
+                    <p class="faq__question"><i class='bx bxs-right-arrow'></i> Comment s'inscrire à la formation ?</p>
+                    <p class="faq__reponse hide">Pour vous inscrire il faut passer par la plateforme nationale eCandidat ou par le biais du dispositif Etudes en France.</p>
+                </div>
+            </div>
+        </div><div class="faq__item">
+            <div class="faq__item__content">
+                <div class="faq__content__text">
+                    <p class="faq__question"><i class='bx bxs-right-arrow'></i> Est-il possible d'effectuer son master en alternance ?</p>
+                    <p class="faq__reponse hide">Il est effectivement possible de faire une alternance. Les étudiants travaillent et suivent leurs études en même temps.</p>
+                </div>
             </div>
         </div>
     </div>
