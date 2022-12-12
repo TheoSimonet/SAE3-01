@@ -54,7 +54,30 @@ class ProjetTERController extends AbstractController
     #[Route('/projet_ter/create', name: 'app_projet_ter_create')]
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
+        $projet = new ProjetTER();
 
+        $form = $this->createForm(ProjetTERType::class, $projet);
+        $form->add('save', SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $projet->setNumpProj($form->getData()->getNumpProj());
+            $projet->setTitre($form->getData()->getTitre());
+            $projet->setDescription($form->getData()->getDescription());
+
+            $em = $doctrine->getManager();
+            $em->persist($projet);
+            $em->flush();
+
+            return $this->redirectToRoute('app_projet_ter', [
+                'id' => $projet->getId(),
+            ]);
+        }
+
+        return $this->render('projet_ter/create.html.twig', [
+            'projet' => $projet,
+            'form' => $form->createView(),
+        ]);
     }
 
     #[Route('/projet_ter/{id}/delete', name: 'app_projet_ter_delete', requirements: ['id' => '\d+'])]

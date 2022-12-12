@@ -6,7 +6,6 @@ use App\Entity\ProjetTER;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class ProjetTERType extends AbstractType
 {
