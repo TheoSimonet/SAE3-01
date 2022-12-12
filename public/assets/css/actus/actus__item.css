@@ -71,4 +71,8 @@
     font-size: 0.95rem;
 }
 
+.actu__list li {
+    margin-bottom: 50px;
+}
+
 /*********************/

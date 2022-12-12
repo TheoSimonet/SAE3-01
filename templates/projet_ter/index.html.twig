@@ -21,7 +21,11 @@
             <div class="actu__item__content">
                 <div class="content__text">
                     <p>
-                        FORMULAIRE DES PROJETS A METTRE
+                        <ul class="actu__list">
+                            {% for projetTER in projetsTER %}
+                                <li>{{ projetTER.titre }}</li>
+                            {% endfor %}
+                        </ul>
                     </p>
                 </div>
             </div>
