@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ProjetTER;
 use App\Form\ProjetTERType;
 use App\Repository\ProjetTERRepository;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +23,12 @@ class ProjetTERController extends AbstractController
         return $this->render('projet_ter/index.html.twig', [
             'projetsTER' => $projetTER,
         ]);
+    }
+
+    #[Route('/projet_ter/{id}', name: 'app_projet_ter_show', requirements: ['id' => '\d+'])]
+    public function show(ProjetTER $projet): Response
+    {
+        return $this->render('projet_ter/show.html.twig', ['projet' => $projet]);
     }
 
     #[Route('/projet_ter/{id}/update', name: 'app_projet_ter_update', requirements: ['id' => '\d+'])]
