@@ -1,5 +1,6 @@
 .right__center {
     padding: 15px 0px;
+    max-height: 670px;
 }
 .actu__item {
     display: flex;
