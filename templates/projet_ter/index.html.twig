@@ -24,6 +24,7 @@
                         <ul class="actu__list">
                             {% for projetTER in projetsTER %}
                                 <li>{{ projetTER.titre }}</li>
+                                <a href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}">Voir plus</a>
                             {% endfor %}
                         </ul>
                     </p>
