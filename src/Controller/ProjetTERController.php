@@ -93,6 +93,34 @@ class ProjetTERController extends AbstractController
     #[Route('/projet_ter/{id}/delete', name: 'app_projet_ter_delete', requirements: ['id' => '\d+'])]
     public function delete(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            if ($form->getClickedButton() === $form->get('delete')) {
+                $entityManager->remove($projet);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_projet_ter');
+            }
+
+            if ($form->getClickedButton() === $form->get('cancel')) {
+                return $this->redirectToRoute('app_projet_ter_show', [
+                    'id' => $projet->getId(),
+                ]);
+            }
+        }
+
+        return $this->render('projet_ter/delete.html.twig', [
+            'projet' => $projet,
+            'form' => $form->createView(),
+        ]);
 
     }
 }
