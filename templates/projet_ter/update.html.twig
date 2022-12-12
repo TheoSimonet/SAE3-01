@@ -6,4 +6,5 @@
 
 {% block body %}
     <h2>Edition du projet {{ projet.titre }}</h2>
+    {{ include('contact/_form.html.twig', {label_submit: 'Modifier', form: form}, with_context = false) }}
 {% endblock %}
