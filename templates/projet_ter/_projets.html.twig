@@ -1,40 +1,34 @@
 {% block body %}
     <div class="right__top">
         <p>
-            <i class="bx bx-news"></i>
+            <i class='bx bxs-briefcase-alt-2'></i>
             Liste des projets TER
         </p>
     </div>
     <div class="right__center">
-        <div class="actu__item">
-            <div class="actu__item__title">
-                <p>Voici la liste des projets TER</p>
+        <div class="projet__top">
+            <div class="search__bar">
+                <input type="text" placeholder="Rechercher un projet" id="search__bar">
+                <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
+            </div>
+            <div class="create">
                 <a href="{{ path('app_projet_ter_create') }}">Créer</a>
-            </div>
-            <div class="actu__item__content">
-                <div class="content__text">
-                    <p>
-                    <ul class="actu__list">
-                        {% for projetTER in projetsTER %}
-                            <li>{{ projetTER.titre }}</li>
-                            <a href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}">Voir plus</a>
-                            <a href="{{ path('app_projet_ter_update', {id: projetTER.id}) }}" >
-                                <span class="material-symbols-outlined text-warning">edit</span>
-                            </a>
-                            <a href="{{ path('app_projet_ter_delete', {id: projetTER.id}) }}" >
-                                <span class="material-symbols-outlined text-danger">delete_forever</span>
-                            </a>
-                        {% endfor %}
-                    </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="actu__item__date">
-                <p>
-                    <i class="bx bx-time-five"></i>
-                    Posté le 10/08/2022
-                </p>
+                <div class="search__icon"><i class='bx bx-plus'></i></div>
             </div>
         </div>
+        <div class="projet__bottom">
+            {% for projetTER in projetsTER %}
+                <div class="projet__item">
+                    <div class="projet__item__titre">{{ projetTER.titre }}</div>
+                    <div class="projet__item__actions">
+                        <a href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}"><i class='bx bxs-show'></i></a>
+                        <a href="{{ path('app_projet_ter_update', {id: projetTER.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                        <a href="{{ path('app_projet_ter_delete', {id: projetTER.id}) }}"><i class='bx bxs-trash'></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
     </div>
+
+    <script src="{{ asset('assets/js/search__bar__projet.js') }}"></script>
 {% endblock %}
