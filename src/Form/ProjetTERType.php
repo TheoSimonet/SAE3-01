@@ -6,6 +6,7 @@ use App\Entity\ProjetTER;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class ProjetTERType extends AbstractType
 {
@@ -13,8 +14,12 @@ class ProjetTERType extends AbstractType
     {
         $builder
             ->add('numpProj')
-            ->add('titre')
-            ->add('description')
+            ->add('titre', null, [
+                'empty_data' => '',
+            ])
+            ->add('description', null, [
+                'empty_data' => '',
+            ])
         ;
     }
 

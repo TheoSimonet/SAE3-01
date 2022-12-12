@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\ProjetTER;
 use App\Form\ProjetTERType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
@@ -24,6 +25,25 @@ class ProjetTERController extends AbstractController
     public function update(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createForm(ProjetTERType::class, $projet);
+        $form->add('save', SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            if (!$projet) {
+                throw $this->createNotFoundException('No project found for id '.$projet->getId());
+            }
+
+            $projet->setNumpProj($form->getData()->getNumpProj());
+            $projet->setTitre($form->getData()->getTitre());
+            $projet->setDescription($form->getData()->getDescription());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_projet_ter', [
+                'id' => $projet->getId(),
+            ]);
+        }
 
         return $this->render('projet_ter/update.html.twig', [
             'projet' => $projet,

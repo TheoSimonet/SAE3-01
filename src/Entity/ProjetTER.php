@@ -4,6 +4,9 @@ namespace App\Entity;
 
 use App\Repository\ProjetTERRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+
 
 #[ORM\Entity(repositoryClass: ProjetTERRepository::class)]
 class ProjetTER
@@ -61,5 +64,11 @@ class ProjetTER
         $this->description = $description;
 
         return $this;
+    }
+
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata->addPropertyConstraint('titre', new Assert\NotBlank());
+        $metadata->addPropertyConstraint('description', new Assert\NotBlank());
     }
 }
