@@ -1,9 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
 {% block title %}
     Création d'un nouveau projet TER
 {% endblock %}
 
 {% block body %}
     <h2>Création d'un nouveau projet TER</h2>
+    {{ include('projet_ter/_form.html.twig', {label_submit: 'Ajouter', form: form}, with_context = false) }}
 {% endblock %}
