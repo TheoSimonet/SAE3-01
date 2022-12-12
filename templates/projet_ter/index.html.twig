@@ -21,7 +21,12 @@
             <div class="actu__item__content">
                 <div class="content__text">
                     <p>
-                        FORMULAIRE DES PROJETS A METTRE
+                        <ul class="actu__list">
+                            {% for projetTER in projetsTER %}
+                                <li>{{ projetTER.titre }}</li>
+                                <a href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}">Voir plus</a>
+                            {% endfor %}
+                        </ul>
                     </p>
                 </div>
             </div>
