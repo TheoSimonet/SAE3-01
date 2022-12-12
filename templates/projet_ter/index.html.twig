@@ -25,6 +25,12 @@
                             {% for projetTER in projetsTER %}
                                 <li>{{ projetTER.titre }}</li>
                                 <a href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}">Voir plus</a>
+                                <a href="{{ path('app_projet_ter_update', {id: projetTER.id}) }}" >
+                                    <span class="material-symbols-outlined text-warning">edit</span>
+                                </a>
+                                <a href="{{ path('app_projet_ter_delete', {id: projetTER.id}) }}" >
+                                    <span class="material-symbols-outlined text-danger">delete_forever</span>
+                                </a>
                             {% endfor %}
                         </ul>
                     </p>

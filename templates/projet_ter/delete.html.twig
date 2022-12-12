@@ -6,4 +6,8 @@
 
 {% block body %}
     Suppression du projet {{ projet.titre }}
+    {{ form_start(form) }}
+        {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
+        {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+    {{ form_end(form) }}
 {% endblock %}
