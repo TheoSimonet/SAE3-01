@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
 {% block title %}
     Edition du projet {{ projet.titre }}
 {% endblock %}
