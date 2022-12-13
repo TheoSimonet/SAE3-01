@@ -1,0 +1,8 @@
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.numStage, {'label': 'Numéro du stage'}) }}
+        {{ form_row(form.titre, {'label': 'Titre du stage'}) }}
+        {{ form_row(form.description, {'label': 'Description du stage'}) }}
+        {{ form_row(form.save, {'label': label_submit }) }}
+    {{ form_end(form) }}
+{% endblock %}
