@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Création d'un nouveau stage
+{% endblock %}
+
+{% block body %}
+    <h2>Création d'un nouveau stage</h2>
+    {{ include('stage/_form.html.twig', {label_submit: 'Ajouter', form: form}, with_context = false) }}
+{% endblock %}

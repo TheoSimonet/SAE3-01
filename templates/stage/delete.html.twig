@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Suppression du stage {{ stage.titre }}
+{% endblock %}
+
+{% block body %}
+    Suppression du stage {{ stage.titre }}
+    {{ form_start(form) }}
+        {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
+        {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+    {{ form_end(form) }}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ stage.titre }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ stage.titre }}</h1>
+    <ul>
+        <li>Titre du stage : {{ stage.titre }}</li>
+        <li>Description du stage : {{ stage.description }}</li>
+    </ul>
+{% endblock %}
+
+
