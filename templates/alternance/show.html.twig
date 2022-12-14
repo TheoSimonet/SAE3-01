@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ alternance.titre }}
+{% endblock %}
+
+{% block body %}
+    <h1>{{ alternance.titre }}</h1>
+    <ul>
+        <li>Titre de l'alternance : {{ alternance.titre }}</li>
+        <li>Description de l'alternance : {{ alternance.description }}</li>
+    </ul>
+{% endblock %}
+
+

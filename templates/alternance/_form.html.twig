@@ -1,0 +1,8 @@
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.numAlternance, {'label': "Numéro de l'alternance"}) }}
+        {{ form_row(form.titre, {'label': "Titre de l'alternance"}) }}
+        {{ form_row(form.description, {'label': "Description de l'alternance"}) }}
+        {{ form_row(form.save, {'label': label_submit }) }}
+    {{ form_end(form) }}
+{% endblock %}

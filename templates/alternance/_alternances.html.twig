@@ -1,0 +1,34 @@
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Liste des Alternances
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="alternance__top">
+            <div class="search__bar">
+                <input type="text" placeholder="Rechercher une alternance" id="search__bar">
+                <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
+            </div>
+            <div class="create">
+                <a href="{{ path('app_alternance_create') }}">Créer</a>
+                <div class="search__icon"><i class='bx bx-plus'></i></div>
+            </div>
+        </div>
+        <div class="alternance__bottom">
+            {% for alternance in alternances %}
+                <div class="alternance__item">
+                    <div class="alternance__item__titre">{{ alternance.titre }}</div>
+                    <div class="alternance__item__actions">
+                        <a href="{{ path('app_alternance_show', {id: alternance.id}) }}"><i class='bx bxs-show'></i></a>
+                        <a href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                        <a href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <script src="{{ asset('assets/js/search__bar__projet.js') }}"></script>
+{% endblock %}
