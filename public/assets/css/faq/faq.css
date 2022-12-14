@@ -1,6 +1,6 @@
 .right__center {
     padding: 15px 0px;
-    justify-content: center;
+    max-height: 670px;
 }
 .faq__item {
     max-width: 700px;
