@@ -47,8 +47,8 @@ final class FaqFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'question' => self::faker()->text(100),
-            'reponse' => self::faker()->text(200),
+            'question' => self::faker()->realText(100),
+            'reponse' => self::faker()->realTextBetween(100, 300),
         ];
     }
 
