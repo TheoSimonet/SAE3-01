@@ -1,0 +1,23 @@
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class="bx bx-news"></i>
+            F.A.Q
+        </p>
+    </div>
+    <div class="right__center">
+        {% for faq in faqs %}
+            <div class="faq__item">
+                <div class="faq__item__content">
+                    <div class="faq__content__text">
+                        <p class="faq__question"><i class='bx bxs-right-arrow'></i> {{ faq.question }}</p>
+                        <p class="faq__reponse hide">{{ faq.reponse }}</p>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <script src="{{ asset('assets/js/faq.js') }}"></script>
+
+{% endblock %}
