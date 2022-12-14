@@ -3,39 +3,10 @@
 {% block title %}Master IA - URCA{% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/actus/actus__item.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/alternance/alternance.css') }}"/>
 {% endblock %}
 
 {% block body %}
-    <div class="right__top">
-        <p>
-            <i class="bx bx-news"></i>
-            Liste des alternances
-        </p>
-    </div>
-    <div class="right__center">
-        <div class="actu__item">
-            <div class="actu__item__title">
-                <p>Voici la liste des alternances</p>
-            </div>
-            <div class="actu__item__content">
-                <div class="content__text">
-                    <p>
-                    <ul class="actu__list">
-                        {% for alternance in alternances %}
-                            <li>{{ alternance.titre }}</li>
-                            <a href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
-                        {% endfor %}
-                    </ul>
-                    </p>
-                </div>
-            </div>
-            <div class="actu__item__date">
-                <p>
-                    <i class="bx bx-time-five"></i>
-                    Posté le 10/08/2022
-                </p>
-            </div>
-        </div>
-    </div>
+    {{ include('alternance/_alternances.html.twig') }}
 {% endblock %}
+

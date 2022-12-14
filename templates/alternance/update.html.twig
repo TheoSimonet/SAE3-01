@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Edition de l'alternance {{ alternance.titre }}
+{% endblock %}
+
+{% block body %}
+    <h2>Edition de l'alternance {{ alternance.titre }}</h2>
+    {{ include('alternance/_form.html.twig', {label_submit: 'Modifier', form: form}, with_context = false) }}
+{% endblock %}
