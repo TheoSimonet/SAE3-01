@@ -11,11 +11,9 @@
     <title>{% block title %}Master IA - URCA{% endblock %}</title>
 
     <!-- PERSONAL CSS -->
-
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/side/left__side.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/side/right__side.css') }}"/>
@@ -26,13 +24,11 @@
             rel="stylesheet"
     />
 
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-
+    <!-- SCRIPTs -->
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+
 </head>
 <body>
 <div class="left">
