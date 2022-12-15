@@ -15,17 +15,15 @@
 
 .faq__item:not(:first-child){
     margin-top: 8px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
 }
 
 /* CONTENT */
 .faq__item__content {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    text-align: center;
     gap: 15px;
     color: var(--white);
 }
@@ -39,3 +37,25 @@
     display: none;
 }
 /*********************/
+
+.faq__item__actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+.faq__item__actions a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    background-color: var(--primary);
+    padding: 12px;
+    border-radius: 50%;
+}
+
+.faq__item__actions a:last-child {
+    background-color: red;
+}

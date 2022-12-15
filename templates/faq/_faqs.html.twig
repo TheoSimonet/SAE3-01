@@ -13,6 +13,12 @@
                         <p class="faq__question"><i class='bx bxs-right-arrow'></i> {{ faq.question }}</p>
                         <p class="faq__reponse hide">{{ faq.reponse }}</p>
                     </div>
+                    {% if is_granted('ROLE_ADMIN') %}
+                        <div class="faq__item__actions">
+                            <a href="{{ path('app_faq_update', {id: faq.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                            <a href="{{ path('app_faq_delete', {id: faq.id}) }}"><i class='bx bxs-trash'></i></a>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         {% endfor %}
