@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Suppression de la question n°{{ faq.id }}
+{% endblock %}
+
+{% block body %}
+    Suppression de la question n°{{ faq.id }}
+    {{ form_start(form) }}
+        {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
+        {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+    {{ form_end(form) }}
+{% endblock %}
