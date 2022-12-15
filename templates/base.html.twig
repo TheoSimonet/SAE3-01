@@ -11,11 +11,9 @@
     <title>{% block title %}Master IA - URCA{% endblock %}</title>
 
     <!-- PERSONAL CSS -->
-
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
     <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/side/left__side.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/side/right__side.css') }}"/>
@@ -26,13 +24,11 @@
             rel="stylesheet"
     />
 
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-    />
-
+    <!-- SCRIPTs -->
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+
 </head>
 <body>
 <div class="left">
@@ -43,19 +39,19 @@
         <div class="left__center">
             <ul>
                 <li>
-                    <a href="/informations">
+                    <a href="{{ path('app_informations') }}">
                         <i class="bx bx-info-circle"></i>
                         Informations
                     </a>
                 </li>
                 <li>
-                    <a href="/decouvrir">
+                    <a href="{{ path('app_decouvrir') }}">
                         <i class="bx bx-bullseye"></i>
                         Découvrir
                     </a>
                 </li>
                 <li>
-                    <a href="/faq">
+                    <a href="{{ path('app_faq') }}">
                         <i class="bx bx-question-mark"></i>
                         F.A.Q
                     </a>
@@ -68,10 +64,17 @@
             </ul>
         </div>
         <div class="left__bottom">
-            <p>
-                <i class="bx bx-log-in-circle"></i>
-                Se connecter
-            </p>
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}">
+                    <i class='bx bx-log-out-circle'></i>
+                    Se déconnecter
+                </a>
+            {% elseif not app.user %}
+                <a href="{{ path('app_login') }}">
+                    <i class='bx bx-log-in-circle'></i>
+                    Se connecter
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>
