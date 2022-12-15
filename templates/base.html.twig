@@ -68,10 +68,17 @@
             </ul>
         </div>
         <div class="left__bottom">
-            <p>
-                <i class="bx bx-log-in-circle"></i>
-                Se connecter
-            </p>
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}">
+                    <i class='bx bx-log-out-circle'></i>
+                    Se déconnecter
+                </a>
+            {% elseif not app.user %}
+                <a href="{{ path('app_login') }}">
+                    <i class='bx bx-log-in-circle'></i>
+                    Se connecter
+                </a>
+            {% endif %}
         </div>
     </div>
 </div>
