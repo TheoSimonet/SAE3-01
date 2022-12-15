@@ -49,3 +49,32 @@ a {
 }
 
 /* ------------------------------ */
+
+/* SCROLL-BAR
+
+ */
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+    padding: 10px;
+    border-radius: 20px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: var(--light-gray);
+    border-radius: 20px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: var(--primary);
+    border-radius: 20px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary);
+    border-radius: 20px;
+}
