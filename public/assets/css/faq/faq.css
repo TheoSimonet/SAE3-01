@@ -10,6 +10,7 @@
     padding: 30px;
     border-radius: 25px;
     flex-wrap: wrap;
+    transition: all 0.2s ease-in-out;
 }
 
 .faq__item:not(:first-child){
