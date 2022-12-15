@@ -1,0 +1,7 @@
+{% block body %}
+    {{ form_start(form) }}
+        {{ form_row(form.question, {'label': 'Question'}) }}
+        {{ form_row(form.reponse, {'label': 'Réponse'}) }}
+        {{ form_row(form.save, {'label': label_submit }) }}
+    {{ form_end(form) }}
+{% endblock %}
