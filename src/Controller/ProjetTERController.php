@@ -5,20 +5,19 @@ namespace App\Controller;
 use App\Entity\ProjetTER;
 use App\Form\ProjetTERType;
 use App\Repository\ProjetTERRepository;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Doctrine\Persistence\ManagerRegistry;
-use Symfony\Component\HttpFoundation\Request;
 
 class ProjetTERController extends AbstractController
 {
     #[Route('/projet_ter', name: 'app_projet_ter')]
     public function index(ProjetTERRepository $projetTERRepository): Response
     {
-        $projetTER = $projetTERRepository->findBy([], ['id'=>'ASC','titre'=> 'ASC','description'=>'ASC']);
+        $projetTER = $projetTERRepository->findBy([], ['id' => 'ASC', 'titre' => 'ASC', 'description' => 'ASC']);
 
         return $this->render('projet_ter/index.html.twig', [
             'projetsTER' => $projetTER,
@@ -121,6 +120,5 @@ class ProjetTERController extends AbstractController
             'projet' => $projet,
             'form' => $form->createView(),
         ]);
-
     }
 }
