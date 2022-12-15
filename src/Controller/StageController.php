@@ -6,23 +6,27 @@ use App\Entity\Stage;
 use App\Form\StageType;
 use App\Repository\StageRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+#[IsGranted('ROLE_ADMIN', null, "Vous n'avez pas les permissions nécessaires pour accéder aux stages")]
 class StageController extends AbstractController
 {
     #[Route('/stage', name: 'app_stage')]
     public function index(StageRepository $stageRepository): Response
     {
-        $stage = $stageRepository->findBy([],['id'=>'ASC','titre'=>'ASC', 'description'=>'ASC']);
+
+        $stage = $stageRepository->findBy([], ['id' => 'ASC', 'titre' => 'ASC', 'description' => 'ASC']);
 
         return $this->render('stage/index.html.twig', [
             'stages' => $stage,
         ]);
     }
+
     #[Route('/stage/{id}', name: 'app_stage_show', requirements: ['id' => '\d+'])]
     public function show(Stage $stage): Response
     {
@@ -119,6 +123,5 @@ class StageController extends AbstractController
             'stage' => $stage,
             'form' => $form->createView(),
         ]);
-
     }
 }

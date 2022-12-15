@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FAQController extends AbstractController
 {
-    #[Route('/faq', name: 'app_f_a_q')]
+    #[Route('/faq', name: 'app_faq')]
     public function index(FaqRepository $faqRepository): Response
     {
 
