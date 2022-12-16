@@ -56,11 +56,23 @@
                         F.A.Q
                     </a>
                 </li>
+                {% if app.user %}
                 <li>
                     <a href="{{ path('app_projet_ter') }}">
                         Projets TER
                     </a>
                 </li>
+                <li>
+                    <a href="{{ path('app_stage') }}">
+                        Stages
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_alternance') }}">
+                        Alternances
+                    </a>
+                </li>
+                {% endif %}
             </ul>
         </div>
         <div class="left__bottom">
