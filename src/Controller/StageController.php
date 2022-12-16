@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[IsGranted('ROLE_ADMIN', null, "Vous n'avez pas les permissions nécessaires pour accéder aux stages")]
+// #[IsGranted('ROLE_ADMIN', null, "Vous n'avez pas les permissions nécessaires pour accéder aux stages")]
 class StageController extends AbstractController
 {
     #[Route('/stage', name: 'app_stage')]
