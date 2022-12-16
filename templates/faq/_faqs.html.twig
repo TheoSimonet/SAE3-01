@@ -6,6 +6,12 @@
         </p>
     </div>
     <div class="right__center">
+        <div class="faq__top">
+            <div class="create">
+                <a href="{{ path('app_faq_create') }}">Créer</a>
+                <div class="search__icon"><i class='bx bx-plus'></i></div>
+            </div>
+        </div>
         {% for faq in faqs %}
             <div class="faq__item">
                 <div class="faq__item__content">
@@ -25,5 +31,4 @@
     </div>
 
     <script src="{{ asset('assets/js/faq.js') }}"></script>
-
 {% endblock %}
