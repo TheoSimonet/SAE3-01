@@ -64,6 +64,7 @@ class AlternanceController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $alternance = new Alternance();
+        $creator = $this->getUser()->getFirstname().$this->getUser()->getLastname();
 
         $form = $this->createForm(AlternanceType::class, $alternance);
         $form->add('save', SubmitType::class);
@@ -71,7 +72,7 @@ class AlternanceController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $alternance->setNumAlternance($form->getData()->getNumAlternance());
-            $alternance->setTitre($form->getData()->getTitre());
+            $alternance->setTitre($form->getData()->getTitre().', publié par '.$creator);
             $alternance->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();
