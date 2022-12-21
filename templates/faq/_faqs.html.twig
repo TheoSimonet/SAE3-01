@@ -7,10 +7,12 @@
     </div>
     <div class="right__center">
         <div class="faq__top">
-            <div class="create">
-                <a href="{{ path('app_faq_create') }}">Créer</a>
-                <div class="search__icon"><i class='bx bx-plus'></i></div>
-            </div>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+                <div class="create">
+                    <a href="{{ path('app_faq_create') }}">Créer</a>
+                    <div class="search__icon"><i class='bx bx-plus'></i></div>
+                </div>
+            {% endif %}
         </div>
         {% for faq in faqs %}
             <div class="faq__item">
