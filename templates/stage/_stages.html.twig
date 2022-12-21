@@ -11,10 +11,12 @@
                 <input type="text" placeholder="Rechercher un stage" id="search__bar">
                 <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
             </div>
-            <div class="create">
-                <a href="{{ path('app_stage_create') }}">Créer</a>
-                <div class="search__icon"><i class='bx bx-plus'></i></div>
-            </div>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+                <div class="create">
+                    <a href="{{ path('app_stage_create') }}">Créer</a>
+                    <div class="search__icon"><i class='bx bx-plus'></i></div>
+                </div>
+            {% endif %}
         </div>
         <div class="projet__bottom">
             {% for stage in stages %}
@@ -22,8 +24,10 @@
                     <div class="projet__item__titre">{{ stage.titre }}</div>
                     <div class="projet__item__actions">
                         <a href="{{ path('app_stage_show', {id: stage.id}) }}"><i class='bx bxs-show'></i></a>
-                        <a href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                        <a href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
+                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+                            <a href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                            <a href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
+                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
