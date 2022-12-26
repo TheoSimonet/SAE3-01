@@ -19,7 +19,6 @@ class StageController extends AbstractController
     #[Route('/stage', name: 'app_stage')]
     public function index(StageRepository $stageRepository): Response
     {
-
         $stage = $stageRepository->findBy([], ['id' => 'ASC', 'titre' => 'ASC', 'description' => 'ASC']);
 
         return $this->render('stage/index.html.twig', [
@@ -67,6 +66,7 @@ class StageController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $stage = new Stage();
+        $creator = $this->getUser()->getFirstname().$this->getUser()->getLastname();
 
         $form = $this->createForm(StageType::class, $stage);
         $form->add('save', SubmitType::class);
@@ -74,7 +74,7 @@ class StageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $stage->setNumStage($form->getData()->getNumStage());
-            $stage->setTitre($form->getData()->getTitre());
+            $stage->setTitre($form->getData()->getTitre().', publié par '.$creator);
             $stage->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();

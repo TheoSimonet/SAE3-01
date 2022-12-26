@@ -64,6 +64,7 @@ class ProjetTERController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $projet = new ProjetTER();
+        $creator = $this->getUser()->getFirstname().' '.$this->getUser()->getLastname();
 
         $form = $this->createForm(ProjetTERType::class, $projet);
         $form->add('save', SubmitType::class);
@@ -71,7 +72,7 @@ class ProjetTERController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $projet->setNumpProj($form->getData()->getNumpProj());
-            $projet->setTitre($form->getData()->getTitre());
+            $projet->setTitre($form->getData()->getTitre().', publié par '.$creator);
             $projet->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();
