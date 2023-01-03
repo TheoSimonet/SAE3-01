@@ -4,17 +4,34 @@ namespace App\Form;
 
 use App\Entity\Candidature;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class CandidatureType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('cvFilename')
-            ->add('idStage')
-            ->add('idUser')
+            ->add('cvFilename', FileType::class, [
+                'label' => 'CV (fichier PDF exclusivement)',
+
+                'mapped' => false,
+
+                'required' => true,
+
+                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Envoyez un fichier PDF valide',
+                    ]),
+                ],
+            ])
         ;
     }
 
