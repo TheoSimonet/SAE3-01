@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Candidature à un stage
+{% endblock %}
+
+{% block body %}
+    <h1>Candidature à ce stage</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.cvFilename) }}
+    {{ form_end(form) }}
+{% endblock %}
