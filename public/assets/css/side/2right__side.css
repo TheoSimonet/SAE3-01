@@ -1,0 +1,4 @@
+.right__content {
+    max-height: 100vh;
+    overflow-y: auto;
+}
