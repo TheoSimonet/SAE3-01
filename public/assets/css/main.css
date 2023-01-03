@@ -27,11 +27,6 @@ html {
     background-size: cover;
 }
 
-body {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
-}
-
 /* ------------------------------ */
 
 /* RESET CSS */
