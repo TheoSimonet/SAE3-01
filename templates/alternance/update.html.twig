@@ -1,14 +1,21 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
 {% endblock %}
 
 {% block title %}
-    Edition de l'alternance {{ alternance.titre }}
+    Edition de l'alternance n°{{ alternance.numAlternance }}
 {% endblock %}
 
 {% block body %}
-    <h2>Edition de l'alternance {{ alternance.titre }}</h2>
-    {{ include('alternance/_form.html.twig', {label_submit: 'Modifier', form: form}, with_context = false) }}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Edition de l'alternance n°{{ alternance.numAlternance }}
+        </p>
+    </div>
+    <div class="right__center">
+        {{ include('alternance/_form.html.twig', {label_submit: 'Modifier', form: form}, with_context = false) }}
+    </div>
 {% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -9,6 +9,13 @@
 {% endblock %}
 
 {% block body %}
-    <h2>Création d'une nouvelle alternance</h2>
-    {{ include('alternance/_form.html.twig', {label_submit: 'Ajouter', form: form}, with_context = false) }}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Création d'une nouvelle alternance
+        </p>
+    </div>
+    <div class="right__center">
+        {{ include('alternance/_form.html.twig', {label_submit: 'Ajouter', form: form}, with_context = false) }}
+    </div>
 {% endblock %}

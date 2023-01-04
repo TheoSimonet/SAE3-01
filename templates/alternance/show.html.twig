@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
 {% block title %}
-    {{ alternance.titre }}
+    Visualisation de l'alternance n°{{ alternance.numAlternance }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ alternance.titre }}</h1>
-    <ul>
-        <li>Titre de l'alternance : {{ alternance.titre }}</li>
-        <li>Description de l'alternance : {{ alternance.description }}</li>
-    </ul>
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Visualisation de l'alternance n°{{ alternance.numAlternance }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="projet__show__item">
+            <h2>{{ alternance.titre }}</h2>
+            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            <p id="projet__num"><span class="important">Numéro de l'alternance:</span> {{ alternance.numAlternance }}</p>
+            <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
+        </div>
+    </div>
 {% endblock %}
 
 
