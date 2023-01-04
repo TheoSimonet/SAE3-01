@@ -21,12 +21,15 @@
         <div class="projet__bottom">
             {% for stage in stages %}
                 <div class="projet__item">
-                    <div class="projet__item__titre">{{ stage.titre }}</div>
+                    <div class="projet__item__content">
+                        <div class="projet__item__titre"><span class="important">Stage:</span> {{ stage.titre }}</div>
+                        <div class="projet__item__author"><p>Publié par, <span class="important">@author</span>.</p></div>
+                    </div>
                     <div class="projet__item__actions">
-                        <a href="{{ path('app_stage_show', {id: stage.id}) }}"><i class='bx bxs-show'></i></a>
+                        <a id="show" href="{{ path('app_stage_show', {id: stage.id}) }}"><i class='bx bxs-show'></i></a>
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
-                            <a href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                            <a href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
+                            <a id="edit" href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                            <a id="delete" href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
                         {% endif %}
                     </div>
                 </div>

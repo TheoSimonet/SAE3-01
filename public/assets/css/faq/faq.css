@@ -21,7 +21,7 @@
     justify-content: center;
     gap: 5px;
     color: var(--white);
-    border-radius: 15px;
+    border-radius: 20px;
     background-color: var(--black);
     padding: 4px 25px;
     border: 2px solid var(--primary);
@@ -75,4 +75,94 @@
 
 #delete {
     background-color: var(--red);
+}
+
+.faq__form__texarea__box {
+    max-height: 100px;
+    min-height: 100px;
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: none;
+}
+
+form[name="faq"] {
+    background-color: var(--black);
+    padding: 10px;
+    max-width: 400px;
+    min-width: 250px;
+    border-radius: 20px;
+}
+
+.faq__form__label__title {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: var(--w-2);
+}
+
+
+.faq__form__submit__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.faq__form__submit__box button {
+    padding: 10px 40px;
+    border-radius: 20px;
+    background-color: var(--primary);
+    border: none;
+    color: var(--white);
+}
+
+.faq__form__delete__message {
+    text-align: center;
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+.faq__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.faq__delete__box {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.faq__form__delete_action button {
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    color: var(--white);
+}
+
+.faq__form__cancel {
+    background-color: var(--primary);
+}
+
+.faq__form__delete {
+    background-color: var(--red);
+}
+
+@keyframes red_pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--red);
+    }
+    100% {
+        color: var(--white);
+    }
 }

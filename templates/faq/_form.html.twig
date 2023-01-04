@@ -1,7 +1,11 @@
 {% block body %}
     {{ form_start(form) }}
-        {{ form_row(form.question, {'label': 'Question'}) }}
-        {{ form_row(form.reponse, {'label': 'Réponse'}) }}
+    <p class="faq__form__label__title">Question:</p>
+    {{ form_row(form.question, {'label': ' '}) }}
+    <p class="faq__form__label__title">Réponse:</p>
+    {{ form_row(form.reponse, {'label': ' '}) }}
+    <div class="faq__form__submit__box">
         {{ form_row(form.save, {'label': label_submit }) }}
+    </div>
     {{ form_end(form) }}
 {% endblock %}

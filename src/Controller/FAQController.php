@@ -36,7 +36,7 @@ class FAQController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             if (!$faq) {
-                throw $this->createNotFoundException('No project found for id '.$faq->getId());
+                throw $this->createNotFoundException('No project found for id ' . $faq->getId());
             }
 
             $faq->setQuestion($form->getData()->getQuestion());
@@ -86,8 +86,12 @@ class FAQController extends AbstractController
     public function delete(Faq $faq, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createFormBuilder()
-            ->add('delete', SubmitType::class)
-            ->add('cancel', SubmitType::class)
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'faq__form__cancel'],
+            ])
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'faq__form__delete'],
+            ])
             ->getForm();
 
         $form->handleRequest($request);

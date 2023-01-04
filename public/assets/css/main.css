@@ -28,6 +28,11 @@ html {
     background-size: cover;
 }
 
+.important {
+    color: var(--primary);
+    font-weight: var(--w-2);
+}
+
 /* ------------------------------ */
 
 /* RESET CSS */

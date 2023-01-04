@@ -6,7 +6,7 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="alternance__top">
+        <div class="projet__top">
             <div class="search__bar">
                 <input type="text" placeholder="Rechercher une alternance" id="search__bar">
                 <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
@@ -18,15 +18,18 @@
                 </div>
             {% endif %}
         </div>
-        <div class="alternance__bottom">
+        <div class="projet__bottom">
             {% for alternance in alternances %}
-                <div class="alternance__item">
-                    <div class="alternance__item__titre">{{ alternance.titre }}</div>
-                    <div class="alternance__item__actions">
-                        <a href="{{ path('app_alternance_show', {id: alternance.id}) }}"><i class='bx bxs-show'></i></a>
+                <div class="projet__item">
+                    <div class="projet__item__content">
+                        <div class="projet__item__titre"><span class="important">Alternance:</span> {{ alternance.titre }}</div>
+                        <div class="projet__item__author"><p>Publié par, <span class="important">@author</span>.</p></div>
+                    </div>
+                    <div class="projet__item__actions">
+                        <a id="show" href="{{ path('app_alternance_show', {id: alternance.id}) }}"><i class='bx bxs-show'></i></a>
                         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
-                            <a href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                            <a href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
+                            <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                            <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
                         {% endif %}
                     </div>
                 </div>
