@@ -9,6 +9,9 @@
     <ul>
         <li>Titre du stage : {{ stage.titre }}</li>
         <li>Description du stage : {{ stage.description }}</li>
+        {% for candidature in stage.candidatures %}
+            <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+        {% endfor %}
     </ul>
 {% endblock %}
 

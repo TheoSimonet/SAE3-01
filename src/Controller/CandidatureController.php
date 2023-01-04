@@ -18,14 +18,6 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CandidatureController extends AbstractController
 {
-    #[Route('/candidature', name: 'app_candidature')]
-    public function index(): Response
-    {
-        return $this->render('candidature/index.html.twig', [
-            'controller_name' => 'CandidatureController',
-        ]);
-    }
-
     #[Route('/candidature/new', name: 'app_candidature_new')]
     public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
     {
