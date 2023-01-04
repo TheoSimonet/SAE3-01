@@ -40,8 +40,8 @@
 /* END JS CLASS */
 
 .faq__item {
-    min-width: 300px;
-    max-width: 300px;
+    min-width: 250px;
+    max-width: 250px;
     border-radius: 10px;
     background-color: var(--black);
     padding: 12px;
@@ -98,6 +98,7 @@ form[name="faq"] {
     color: var(--primary);
     text-transform: uppercase;
     font-weight: var(--w-2);
+    margin-bottom: 4px;
 }
 
 
