@@ -1,46 +1,130 @@
-.left {
-    background-color: var(--primary);
-    height: 100vh;
-}
+/* CONTENT */
 
 .left__content {
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    align-items: center;
 }
 
-.left__content > div {
+/* END CONTENT */
+
+/* --------------------------- */
+
+/* LEFT */
+
+.left {
+    z-index: 9999999;
+    display: grid;
+    grid-template-columns: 190px 40px;
+    position: absolute;
+    width: 230px;
+    height: 100vh;
+    font-size: 14px;
+    background-color: var(--black);
+    transform-origin: left;
+    transition: all 500ms cubic-bezier(0.480, 0.610, 0.740, 1.000);
+    transition-timing-function: cubic-bezier(0.480, 0.610, 0.740, 1.000);
+    left: -190px;
+    opacity: 0.9;
+    overflow: hidden;
+}
+
+/* END LEFT */
+
+/* --------------------------- */
+
+/* JS CLASS */
+
+.active {
+    left: 0;
+    opacity: 100;
+}
+
+/* END JS CLASS */
+
+/* --------------------------- */
+
+/* ALL PARTS */
+
+.left__top, .left__center, .left__bottom {
+    text-align: left;
+    padding: 20px;
+}
+
+/* END ALL PART */
+
+/* --------------------------- */
+
+/* BURGER SPACE */
+
+.burger__space i {
+    color: var(--white);
+}
+
+.burger__space .nav__button {
+    padding: 20px;
+    font-size: 25px;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
 }
 
-.left a {
-    color: var(--white);
-}
+/* END BURGER SPACE */
 
-.left li {
-    text-transform: uppercase;
-}
+/* --------------------------- */
 
 /* TOP */
-.left__bottom {
-    padding: 15px 0px;
+
+.left__top {
+    width: 100%;
+}
+
+.left__image__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .left__top img {
-    height: 150px;
+    height: 100px;
+    width: 100px;
+    background-color: var(--white);
+    padding: 8px;
+    border-radius: 50%;
 }
+
+.left__top p {
+    text-align: right;
+}
+
+/* END TOP */
+
+/* --------------------------- */
 
 /* CENTER */
-.left__center ul li:not(:last-child) {
-    margin-bottom: 10px;
+
+.left__center a {
+    color: var(--white);
 }
 
-/* BOTTOM */
-.left__bottom {
-    color: var(--white);
+.left__center li:not(:last-child) {
+    margin-bottom: 14px;
     text-transform: uppercase;
+}
+
+.left__center li i {
+    font-size: 20px;
+    color: var(--white);
+}
+
+/* END CENTER */
+
+/* --------------------------- */
+
+/* BOTTOM */
+
+.left__bottom a{
+    color: var(--white);
 }

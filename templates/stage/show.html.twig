@@ -1,15 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
 {% block title %}
-    {{ stage.titre }}
+    Visualisation du stage n°{{ stage.numStage }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ stage.titre }}</h1>
-    <ul>
-        <li>Titre du stage : {{ stage.titre }}</li>
-        <li>Description du stage : {{ stage.description }}</li>
-        {% set x = 1 %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Visualisation du stage n°{{ stage.numStage }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="projet__show__item">
+            <h2>{{ stage.titre }}</h2>
+            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            <p id="projet__num"><span class="important">Numéro de stage:</span> {{ stage.numStage }}</p>
+            <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
+        </div>
+    </div>
+    {% set x = 1 %}
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
             {% for candidature in stage.candidatures %}
                 <h2>Candidature n°{{ x }}</h2>
@@ -18,7 +32,6 @@
                 {% set x = x + 1 %}
             {% endfor %}
         {% endif %}
-    </ul>
 {% endblock %}
 
 

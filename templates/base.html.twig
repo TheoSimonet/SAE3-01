@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
 
     <!-- BASIC HEAD -->
@@ -34,7 +34,9 @@
 <div class="left">
     <div class="left__content">
         <div class="left__top">
-            <a href="{{ path('app_accueil') }}"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
+            <div class="left__image__box">
+                <a href="{{ path('app_accueil') }}"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
+            </div>
         </div>
         <div class="left__center">
             <ul>
@@ -58,21 +60,21 @@
                 </li>
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
                     or is_granted('ROLE_ENTREPRISE') %}
-                <li>
-                    <a href="{{ path('app_projet_ter') }}">
-                        Projets TER
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_stage') }}">
-                        Stages
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_alternance') }}">
-                        Alternances
-                    </a>
-                </li>
+                    <li>
+                        <a href="{{ path('app_projet_ter') }}">
+                            Projets TER
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_stage') }}">
+                            Stages
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ path('app_alternance') }}">
+                            Alternances
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
         </div>
@@ -90,6 +92,7 @@
             {% endif %}
         </div>
     </div>
+    <div class="burger__space"><p class="nav__button"><i id="burger__icon" class='bx bx-menu'></i></p></div>
 </div>
 <div class="right">
     <div class="right__content">
@@ -105,6 +108,7 @@
 
 <!-- SCRIPT -->
 <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="{{ asset('assets/js/burger.js') }}"></script>
 
 </body>
 </html>

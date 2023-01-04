@@ -7,6 +7,7 @@
     --white: #ffffff;
     --light-gray: #cacaca;
     --black: #2e2e2e;
+    --red: #f30000;
 
     /** FONT **/
     font-family: 'Poppins', sans-serif;
@@ -27,9 +28,9 @@ html {
     background-size: cover;
 }
 
-body {
-    display: grid;
-    grid-template-columns: 1fr 5fr;
+.important {
+    color: var(--primary);
+    font-weight: var(--w-2);
 }
 
 /* ------------------------------ */

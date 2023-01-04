@@ -1,8 +1,13 @@
 {% block body %}
     {{ form_start(form) }}
-        {{ form_row(form.numAlternance, {'label': "Numéro de l'alternance"}) }}
-        {{ form_row(form.titre, {'label': "Titre de l'alternance"}) }}
-        {{ form_row(form.description, {'label': "Description de l'alternance"}) }}
+    <p class="projet__form__label__title">Numéro de l'alternance:</p>
+    {{ form_row(form.numAlternance, {'label': " "}) }}
+    <p class="projet__form__label__title">Titre de l'alternance:</p>
+    {{ form_row(form.titre, {'label': " "}) }}
+    <p class="projet__form__label__title">Description de l'alternance:</p>
+    {{ form_row(form.description, {'label': " "}) }}
+    <div class="projet__form__submit__box">
         {{ form_row(form.save, {'label': label_submit }) }}
+    </div>
     {{ form_end(form) }}
 {% endblock %}

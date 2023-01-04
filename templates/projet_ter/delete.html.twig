@@ -1,13 +1,29 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
 {% block title %}
-    Suppression du projet {{ projet.titre }}
+    Suppression du projet n°{{ projet.numpProj }}
 {% endblock %}
 
 {% block body %}
-    Suppression du projet {{ projet.titre }}
-    {{ form_start(form) }}
-        {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
-        {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
-    {{ form_end(form) }}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Suppression du projet n°{{ projet.numpProj }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="projet__delete__box">
+            <p class="projet__form__delete__message">Êtes-vous sûr de vouloir supprimer le projet n°{{ projet.numpProj }} ?</p>
+            <div class="projet__form__delete_action">
+                {{ form_start(form,  { 'attr' : { 'class': 'projet__form' } }) }}
+                {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+                {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}

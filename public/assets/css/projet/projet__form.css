@@ -1,0 +1,124 @@
+.projet__text__area {
+    max-height: 100px;
+    min-height: 100px;
+    min-width: 100%;
+    max-width: 100%;
+    border: none;
+}
+
+.projet__form__input {
+    margin-bottom: 20px;
+    max-width: 100%;
+}
+
+form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
+    background-color: var(--black);
+    padding: 10px;
+    max-width: 400px;
+    min-width: 250px;
+    border-radius: 20px;
+}
+
+.projet__form__label__title {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: var(--w-2);
+    margin-bottom: 4px;
+}
+
+.projet__form__submit__box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.projet__form__submit__box button {
+    padding: 10px 40px;
+    border-radius: 20px;
+    background-color: var(--primary);
+    border: none;
+    color: var(--white);
+}
+
+.projet__delete__box {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.projet__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.projet__form__delete__message {
+    text-align: center;
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+.projet__form__delete_action button {
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    color: var(--white);
+}
+
+.projet__delete__box {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.projet__form__cancel {
+    background-color: var(--primary);
+}
+
+.projet__form__delete {
+    background-color: var(--red);
+}
+
+.projet__show__item {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    width: 250px;
+}
+
+.projet__show__item h2 {
+    text-align: center;
+    color: var(--white);
+    margin-bottom: 20px;
+}
+
+.projet__show__item {
+    color: var(--white);
+}
+
+#projet__desc {
+    max-width: 100%;
+}
+
+@keyframes red_pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--red);
+    }
+    100% {
+        color: var(--white);
+    }
+}

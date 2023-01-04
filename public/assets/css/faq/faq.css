@@ -1,101 +1,169 @@
-.right__center {
-    padding: 15px 0px;
-    max-height: 670px;
-}
-.faq__item {
-    max-width: 700px;
-    min-width: 700px;
-    gap: 20px;
-    background-color: var(--black);
-    padding: 30px;
-    border-radius: 25px;
-    flex-wrap: wrap;
-    transition: all 0.2s ease-in-out;
-}
-
-.faq__item:not(:first-child){
-    margin-top: 8px;
-}
-
-/* CONTENT */
-.faq__item__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-    gap: 15px;
-    color: var(--white);
-}
-
-.faq__question {
-    text-transform: uppercase;
-    font-weight: var(--w-3);
-}
-
-.hide {
-    display: none;
-}
-/*********************/
-
-.faq__item__actions {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 12px;
-}
-
-.faq__item__actions a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--white);
-    background-color: var(--primary);
-    padding: 12px;
-    border-radius: 50%;
-}
-
-.faq__item__actions a:last-child {
-    background-color: red;
-}
-
-.faq__top {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 15px;
-    margin: 50px 0;
-}
+/* CREATE BUTTON */
 
 .create {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-content: center;
+    gap: 5px;
+}
+
+.create i {
+    background-color: var(--white);
+    border-radius: 50%;
+    color: var(--black);
 }
 
 .create a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
     color: var(--white);
+    border-radius: 20px;
     background-color: var(--black);
-    padding: 8px 25px;
-    text-transform: uppercase;
-    font-size: 0.90rem;
-    font-weight: var(--w-5);
-    border-bottom-left-radius: 20px;
-    border-top-left-radius: 20px;
+    padding: 4px 25px;
+    border: 2px solid var(--primary);
 }
 
-.search__icon {
-    position: relative;
-    right: 10px;
+/* END CREATE BUTTON */
+
+/* --------------------------------- */
+
+/* JS CLASS */
+
+.hide {
+    display: none;
+}
+
+/* END JS CLASS */
+
+.faq__item {
+    min-width: 250px;
+    max-width: 250px;
+    border-radius: 10px;
+    background-color: var(--black);
+    padding: 12px;
+    color: var(--white);
+    transition: all 0.4s ease-in-out;
+    overflow-wrap: break-word;
+}
+
+.faq__item__actions {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+}
+
+#edit, #delete {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    color: var(--white);
+}
+
+#edit {
+    background-color: var(--primary);
+}
+
+#delete {
+    background-color: var(--red);
+}
+
+.faq__form__texarea__box {
+    max-height: 100px;
+    min-height: 100px;
+    min-width: 100%;
+    max-width: 100%;
+    margin-bottom: 20px;
+    border: none;
+}
+
+form[name="faq"] {
+    background-color: var(--black);
+    padding: 10px;
+    max-width: 400px;
+    min-width: 250px;
+    border-radius: 20px;
+}
+
+.faq__form__label__title {
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: var(--w-2);
+    margin-bottom: 4px;
+}
+
+
+.faq__form__submit__box {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 15px;
-    height: 25px;
-    width: 25px;
+}
+
+.faq__form__submit__box button {
+    padding: 10px 40px;
+    border-radius: 20px;
     background-color: var(--primary);
+    border: none;
     color: var(--white);
-    border-radius: 50%;
+}
+
+.faq__form__delete__message {
+    text-align: center;
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+.faq__form {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.faq__delete__box {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.faq__form__delete_action button {
+    padding: 5px 20px;
+    border-radius: 20px;
+    border: none;
+    color: var(--white);
+}
+
+.faq__form__cancel {
+    background-color: var(--primary);
+}
+
+.faq__form__delete {
+    background-color: var(--red);
+}
+
+@keyframes red_pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--red);
+    }
+    100% {
+        color: var(--white);
+    }
 }

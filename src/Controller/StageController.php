@@ -51,7 +51,7 @@ class StageController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             if (!$stage) {
-                throw $this->createNotFoundException('No stage found for id '.$stage->getId());
+                throw $this->createNotFoundException('No stage found for id ' . $stage->getId());
             }
 
             $stage->setNumStage($form->getData()->getNumStage());
@@ -74,7 +74,7 @@ class StageController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $stage = new Stage();
-        $creator = $this->getUser()->getFirstname().$this->getUser()->getLastname();
+        $creator = $this->getUser()->getFirstname() . $this->getUser()->getLastname();
 
         $form = $this->createForm(StageType::class, $stage);
         $form->add('save', SubmitType::class);
@@ -82,7 +82,7 @@ class StageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $stage->setNumStage($form->getData()->getNumStage());
-            $stage->setTitre($form->getData()->getTitre().', publié par '.$creator);
+            $stage->setTitre($form->getData()->getTitre() . ', publié par ' . $creator);
             $stage->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();
@@ -104,8 +104,12 @@ class StageController extends AbstractController
     public function delete(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createFormBuilder()
-            ->add('delete', SubmitType::class)
-            ->add('cancel', SubmitType::class)
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__delete'],
+            ])
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__cancel'],
+            ])
             ->getForm();
 
         $form->handleRequest($request);

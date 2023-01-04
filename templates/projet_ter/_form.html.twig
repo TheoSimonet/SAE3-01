@@ -1,8 +1,13 @@
 {% block body %}
     {{ form_start(form) }}
-        {{ form_row(form.numpProj, {'label': 'Numéro du projet'}) }}
-        {{ form_row(form.titre, {'label': 'Titre du projet'}) }}
-        {{ form_row(form.description, {'label': 'Description du projet'}) }}
+    <p class="projet__form__label__title">Numéro du projet:</p>
+    {{ form_row(form.numpProj, {'label': ' '}) }}
+    <p class="projet__form__label__title">Titre du projet:</p>
+    {{ form_row(form.titre, {'label': ' '}) }}
+    <p class="projet__form__label__title">Description du projet:</p>
+    {{ form_row(form.description, {'label': ' '}) }}
+    <div class="projet__form__submit__box">
         {{ form_row(form.save, {'label': label_submit }) }}
+    </div>
     {{ form_end(form) }}
 {% endblock %}

@@ -1,15 +1,28 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
 {% block title %}
-    {{ projet.titre }}
+    Visualisation du projet n°{{ projet.numpProj }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ projet.titre }}</h1>
-    <ul>
-        <li>Titre du projet : {{ projet.titre }}</li>
-        <li>Description du projet : {{ projet.description }}</li>
-    </ul>
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Visualisation du projet n°{{ projet.numpProj }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="projet__show__item">
+            <h2>{{ projet.titre }}</h2>
+            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            <p id="projet__num"><span class="important">Numéro de projet:</span> {{ projet.numpProj }}</p>
+            <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
+        </div>
+    </div>
 {% endblock %}
 
 

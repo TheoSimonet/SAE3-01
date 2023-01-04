@@ -1,13 +1,30 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/faq/faq.css') }}"/>
+{% endblock %}
+
 {% block title %}
     Suppression de la question n°{{ faq.id }}
 {% endblock %}
 
 {% block body %}
-    Suppression de la question n°{{ faq.id }}
-    {{ form_start(form) }}
-        {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
-        {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
-    {{ form_end(form) }}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            FAQ - Suppression question n°{{ faq.id }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="faq__delete__box">
+            <p class="faq__form__delete__message">Êtes-vous sûr de vouloir supprimer la question n°{{ faq.id }} de la
+                FAQ ?</p>
+            <div class="faq__form__delete_action">
+                {{ form_start(form, { 'attr' : { 'class': 'faq__form' } }) }}
+                {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+                {{ form_row(form.delete, { 'label': 'Supprimer' }) }}
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </div>
 {% endblock %}
