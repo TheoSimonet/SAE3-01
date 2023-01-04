@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Candidature;
+use App\Entity\Stage;
 use App\Form\CandidatureType;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -25,7 +27,7 @@ class CandidatureController extends AbstractController
     }
 
     #[Route('/candidature/new', name: 'app_candidature_new')]
-    public function new(Request $request, SluggerInterface $slugger)
+    public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
     {
         $candidature = new Candidature();
         $form = $this->createForm(CandidatureType::class, $candidature);
@@ -50,7 +52,17 @@ class CandidatureController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
 
-                $candidature->setCvFilename(new File($this->getParameter('cvs_directory').'/'.$candidature->getCvFilename()));
+                $candidature->setCvFilename($newFilename);
+            }
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $candidature->setIdUser($this->getUser());
+
+                $em = $doctrine->getManager();
+                $idStage = $request->query->get('idStage');
+                $candidature->setIdStage($em->getRepository(Stage::class)->find($idStage));
+                $em->persist($candidature);
+                $em->flush();
             }
 
             return $this->redirectToRoute('app_accueil');

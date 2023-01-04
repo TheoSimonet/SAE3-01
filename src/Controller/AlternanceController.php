@@ -64,7 +64,7 @@ class AlternanceController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $alternance = new Alternance();
-        $creator = $this->getUser()->getFirstname().$this->getUser()->getLastname();
+        $creator = $this->getUser()->getId().$this->getUser()->getLastname();
 
         $form = $this->createForm(AlternanceType::class, $alternance);
         $form->add('save', SubmitType::class);
