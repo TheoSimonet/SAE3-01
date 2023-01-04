@@ -17,7 +17,7 @@ class AlternanceController extends AbstractController
     #[Route('/alternance', name: 'app_alternance')]
     public function index(AlternanceRepository $alternanceRepository): Response
     {
-        $alternance = $alternanceRepository->findBy([],['id'=>'ASC','titre'=>'ASC','description'=>'ASC']);
+        $alternance = $alternanceRepository->findBy([], ['id' => 'ASC', 'titre' => 'ASC', 'description' => 'ASC']);
 
         return $this->render('alternance/index.html.twig', [
             'alternances' => $alternance,
@@ -41,7 +41,7 @@ class AlternanceController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             if (!$alternance) {
-                throw $this->createNotFoundException('No project found for id '.$alternance->getId());
+                throw $this->createNotFoundException('No project found for id ' . $alternance->getId());
             }
 
             $alternance->setNumAlternance($form->getData()->getNumAlternance());
@@ -64,7 +64,7 @@ class AlternanceController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $alternance = new Alternance();
-        $creator = $this->getUser()->getFirstname().$this->getUser()->getLastname();
+        $creator = $this->getUser()->getFirstname() . $this->getUser()->getLastname();
 
         $form = $this->createForm(AlternanceType::class, $alternance);
         $form->add('save', SubmitType::class);
@@ -72,7 +72,7 @@ class AlternanceController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $alternance->setNumAlternance($form->getData()->getNumAlternance());
-            $alternance->setTitre($form->getData()->getTitre().', publié par '.$creator);
+            $alternance->setTitre($form->getData()->getTitre() . ', publié par ' . $creator);
             $alternance->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();
@@ -94,8 +94,12 @@ class AlternanceController extends AbstractController
     public function delete(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
         $form = $this->createFormBuilder()
-            ->add('delete', SubmitType::class)
-            ->add('cancel', SubmitType::class)
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__delete'],
+            ])
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__cancel'],
+            ])
             ->getForm();
 
         $form->handleRequest($request);
