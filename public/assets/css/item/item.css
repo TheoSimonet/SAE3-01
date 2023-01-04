@@ -1,4 +1,4 @@
-.actu__item {
+.item {
     background-color: var(--black);
     padding: 20px;
     border-radius: 20px;
@@ -19,7 +19,7 @@
     border-radius: 5px;
 }
 
-.actu__item__title {
+.item__title {
     text-align: center;
     text-transform: uppercase;
     font-weight: var(--w-3);
@@ -27,7 +27,7 @@
     margin-bottom: 20px;
 }
 
-.actu__item__content {
+.item__content {
     color: var(--white);
     display: flex;
     flex-direction: column;
@@ -48,7 +48,7 @@
     border-radius: 22px;
 }
 
-.actu__item__date {
+.item__date {
     text-align: right;
     color: var(--white);
 }

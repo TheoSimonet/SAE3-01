@@ -1,0 +1,30 @@
+.search__bar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__bar .search__icon {
+    position: relative;
+    left: -15px;
+}
+
+.search__icon i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: var(--black);
+    border-radius: 50%;
+    color: var(--white);
+    height: 20px;
+    width: 20px;
+}
+
+#search__bar {
+    padding: 3px 15px;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border: none;
+}

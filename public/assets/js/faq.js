@@ -1,4 +1,5 @@
 const faq__item = document.querySelectorAll('.faq__item');
+const edit__buttons = document.querySelectorAll("#edit");
 
 faq__item.forEach(item => {
     item.addEventListener('click', evt => {
@@ -25,6 +26,8 @@ faq__item.forEach(item => {
         bx__icon.classList.add("bxs-down-arrow");
         bx__icon.classList.remove("bxs-right-arrow");
 
+        item.querySelector("#edit").style.backgroundColor = "var(--black)"
+
     })
 })
 
@@ -44,6 +47,8 @@ function disableAll() {
         // Permet de mettre à jour la flèche
         bx__icon.classList.remove("bxs-down-arrow");
         bx__icon.classList.add("bxs-right-arrow");
+
+       edit__buttons.forEach(item => item.style.backgroundColor = "var(--primary)")
 
     })
 }

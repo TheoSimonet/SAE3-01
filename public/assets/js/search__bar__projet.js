@@ -1,8 +1,9 @@
 document.querySelector("#search__bar").addEventListener('keyup', update)
 
 function update() {
-    console.log("test");
+
     let input, filter, section, items, a, i, txtValue;
+
     input = document.getElementById('search__bar');
     filter = input.value.toUpperCase();
     section = document.querySelector(".projet__bottom");
@@ -17,4 +18,5 @@ function update() {
             items[i].style.display = "none";
         }
     }
+
 }
