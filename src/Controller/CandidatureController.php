@@ -7,6 +7,7 @@ use App\Form\CandidatureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -49,7 +50,7 @@ class CandidatureController extends AbstractController
                     // ... handle exception if something happens during file upload
                 }
 
-                $candidature->setCvFilename($newFilename);
+                $candidature->setCvFilename(new File($this->getParameter('cvs_directory').'/'.$candidature->getCvFilename()));
             }
 
             return $this->redirectToRoute('app_accueil');
