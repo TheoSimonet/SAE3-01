@@ -23,6 +23,15 @@
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
         </div>
     </div>
+    {% set x = 1 %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+            {% for candidature in stage.candidatures %}
+                <h2>Candidature n°{{ x }}</h2>
+                <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
+                <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+                {% set x = x + 1 %}
+            {% endfor %}
+        {% endif %}
 {% endblock %}
 
 

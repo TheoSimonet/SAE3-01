@@ -32,6 +32,14 @@ class StageController extends AbstractController
         return $this->render('stage/show.html.twig', ['stage' => $stage]);
     }
 
+    #[Route('/stage/{id}/candidate', name: 'app_stage_candidate', requirements: ['id' => '\d+'])]
+    public function candidate(Stage $stage): Response
+    {
+        return $this->redirectToRoute('app_candidature_new', [
+            'idStage' => $stage->getId(),
+        ]);
+    }
+
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
