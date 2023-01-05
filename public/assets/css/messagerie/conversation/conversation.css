@@ -85,7 +85,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
-border: 3px solid var(--primary);
+    border: 3px solid var(--primary);
     padding: 10px;
     border-radius: 20px;
 }
@@ -101,6 +101,16 @@ border: 3px solid var(--primary);
 
 .conversation__show__item__lastmessage .author {
     font-size: 10px;
-    font-style: italic;
     color: var(--white);
+}
+
+.return__button {
+    color: var(--white);
+    background-color: var(--black);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.object__head {
+    margin-bottom: 10px;
 }
