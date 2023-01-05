@@ -1,0 +1,50 @@
+.message__item {
+    border: 2px solid var(--white);
+}
+
+.align__left {
+    background-color: var(--black);
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-left-radius: 20px;
+    margin-right: 70px;
+}
+
+.align__right {
+    background-color: var(--primary);
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    margin-left: 70px;
+}
+
+.align__left, .align__right {
+    padding: 20px;
+    color: var(--white);
+}
+
+.message__item p:not(:last-child)  {
+    margin-bottom: 18px;
+}
+
+.message__item .author i {
+    margin-right: 2px;
+    border-radius: 50%;
+    padding: 5px;
+    color: var(--white);
+    background-color: var(--primary);
+}
+
+.message__item .date {
+    text-align: right;
+    font-size: 13px;
+}
+
+.locked__information {
+    margin-top: 15px;
+    padding: 10px;
+    background-color: var(--red);
+    text-align: center;
+    color: var(--white);
+    border-radius: 20px;
+}
