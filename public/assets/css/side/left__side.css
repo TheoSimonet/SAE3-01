@@ -15,7 +15,7 @@
 /* LEFT */
 
 .left {
-    z-index: 9999999;
+    z-index: 1000;
     display: grid;
     grid-template-columns: 190px 40px;
     position: absolute;

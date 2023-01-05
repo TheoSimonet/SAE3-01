@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/conversation.css') }}"/>
+{% endblock %}
+
+{% block title %}Conversations{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-chat'></i>
+            Conversations
+        </p>
+    </div>
+    <div class="right__center">
+        {% for conversation in conversations %}
+            <a href="{{ path('app_conversation_show', {id: conversation.id}) }}">
+                <div class="conversation__show__item">
+                    <div class="conversation__show__item__left">
+                        <div class="conversation__item__show__logo">
+                            {% if conversation.locked %}
+                                <i class='bx bxs-lock-alt'></i>
+                            {% else %}
+                                <i class='bx bx-message-rounded'></i>
+                            {% endif %}
+                        </div>
+                        <div class="conversation__show__item__head">
+                            <p class="conversation__item__show__subject"><i
+                                        class='bx bx-book-open'></i> {{ conversation.subject }}</p>
+                            <p class="conversation__item__show__author">
+                                <i class='bx bx-user'></i> {{ conversation.author.firstname }} {{ conversation.author.lastname }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="conversation__show__item__right">
+                        <div class="conversation__show__item__stats">
+                            <div>
+                                <p class="stat__name">Message{{ (conversation.messages|length > 1 ? 's':'') }}</p>
+                                <p class="number">{{ conversation.messages|length }}</p>
+                            </div>
+                            <div>
+                                <p class="stat__name">
+                                    Participant{{ (conversation.participant|length > 1 ? 's' : '') }}</p>
+                                <p class="number">{{ conversation.participant|length }}</p>
+                            </div>
+                        </div>
+                        {% if conversation.messages|length > 0 %}
+                            <div class="conversation__show__item__lastmessage">
+                                <p class="message"><i
+                                            class='bx bxs-time'></i> {{ conversation.messages|last.content[:35] ~ '...' }}
+                                </p>
+                                <p class="author">
+                                    Le {{ conversation.messages|last.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}
+                                    par {{ conversation.messages|last.senderid.firstname }} {{ conversation.messages|last.senderid.lastname }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock %}

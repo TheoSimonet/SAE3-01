@@ -28,6 +28,7 @@
     {% block javascripts %}
         {{ encore_entry_script_tags('app') }}
     {% endblock %}
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 <body>
@@ -56,6 +57,12 @@
                     <a href="{{ path('app_faq') }}">
                         <i class="bx bx-question-mark"></i>
                         F.A.Q
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ path('app_conversation') }}">
+                        <i class='bx bxs-chat'></i>
+                        Messagerie
                     </a>
                 </li>
                 {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
