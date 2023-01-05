@@ -48,3 +48,43 @@
     color: var(--white);
     border-radius: 20px;
 }
+
+.return__button {
+    color: var(--white);
+    background-color: var(--black);
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+.object__head {
+    margin-bottom: 10px;
+}
+
+form[name="message"] {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#message_content {
+    color: var(--black);
+    text-align: center;
+    padding: 15px;
+    border: 2px solid var(--primary);
+    background-color: var(--white);
+    border-radius: 5px;
+    min-height: 10px;
+    max-height: 20px;
+    min-width: 100px;
+    max-width: 150px;
+}
+
+#message_save{
+    padding: 10px 15px;
+    border: 2px solid var(--primary);
+    color: var(--white);
+    background-color: var(--black);
+    border-radius: 20px;
+}
