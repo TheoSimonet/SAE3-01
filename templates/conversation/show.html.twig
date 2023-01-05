@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/conversation.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/in_conversation.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Conversation n°{{ conversation.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-chat'></i>
+            Conversation n°{{ conversation.id }}
+        </p>
+        <p class="object__head">Objet: {{ conversation.subject }}</p>
+        <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
+    </div>
+    <div class="right__center">
+        {% if conversation.locked %}
+            <div class="locked__information">
+                <p><i class='bx bxs-lock-alt'></i> Cette conversation est fermée</p>
+            </div>
+        {% endif %}
+        {% for message in conversation.messages %}
+            <div class="message__item {{ message.senderid.id == app.user.id ? "align__right" : "align__left" }}">
+                {% if message.senderid.id != app.user.id %}
+                    <p class="author"><i class='bx bx-user'></i> {{ message.senderid.firstname }}</p>
+                {% endif %}
+                <p class="message">{{ message.content }}</p>
+                <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if conversation.locked %}
+        <script>
+            Swal.fire(
+                'Conversation fermée',
+                'Vous ne pouvez plus envoyer de messages dans cette conversation.',
+                'warning'
+            )
+        </script>
+    {% endif %}
+{% endblock %}
+
