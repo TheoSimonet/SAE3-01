@@ -1,0 +1,106 @@
+.conversation__show__item {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    max-height: 300px;
+    gap: 20px;
+}
+
+/* LEFT */
+
+.conversation__show__item__left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.conversation__item__show__subject {
+    margin-bottom: 5px;
+}
+
+.conversation__item__show__subject, .conversation__item__show__author {
+    width: 100%;
+    color: var(--white);
+    text-overflow: ellipsis;
+}
+
+.conversation__item__show__subject i, .conversation__item__show__author i {
+    color: var(--primary);
+}
+
+.conversation__item__show__logo i {
+    background-color: var(--primary);
+    font-size: 30px;
+    color: var(--white);
+    padding: 10px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.conversation__show__item__head {
+    text-align: center;
+}
+
+/* END LEFT */
+
+/* RIGHT */
+
+.conversation__show__item__stats {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.conversation__show__item__stats .number {
+    text-align: center;
+    color: var(--primary);
+}
+
+.conversation__show__item__stats .stat__name {
+    text-transform: uppercase;
+    color: var(--white);
+}
+
+.conversation__show__item__right {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.conversation__show__item__lastmessage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+border: 3px solid var(--primary);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.conversation__show__item__lastmessage .message {
+    font-size: 15px;
+    color: var(--white);
+}
+
+.conversation__show__item__lastmessage .message i {
+    color: var(--primary);
+}
+
+.conversation__show__item__lastmessage .author {
+    font-size: 10px;
+    font-style: italic;
+    color: var(--white);
+}
