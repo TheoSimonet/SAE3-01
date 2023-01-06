@@ -1,7 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/conversation.css') }}"/>
     <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/in_conversation.css') }}"/>
 {% endblock %}
 
@@ -33,6 +32,9 @@
                 <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
             </div>
         {% endfor %}
+        {% if conversation.locked == false %}
+            {{ include('message/_form.html.twig', {label_submit: 'Envoyer', form: form}, with_context = false) }}
+        {% endif %}
     </div>
 
     {% if conversation.locked %}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/conversation.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Création d'une nouvelle conversation
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-chat'></i>
+            Création d'une nouvelle conversation
+        </p>
+    </div>
+    <div class="right__center">
+        {{ include('conversation/_form.html.twig', {label_submit: 'Créer', form: form}, with_context = false) }}
+    </div>
+{% endblock %}
