@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des événements{% endblock %}
+
+{% block body %}
+    <h1>Liste des événements</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.startTime|date('Y-m-d H:i:s') }}</td>
+                <td>{{ event.endTime|date('Y-m-d H:i:s') }}</td>
+                <td>{{ event.description|default('') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
