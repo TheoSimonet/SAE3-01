@@ -2,6 +2,7 @@
     {{ form_start(form) }}
     <p class="projet__form__label__title">Sujet:</p>
     {{ form_row(form.subject, {'label': ' '}) }}
+        {{ form_row(form.participant, {'label': ' '}) }}
     <div class="projet__form__submit__box">
         {{ form_row(form.save, {'label': label_submit }) }}
     </div>
