@@ -83,6 +83,7 @@ class StageController extends AbstractController
             $stage->setNumStage($form->getData()->getNumStage());
             $stage->setTitre($form->getData()->getTitre());
             $stage->setDescription($form->getData()->getDescription());
+            $stage->setAuthor($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($stage);
