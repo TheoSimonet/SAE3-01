@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\Candidature;
 use App\Entity\Stage;
+use App\Entity\User;
 use App\Form\StageType;
 use App\Repository\StageRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -12,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
 // #[IsGranted('ROLE_ADMIN', null, "Vous n'avez pas les permissions nécessaires pour accéder aux stages")]
 class StageController extends AbstractController
@@ -40,6 +43,12 @@ class StageController extends AbstractController
         ]);
     }
 
+    #[Route('/stage/detail-candidature/{id}/', name: 'app_stage_detail-candidature', requirements: ['id' => '\d+'])]
+    public function candidatureShow(Candidature $candidature): Response
+    {
+        return $this->render('stage/candidature_show.html.twig', ['candidature' => $candidature]);
+    }
+
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -51,7 +60,7 @@ class StageController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             if (!$stage) {
-                throw $this->createNotFoundException('No stage found for id ' . $stage->getId());
+                throw $this->createNotFoundException('No stage found for id '.$stage->getId());
             }
 
             $stage->setNumStage($form->getData()->getNumStage());

@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CandidatureRepository;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
@@ -23,6 +24,9 @@ class Candidature
 
     #[ORM\Column(length: 255)]
     private ?string $cvFilename = null;
+
+    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    private ?\DateTimeInterface $date = null;
 
     public function getId(): ?int
     {
@@ -61,6 +65,18 @@ class Candidature
     public function setCvFilename(string $cvFilename): self
     {
         $this->cvFilename = $cvFilename;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }
