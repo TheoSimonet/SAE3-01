@@ -18,7 +18,7 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ stage.titre }}</h2>
-            <p id="projet__author"><span class="important">Auteur:</span>{{ stage.author.firstname }} {{ stage.author.lastname }}</p>
+            <p id="projet__author"><span class="important">Auteur:</span> {{ stage.author.firstname }} {{ stage.author.lastname }}</p>
             <p id="projet__num"><span class="important">Numéro de stage:</span> {{ stage.numStage }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
 
@@ -32,7 +32,7 @@
             {% for candidature in stage.candidatures %}
                 <h2>Candidature n°{{ x }}</h2>
                 <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
-                <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+                <a href="{{ path('app_stage_detail-candidature', {id: candidature.id}) }}">Voir plus</a>
                 {% set x = x + 1 %}
             {% endfor %}
         {% endif %}
