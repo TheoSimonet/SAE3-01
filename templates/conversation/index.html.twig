@@ -42,13 +42,13 @@
                             <div>
                                 <p class="stat__name">
                                     Participant{{ (conversation.participant|length > 1 ? 's' : '') }}</p>
-                                <p class="number">{{ conversation.participant|length }}</p>
+                                <p class="number">{{ conversation.participant|length + 1 }}</p>
                             </div>
                         </div>
                         {% if conversation.messages|length > 0 %}
                             <div class="conversation__show__item__lastmessage">
                                 <p class="message"><i
-                                            class='bx bxs-time'></i> {{ conversation.messages|last.content[:35] ~ '...' }}
+                                            class='bx bxs-time'></i> {{ conversation.messages|last.content[:50] ~ '...' }}
                                 </p>
                                 <p class="author">
                                     Le {{ conversation.messages|last.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}

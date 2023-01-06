@@ -18,23 +18,36 @@
         <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
     </div>
     <div class="right__center">
-        {% if conversation.locked %}
-            <div class="locked__information">
-                <p><i class='bx bxs-lock-alt'></i> Cette conversation est fermée</p>
-            </div>
-        {% endif %}
-        {% for message in conversation.messages %}
-            <div class="message__item {{ message.senderid.id == app.user.id ? "align__right" : "align__left" }}">
-                {% if message.senderid.id != app.user.id %}
-                    <p class="author"><i class='bx bx-user'></i> {{ message.senderid.firstname }}</p>
+        <div class="conv__space">
+            <div class="conv__top">
+                {% if conversation.locked %}
+                    <div class="locked__information">
+                        <p><i class='bx bxs-lock-alt'></i> Cette conversation est fermée</p>
+                    </div>
                 {% endif %}
-                <p class="message">{{ message.content }}</p>
-                <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
             </div>
-        {% endfor %}
-        {% if conversation.locked == false %}
-            {{ include('message/_form.html.twig', {label_submit: 'Envoyer', form: form}, with_context = false) }}
-        {% endif %}
+            <div class="conv__center">
+                {% if conversation.messages|length == 0 %}
+                    <p class="start__talk">Commencez à discuter dès maintenant</p>
+                {% endif %}
+                {% for message in conversation.messages %}
+                    <div class="message__item {{ message.senderid.id == app.user.id ? "align__right" : "align__left" }}">
+                        {% if message.senderid.id != app.user.id %}
+                            <p class="author"><i class='bx bx-user'></i> {{ message.senderid.firstname }}</p>
+                        {% endif %}
+                        <p class="message">{{ message.content }}</p>
+                        <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <div class="conv__bottom">
+                {% if conversation.locked == false %}
+                    {{ include('message/_form.html.twig', {label_submit: 'Envoyer', form: form, conversation: conversation}, with_context = false) }}
+                {% else %}
+                    <p class="close_conversation__sendmessage">Impossible d'envoyer un message dans une conversation fermée</p>
+                {% endif %}
+            </div>
+        </div>
     </div>
 
     {% if conversation.locked %}

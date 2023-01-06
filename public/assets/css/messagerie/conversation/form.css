@@ -1,0 +1,7 @@
+#conversation_participant {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 150px;
+    overflow-y: auto;
+}
