@@ -44,7 +44,6 @@ class AlternanceController extends AbstractController
                 throw $this->createNotFoundException('No project found for id ' . $alternance->getId());
             }
 
-            $alternance->setNumAlternance($form->getData()->getNumAlternance());
             $alternance->setTitre($form->getData()->getTitre());
             $alternance->setDescription($form->getData()->getDescription());
             $entityManager->flush();
@@ -71,7 +70,6 @@ class AlternanceController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $alternance->setNumAlternance($form->getData()->getNumAlternance());
             $alternance->setTitre($form->getData()->getTitre() . ', publié par ' . $creator);
             $alternance->setDescription($form->getData()->getDescription());
 

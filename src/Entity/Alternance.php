@@ -14,9 +14,6 @@ class Alternance
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $numAlternance = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
@@ -25,18 +22,6 @@ class Alternance
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumAlternance(): ?string
-    {
-        return $this->numAlternance;
-    }
-
-    public function setNumAlternance(string $numAlternance): self
-    {
-        $this->numAlternance = $numAlternance;
-
-        return $this;
     }
 
     public function getTitre(): ?string
