@@ -4,6 +4,9 @@ namespace App\Form;
 
 use App\Entity\Event;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -21,7 +24,7 @@ class EventType extends AbstractType
             ->add('endTime', DateTimeType::class, [
                 'label' => 'Fin de l\'événement'
             ])
-            ->add('description', TextareaType::class, [
+            ->add('text', TextareaType::class, [
                 'label' => 'Description de l\'événement',
                 'required' => false
             ])

@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Event;
+use App\Form\EventType;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 
 class EventController extends AbstractController
 {
@@ -20,11 +23,12 @@ class EventController extends AbstractController
             'events' => $events,
         ]);
     }
-
-    public function createEvent(Request $request): Response
+    #[Route('/event/create', name: 'app_event_create')]
+    public function create(Request $request,ManagerRegistry $doctrine): Response
     {
         $event = new Event();
         $form = $this->createForm(EventType::class, $event);
+        $form ->add('Ajouter', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -32,7 +36,7 @@ class EventController extends AbstractController
             $entityManager->persist($event);
             $entityManager->flush();
 
-            return $this->redirectToRoute('event_list');
+            return $this->redirectToRoute('app_event');
         }
 
         return $this->render('event/create.html.twig', [
