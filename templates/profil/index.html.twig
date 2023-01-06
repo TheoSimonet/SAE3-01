@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de profil de {{ user.firstname }}{% endblock %}
+
+{% block body %}
+    <h1>Page de profil de {{ user.firstname }}</h1>
+
+
+    {% if user.roles[0] == "ROLE_ADMIN" %}
+    <h3>Vous êtes connectés en tant qu'Adminitrateur.</h3>
+    {% endif %}
+    {% if user.roles[0] == "ROLE_USER" %}
+        <h3>Vous êtes connectés en tant qu'Utilisateur.</h3>
+    {% endif %}
+    {% if user.roles[0] == "ROLE_ETUDIANT" %}
+        <h3>Vous êtes connectés en tant qu'Etudiant.</h3>
+    {% endif %}
+    {% if user.roles[0] == "ROLE_ENTREPRISE" %}
+        <h3>Vous êtes connectés en tant qu'Entreprise.</h3>
+    {% endif %}
+    {% if user.roles[0] == "ROLE_ENSEIGNANT" %}
+        <h3>Vous êtes connectés en tant qu'Enseignant.</h3>
+    {% endif %}
+    <h3>Numéro de téléphone : {{ user.phone }}</h3>
+{% endblock %}
