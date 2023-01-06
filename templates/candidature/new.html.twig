@@ -13,5 +13,7 @@
 
     {{ form_start(form) }}
         {{ form_row(form.cvFilename) }}
+        {{ form_row(form.Valider) }}
+        <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
     {{ form_end(form) }}
 {% endblock %}
