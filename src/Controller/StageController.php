@@ -74,7 +74,6 @@ class StageController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $stage = new Stage();
-        $creator = $this->getUser()->getFirstname() . $this->getUser()->getLastname();
 
         $form = $this->createForm(StageType::class, $stage);
         $form->add('save', SubmitType::class);
@@ -82,8 +81,9 @@ class StageController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $stage->setNumStage($form->getData()->getNumStage());
-            $stage->setTitre($form->getData()->getTitre() . ', publié par ' . $creator);
+            $stage->setTitre($form->getData()->getTitre());
             $stage->setDescription($form->getData()->getDescription());
+            $stage->setAuthor($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($stage);

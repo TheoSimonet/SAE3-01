@@ -18,9 +18,13 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ stage.titre }}</h2>
-            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            <p id="projet__author"><span class="important">Auteur:</span>{{ stage.author.firstname }} {{ stage.author.lastname }}</p>
             <p id="projet__num"><span class="important">Numéro de stage:</span> {{ stage.numStage }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
+
+            {% if is_granted('ROLE_ETUDIANT') %}
+                <a href="{{ path('app_candidature_new', {idStage: stage.id}) }}">Candidater</a>
+            {% endif %}
         </div>
     </div>
     {% set x = 1 %}

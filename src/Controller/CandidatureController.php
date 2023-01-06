@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
@@ -21,6 +20,9 @@ class CandidatureController extends AbstractController
     #[Route('/candidature/new', name: 'app_candidature_new')]
     public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
     {
+        $em = $doctrine->getManager();
+        $stage = $em->getRepository(Stage::class)->find($request->query->get('idStage'));
+
         $candidature = new Candidature();
         $form = $this->createForm(CandidatureType::class, $candidature);
         $form->add('Valider', SubmitType::class);
@@ -49,19 +51,17 @@ class CandidatureController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $candidature->setIdUser($this->getUser());
-
-                $em = $doctrine->getManager();
-                $idStage = $request->query->get('idStage');
-                $candidature->setIdStage($em->getRepository(Stage::class)->find($idStage));
+                $candidature->setIdStage($stage);
                 $em->persist($candidature);
                 $em->flush();
             }
 
-            return $this->redirectToRoute('app_accueil');
+            return $this->redirectToRoute('app_stage');
         }
 
         return $this->renderForm('candidature/new.html.twig', [
             'form' => $form,
+            'stage' => $stage,
         ]);
     }
 }

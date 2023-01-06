@@ -27,6 +27,10 @@ class Stage
     #[ORM\OneToMany(mappedBy: 'idStage', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $candidatures;
 
+    #[ORM\ManyToOne(inversedBy: 'stages')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $author = null;
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
@@ -99,6 +103,18 @@ class Stage
                 $candidature->setIdStage(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?User $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }
