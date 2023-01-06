@@ -52,6 +52,7 @@ class CandidatureController extends AbstractController
             if ($form->isSubmitted() && $form->isValid()) {
                 $candidature->setIdUser($this->getUser());
                 $candidature->setIdStage($stage);
+                $candidature->setDate(new \DateTimeImmutable('now'));
                 $em->persist($candidature);
                 $em->flush();
             }

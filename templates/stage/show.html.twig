@@ -32,6 +32,7 @@
             {% for candidature in stage.candidatures %}
                 <h2>Candidature n°{{ x }}</h2>
                 <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
+                <p>Faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
                 <a href="{{ path('app_stage_detail-candidature', {id: candidature.id}) }}">Voir plus</a>
                 {% set x = x + 1 %}
             {% endfor %}
