@@ -6,6 +6,8 @@ use App\Entity\Conversation;
 use App\Entity\Message;
 use App\Form\ConversationType;
 use App\Form\MessageType;
+use App\Repository\ConversationRepository;
+use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -17,10 +19,19 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class ConversationController extends AbstractController
 {
     #[Route('/conversation', name: 'app_conversation')]
-    public function index(): Response
+    public function index(ConversationRepository $conversationRepository): Response
     {
+        $user = $this->getUser();
+        $result = array();
+
+        foreach ($conversationRepository->findAll() as $conversation) {
+            if ($conversation->getAuthor() === $user || $conversation->getParticipant()->contains($user)) {
+                $result[] = $conversation;
+            }
+        }
+
         return $this->render('conversation/index.html.twig', [
-            'conversations' => $this->getUser()->getConversations(),
+            'conversations' => $result,
         ]);
     }
 
@@ -36,7 +47,7 @@ class ConversationController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $conversation->setAuthor($user);
-            $conversation->setCreatedAt(new \DateTimeImmutable('now'));
+            $conversation->setCreatedAt(new DateTimeImmutable('now'));
             $conversation->setLocked(false);
             $conversation->setSubject($form->getData()->getSubject());
 
@@ -73,7 +84,7 @@ class ConversationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message->setContent($form->getData()->getContent());
             $message->setConversation($conversation);
-            $message->setSendAt(new \DateTimeImmutable('now'));
+            $message->setSendAt(new DateTimeImmutable('now'));
             $message->setSenderId($user);
 
             $em = $doctrine->getManager();
