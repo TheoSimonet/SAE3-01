@@ -22,6 +22,7 @@ class ConversationType extends AbstractType
             ])
             ->add('participant', EntityType::class,
                 [
+                    'required' => true,
                     'class' => User::class,
                     'multiple' => true,
                     'expanded' => true,
