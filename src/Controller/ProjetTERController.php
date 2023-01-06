@@ -41,10 +41,9 @@ class ProjetTERController extends AbstractController
             $entityManager = $doctrine->getManager();
 
             if (!$projet) {
-                throw $this->createNotFoundException('No project found for id ' . $projet->getId());
+                throw $this->createNotFoundException('No project found for id '.$projet->getId());
             }
 
-            $projet->setNumpProj($form->getData()->getNumpProj());
             $projet->setTitre($form->getData()->getTitre());
             $projet->setDescription($form->getData()->getDescription());
             $entityManager->flush();
@@ -64,15 +63,13 @@ class ProjetTERController extends AbstractController
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
         $projet = new ProjetTER();
-        $creator = $this->getUser()->getFirstname() . ' ' . $this->getUser()->getLastname();
-
+        $creator = $this->getUser()->getFirstname().' '.$this->getUser()->getLastname();
         $form = $this->createForm(ProjetTERType::class, $projet);
         $form->add('save', SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $projet->setNumpProj($form->getData()->getNumpProj());
-            $projet->setTitre($form->getData()->getTitre() . ', publié par ' . $creator);
+            $projet->setTitre($form->getData()->getTitre().', publié par '.$creator);
             $projet->setDescription($form->getData()->getDescription());
 
             $em = $doctrine->getManager();

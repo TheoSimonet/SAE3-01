@@ -5,19 +5,19 @@
 {% endblock %}
 
 {% block title %}
-    Suppression de l'alternance n°{{ alternance.numAlternance }}
+    Suppression de l'alternance n°{{ alternance.id }}
 {% endblock %}
 
 {% block body %}
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
-            Suppression de l'alternance n°{{ alternance.numAlternance }}
+            Suppression de l'alternance n°{{ alternance.id }}
         </p>
     </div>
     <div class="right__center">
         <div class="projet__delete__box">
-            <p class="projet__form__delete__message">Êtes-vous sûr de vouloir supprimer l'alternance n°{{ alternance.numAlternance }} ?</p>
+            <p class="projet__form__delete__message">Êtes-vous sûr de vouloir supprimer l'alternance n°{{ alternance.id }} ?</p>
             <div class="projet__form__delete_action">
                 {{ form_start(form,  { 'attr' : { 'class': 'projet__form' } }) }}
                 {{ form_row(form.cancel, { 'label': 'Annuler' }) }}

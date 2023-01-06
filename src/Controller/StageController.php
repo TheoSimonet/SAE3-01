@@ -63,7 +63,6 @@ class StageController extends AbstractController
                 throw $this->createNotFoundException('No stage found for id '.$stage->getId());
             }
 
-            $stage->setNumStage($form->getData()->getNumStage());
             $stage->setTitre($form->getData()->getTitre());
             $stage->setDescription($form->getData()->getDescription());
             $entityManager->flush();
@@ -89,7 +88,6 @@ class StageController extends AbstractController
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $stage->setNumStage($form->getData()->getNumStage());
             $stage->setTitre($form->getData()->getTitre());
             $stage->setDescription($form->getData()->getDescription());
             $stage->setAuthor($this->getUser());

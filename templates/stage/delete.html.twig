@@ -5,19 +5,19 @@
 {% endblock %}
 
 {% block title %}
-    Suppression du stage {{ stage.numStage }}
+    Suppression du stage {{ stage.id }}
 {% endblock %}
 
 {% block body %}
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
-            Suppression du stage n°{{ stage.numStage }}
+            Suppression du stage n°{{ stage.id }}
         </p>
     </div>
     <div class="right__center">
         <div class="projet__delete__box">
-            <p class="projet__form__delete__message">Êtes-vous sûr de vouloir supprimer le stage n°{{ stage.numStage }}
+            <p class="projet__form__delete__message">Êtes-vous sûr de vouloir supprimer le stage n°{{ stage.id }}
                 ?</p>
             <div class="projet__form__delete_action">
                 {{ form_start(form, { 'attr' : { 'class': 'projet__form' } }) }}

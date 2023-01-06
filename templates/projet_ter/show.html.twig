@@ -5,21 +5,20 @@
 {% endblock %}
 
 {% block title %}
-    Visualisation du projet n°{{ projet.numpProj }}
+    Visualisation du projet n°{{ projet.id }}
 {% endblock %}
 
 {% block body %}
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
-            Visualisation du projet n°{{ projet.numpProj }}
+            Visualisation du projet n°{{ projet.id }}
         </p>
     </div>
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ projet.titre }}</h2>
             <p id="projet__author"><span class="important">Auteur:</span> @author</p>
-            <p id="projet__num"><span class="important">Numéro de projet:</span> {{ projet.numpProj }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
         </div>
     </div>

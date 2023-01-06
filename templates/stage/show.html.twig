@@ -5,21 +5,20 @@
 {% endblock %}
 
 {% block title %}
-    Visualisation du stage n°{{ stage.numStage }}
+    Visualisation du stage n°{{ stage.id }}
 {% endblock %}
 
 {% block body %}
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
-            Visualisation du stage n°{{ stage.numStage }}
+            Visualisation du stage n°{{ stage.id }}
         </p>
     </div>
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ stage.titre }}</h2>
             <p id="projet__author"><span class="important">Auteur:</span> {{ stage.author.firstname }} {{ stage.author.lastname }}</p>
-            <p id="projet__num"><span class="important">Numéro de stage:</span> {{ stage.numStage }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
 
             {% if is_granted('ROLE_ETUDIANT') %}

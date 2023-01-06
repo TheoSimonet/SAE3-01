@@ -15,9 +15,6 @@ class Stage
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $numStage = null;
-
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
@@ -39,18 +36,6 @@ class Stage
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumStage(): ?int
-    {
-        return $this->numStage;
-    }
-
-    public function setNumStage(int $numStage): self
-    {
-        $this->numStage = $numStage;
-
-        return $this;
     }
 
     public function getTitre(): ?string

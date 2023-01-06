@@ -5,21 +5,20 @@
 {% endblock %}
 
 {% block title %}
-    Visualisation de l'alternance n°{{ alternance.numAlternance }}
+    Visualisation de l'alternance n°{{ alternance.id }}
 {% endblock %}
 
 {% block body %}
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
-            Visualisation de l'alternance n°{{ alternance.numAlternance }}
+            Visualisation de l'alternance n°{{ alternance.id }}
         </p>
     </div>
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ alternance.titre }}</h2>
             <p id="projet__author"><span class="important">Auteur:</span> @author</p>
-            <p id="projet__num"><span class="important">Numéro de l'alternance:</span> {{ alternance.numAlternance }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
         </div>
     </div>

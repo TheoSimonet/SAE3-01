@@ -16,9 +16,6 @@ class ProjetTER
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $numpProj = null;
-
     #[ORM\Column(length: 255)]
     private ?string $titre = null;
 
@@ -28,18 +25,6 @@ class ProjetTER
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getNumpProj(): ?int
-    {
-        return $this->numpProj;
-    }
-
-    public function setNumpProj(int $numpProj): self
-    {
-        $this->numpProj = $numpProj;
-
-        return $this;
     }
 
     public function getTitre(): ?string

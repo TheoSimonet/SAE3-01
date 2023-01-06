@@ -14,8 +14,6 @@ class AlternanceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('numAlternance', IntegerType::class,
-                ['attr' => ['class' => 'projet__form__input']])
             ->add('titre', TextareaType::class, [
                 'empty_data' => '',
                 'attr' => ['class' => 'projet__form__input projet__text__area']
