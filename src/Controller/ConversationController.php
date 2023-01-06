@@ -4,15 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Conversation;
 use App\Entity\Message;
+use App\Form\ConversationType;
 use App\Form\MessageType;
-use DateTimeImmutable;
-use DateTimeZone;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ConversationController extends AbstractController
 {
@@ -21,6 +21,42 @@ class ConversationController extends AbstractController
     {
         return $this->render('conversation/index.html.twig', [
             'conversations' => $this->getUser()->getConversations(),
+        ]);
+    }
+
+    #[Route('/conversation/create', name: 'app_conversation_create')]
+    public function create(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
+    {
+        $conversation = new Conversation();
+        $user = $this->getUser();
+
+        $form = $this->createForm(ConversationType::class, $conversation);
+        $form->add('save', SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $conversation->setAuthor($user);
+            $conversation->setCreatedAt(new \DateTimeImmutable('now'));
+            $conversation->setLocked(false);
+            $conversation->setSubject($form->getData()->getSubject());
+
+            $em = $doctrine->getManager();
+            $em->persist($conversation);
+            $em->flush();
+
+            return $this->redirectToRoute('app_conversation_show', [
+                'id' => $conversation->getId(),
+            ]);
+        }
+
+//        return $this->render('conversation/index.html.twig', [
+//            'conversation' => $conversation,
+//            'form' => $form->createView(),
+//        ]);
+
+        return $this->render('conversation/create.html.twig', [
+            'conversation' => $conversation,
+            'form' => $form->createView()
         ]);
     }
 
@@ -37,7 +73,7 @@ class ConversationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $message->setContent($form->getData()->getContent());
             $message->setConversation($conversation);
-            $message->setSendAt(new DateTimeImmutable("now"));
+            $message->setSendAt(new \DateTimeImmutable('now'));
             $message->setSenderId($user);
 
             $em = $doctrine->getManager();
@@ -47,13 +83,11 @@ class ConversationController extends AbstractController
             return $this->redirectToRoute('app_conversation_show', [
                 'id' => $conversation->getId(),
             ]);
-
         }
 
         return $this->render('conversation/show.html.twig', [
             'form' => $form->createView(),
-            'conversation' => $conversation
+            'conversation' => $conversation,
         ]);
-
     }
 }
