@@ -1,13 +1,27 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Emploi du temps{% endblock %}
+{% block title %}Liste des événements{% endblock %}
 
 {% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form.title) }}
-    {{ form_row(form.startTime) }}
-    {{ form_row(form.endTime) }}
-    {{ form_row(form.description) }}
-    <button type="submit">Ajouter l'événement</button>
-    {{ form_end(form) }}
+    <h1>Liste des événements</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Début</th>
+            <th>Fin</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.startTime|date('Y-m-d H:i:s') }}</td>
+                <td>{{ event.endTime|date('Y-m-d H:i:s') }}</td>
+                <td>{{ event.description|default('') }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
