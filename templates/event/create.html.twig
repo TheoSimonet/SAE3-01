@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Création d'un nouvel event
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Création d'un nouvel event
+        </p>
+    </div>
+    <div class="right__center">
+        {{ include('event/form.html.twig', {label_submit: 'Ajouter', form: form}, with_context = false) }}
+    </div>
+{% endblock %}
