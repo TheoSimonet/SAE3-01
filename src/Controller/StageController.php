@@ -4,21 +4,19 @@ namespace App\Controller;
 
 use App\Entity\Candidature;
 use App\Entity\Stage;
-use App\Entity\User;
 use App\Form\StageType;
 use App\Repository\StageRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-// #[IsGranted('ROLE_ADMIN', null, "Vous n'avez pas les permissions nécessaires pour accéder aux stages")]
 class StageController extends AbstractController
 {
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage', name: 'app_stage')]
     public function index(StageRepository $stageRepository): Response
     {
@@ -29,12 +27,14 @@ class StageController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/{id}', name: 'app_stage_show', requirements: ['id' => '\d+'])]
     public function show(Stage $stage): Response
     {
         return $this->render('stage/show.html.twig', ['stage' => $stage]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
     #[Route('/stage/{id}/candidate', name: 'app_stage_candidate', requirements: ['id' => '\d+'])]
     public function candidate(Stage $stage): Response
     {
@@ -43,12 +43,14 @@ class StageController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/detail-candidature/{id}/', name: 'app_stage_detail-candidature', requirements: ['id' => '\d+'])]
     public function candidatureShow(Candidature $candidature): Response
     {
         return $this->render('stage/candidature_show.html.twig', ['candidature' => $candidature]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
@@ -78,6 +80,7 @@ class StageController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or  is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/create', name: 'app_stage_create')]
     public function create(ManagerRegistry $doctrine, Request $request): Response
     {
@@ -107,6 +110,7 @@ class StageController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/{id}/delete', name: 'app_stage_delete', requirements: ['id' => '\d+'])]
     public function delete(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
