@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/conversation.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/messagerie/conversation/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Edition de la conversation n°{{ conversation.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-edit-alt'></i>
+            Edition de la conversation n°{{ conversation.id }}
+        </p>
+    </div>
+    <div class="right__center">
+        {{ include('conversation/_form.html.twig', {label_submit: 'Modifier', form: form}, with_context = false) }}
+    </div>
+{% endblock %}
