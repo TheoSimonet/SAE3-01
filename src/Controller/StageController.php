@@ -69,9 +69,7 @@ class StageController extends AbstractController
             $stage->setDescription($form->getData()->getDescription());
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_stage', [
-                'id' => $stage->getId(),
-            ]);
+            return $this->redirectToRoute('app_profil_stages');
         }
 
         return $this->render('stage/update.html.twig', [
@@ -132,7 +130,7 @@ class StageController extends AbstractController
                 $entityManager->remove($stage);
                 $entityManager->flush();
 
-                return $this->redirectToRoute('app_stage');
+                return $this->redirectToRoute('app_profil_stages');
             }
 
             if ($form->getClickedButton() === $form->get('cancel')) {
