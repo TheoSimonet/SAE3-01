@@ -3,23 +3,42 @@
 {% block title %}Page de profil de {{ user.firstname }}{% endblock %}
 
 {% block body %}
-    <h1>Page de profil de {{ user.firstname }}</h1>
-
+    <h1>Bonjour {{ user.firstname }} !</h1>
 
     {% if user.roles[0] == "ROLE_ADMIN" %}
-    <h3>Vous êtes connectés en tant qu'Adminitrateur.</h3>
+        <h2>Vous êtes connectés en tant qu'administrateur.</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_USER" %}
-        <h3>Vous êtes connectés en tant qu'Utilisateur.</h3>
+        <h2>Vous êtes connectés en tant qu'utilisateur.</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_ETUDIANT" %}
-        <h3>Vous êtes connectés en tant qu'Etudiant.</h3>
+        <h2>Vous êtes connectés en tant qu'étudiant.</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_ENTREPRISE" %}
-        <h3>Vous êtes connectés en tant qu'Entreprise.</h3>
+        <h2>Vous êtes connectés en tant que personnel d'une entreprise.</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_ENSEIGNANT" %}
-        <h3>Vous êtes connectés en tant qu'Enseignant.</h3>
+        <h2>Vous êtes connectés en tant qu'enseignant.</h2>
     {% endif %}
-    <h3>Numéro de téléphone : {{ user.phone }}</h3>
+
+    <h2>Informations personnelles :</h2>
+    <ul>
+        <li>
+            Nom : {{ user.firstname }}
+        </li>
+        <li>
+            Prenom : {{ user.lastname }}
+        </li>
+        <li>
+            Email : {{ user.email }}
+        </li>
+        <li>
+            Numéro de téléphone : {{ user.phone }}
+        </li>
+        {% if is_granted('ROLE_ETUDIANT') %}
+        <li>
+            Candidatures : cliquez ici pour voir vos candidatures aux différents stages proposés.
+        </li>
+        {% endif %}
+    </ul>
 {% endblock %}
