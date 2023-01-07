@@ -18,14 +18,14 @@
         <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
     </div>
     <div class="right__center">
-        <div class="conv__space">
-            <div class="conv__top">
-                {% if conversation.locked %}
+        <div class="conv__space {{ conversation.locked ? 'conv__close' : 'conv__open' }}">
+            {% if conversation.locked %}
+                <div class="conv__top">
                     <div class="locked__information">
                         <p><i class='bx bxs-lock-alt'></i> Cette conversation est fermée</p>
                     </div>
-                {% endif %}
-            </div>
+                </div>
+            {% endif %}
             <div class="conv__center">
                 {% if conversation.messages|length == 0 %}
                     <p class="start__talk">Commencez à discuter dès maintenant</p>
@@ -44,7 +44,8 @@
                 {% if conversation.locked == false %}
                     {{ include('message/_form.html.twig', {label_submit: 'Envoyer', form: form, conversation: conversation}, with_context = false) }}
                 {% else %}
-                    <p class="close_conversation__sendmessage">Impossible d'envoyer un message dans une conversation fermée</p>
+                    <p class="close_conversation__sendmessage">Impossible d'envoyer un message dans une conversation
+                        fermée</p>
                 {% endif %}
             </div>
         </div>
