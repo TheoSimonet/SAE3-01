@@ -110,7 +110,7 @@ form[name="message"] {
     border-radius: 20px;
 }
 
-.locked__information, conv__bottom .close_conversation__sendmessage {
+.locked__information, .conv__bottom .close_conversation__sendmessage {
     color: var(--white);
     background-color: var(--red);
     text-align: center;
