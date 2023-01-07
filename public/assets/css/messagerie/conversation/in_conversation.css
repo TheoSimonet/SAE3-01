@@ -47,9 +47,6 @@
     border-radius: 20px;
 }
 
-.object__head {
-    margin-bottom: 10px;
-}
 
 form[name="message"] {
     display: flex;
@@ -84,12 +81,12 @@ form[name="message"] {
     grid-template-rows: 2fr 20fr 2fr;
 }
 
-.conv__open{
+.conv__open {
     grid-template-rows: 22fr 2fr;
 }
 
 .conv__space {
-    height: 70vh;
+    height: 65vh;
     display: grid;
     gap: 20px;
 }
@@ -101,7 +98,7 @@ form[name="message"] {
     overflow-y: auto;
 }
 
-.conv__center div:not(:last-child){
+.conv__center div:not(:last-child) {
     margin-bottom: 15px;
 }
 
@@ -113,11 +110,44 @@ form[name="message"] {
     border-radius: 20px;
 }
 
-.locked__information, .close_conversation__sendmessage {
+.locked__information, conv__bottom .close_conversation__sendmessage {
     color: var(--white);
     background-color: var(--red);
     text-align: center;
     border-radius: 20px;
     padding: 20px;
     font-size: 12px;
+}
+
+.conv__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.return__close__space {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#close__conversation__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#close__conversation__button i {
+    padding: 10px;
+    border-radius: 50%;
+    background-color: var(--red);
+}
+
+#close__conversation__button a {
+    color: var(--white);
 }
