@@ -106,6 +106,7 @@
 
 .conversation__index__show {
     display: grid;
+    gap: 10px;
     grid-template-rows: 2fr 15fr;
 }
 
