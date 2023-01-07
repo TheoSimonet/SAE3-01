@@ -103,6 +103,10 @@ form[name="message"] {
     overflow-y: auto;
 }
 
+.conv__center div:not(:last-child){
+    margin-bottom: 15px;
+}
+
 .start__talk {
     text-align: center;
     background-color: var(--black);
