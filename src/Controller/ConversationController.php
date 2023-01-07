@@ -74,31 +74,98 @@ class ConversationController extends AbstractController
     #[Route('/conversation/{id}', name: 'app_conversation_show', requirements: ['id' => '\d+'])]
     public function show(Conversation $conversation, ManagerRegistry $doctrine, Request $request): Response
     {
-        $message = new Message();
         $user = $this->getUser();
 
-        $form = $this->createForm(MessageType::class, $message);
-        $form->add('save', SubmitType::class);
+        if ($conversation->getAuthor() === $user || $conversation->getParticipant()->contains($user)) {
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $message->setContent($form->getData()->getContent());
-            $message->setConversation($conversation);
-            $message->setSendAt(new DateTimeImmutable('now'));
-            $message->setSenderId($user);
+            $message = new Message();
 
-            $em = $doctrine->getManager();
-            $em->persist($message);
-            $em->flush();
+            $form = $this->createForm(MessageType::class, $message);
+            $form->add('save', SubmitType::class);
 
-            return $this->redirectToRoute('app_conversation_show', [
-                'id' => $conversation->getId(),
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $message->setContent($form->getData()->getContent());
+                $message->setConversation($conversation);
+                $message->setSendAt(new DateTimeImmutable('now'));
+                $message->setSenderId($user);
+
+                $em = $doctrine->getManager();
+                $em->persist($message);
+                $em->flush();
+
+                return $this->redirectToRoute('app_conversation_show', [
+                    'id' => $conversation->getId(),
+                ]);
+            }
+
+            return $this->render('conversation/show.html.twig', [
+                'form' => $form->createView(),
+                'conversation' => $conversation,
             ]);
+
         }
 
-        return $this->render('conversation/show.html.twig', [
-            'form' => $form->createView(),
-            'conversation' => $conversation,
+        return $this->redirectToRoute('app_conversation');
+
+    }
+
+    #[Route('/conversation/{id}/close', name: 'app_conversation_close', requirements: ['id' => '\d+'])]
+    public function close(Conversation $conversation, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        if ($this->getUser() !== $conversation->getAuthor()) {
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+        }
+
+        $conversation->setLocked(true);
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('app_conversation_show', [
+            'id' => $conversation->getId(),
         ]);
+    }
+
+    #[Route('/conversation/{id}/update', name: 'app_conversation_update', requirements: ['id' => '\d+'])]
+    public function update(Conversation $conversation, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        $user = $this->getUser();
+
+        if ($conversation->getAuthor() === $user) {
+
+            $form = $this->createForm(ConversationType::class, $conversation);
+            $form->add('save', SubmitType::class);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $entityManager = $doctrine->getManager();
+
+                $conversation->setSubject($form->getData()->getSubject());
+                $conversation->setParticipant($form->getData()->getParticipant());
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_conversation_show', [
+                    'id' => $conversation->getId(),
+                ]);
+
+            }
+
+            return $this->render('conversation/update.html.twig', [
+                'conversation' => $conversation,
+                'form' => $form->createView(),
+            ]);
+
+        } else if ($conversation->getParticipant()->contains($user)) {
+
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+
+        }
+
+        return $this->redirectToRoute('app_conversation');
+
     }
 }

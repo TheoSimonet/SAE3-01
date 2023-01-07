@@ -1,9 +1,15 @@
 {% block body %}
     {{ form_start(form) }}
-    <p class="projet__form__label__title">Sujet:</p>
-    {{ form_row(form.subject, {'label': ' '}) }}
+    <div>
+        <p class="conversation__form__label__title">Sujet:</p>
+        {{ form_row(form.subject, {'label': ' '}) }}
+    </div>
+    <div>
+        <p>Participant(s):</p>
         {{ form_row(form.participant, {'label': ' '}) }}
-    <div class="projet__form__submit__box">
+    </div>
+
+    <div class="conversation__form__submit__box">
         {{ form_row(form.save, {'label': label_submit }) }}
     </div>
     {{ form_end(form) }}

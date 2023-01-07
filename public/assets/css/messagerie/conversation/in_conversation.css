@@ -40,15 +40,6 @@
     font-size: 13px;
 }
 
-.locked__information {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: var(--red);
-    text-align: center;
-    color: var(--white);
-    border-radius: 20px;
-}
-
 .return__button {
     color: var(--white);
     background-color: var(--black);
@@ -56,9 +47,6 @@
     border-radius: 20px;
 }
 
-.object__head {
-    margin-bottom: 10px;
-}
 
 form[name="message"] {
     display: flex;
@@ -89,11 +77,18 @@ form[name="message"] {
     border-radius: 20px;
 }
 
+.conv__close {
+    grid-template-rows: 2fr 20fr 2fr;
+}
+
+.conv__open {
+    grid-template-rows: 22fr 2fr;
+}
+
 .conv__space {
     height: 65vh;
     display: grid;
-    grid-template-rows: 2fr 20fr 2fr;
-    gap: 30px;
+    gap: 20px;
 }
 
 .conv__center {
@@ -101,6 +96,10 @@ form[name="message"] {
     padding: 0 5px;
     max-height: 90%;
     overflow-y: auto;
+}
+
+.conv__center div:not(:last-child) {
+    margin-bottom: 15px;
 }
 
 .start__talk {
@@ -111,10 +110,51 @@ form[name="message"] {
     border-radius: 20px;
 }
 
-.close_conversation__sendmessage {
+.locked__information, .conv__bottom .close_conversation__sendmessage {
     color: var(--white);
     background-color: var(--red);
     text-align: center;
     border-radius: 20px;
     padding: 20px;
+    font-size: 12px;
+}
+
+.conv__bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.return__close__space {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+#close__conversation__button, #edit__conversation__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#close__conversation__button a, #edit__conversation__button a {
+    color: var(--white);
+}
+
+#close__conversation__button i, #edit__conversation__button i {
+    padding: 10px;
+    border-radius: 50%;
+}
+
+#close__conversation__button i {
+    background-color: var(--red);
+}
+
+#edit__conversation__button i {
+    background-color: var(--black);
 }
