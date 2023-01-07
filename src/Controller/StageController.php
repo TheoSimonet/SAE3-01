@@ -55,7 +55,7 @@ class StageController extends AbstractController
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier ce stage');
+            return $this->redirectToRoute('app_stage');
         }
 
         $form = $this->createForm(StageType::class, $stage);
@@ -117,7 +117,7 @@ class StageController extends AbstractController
     public function delete(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer ce stage');
+            return $this->redirectToRoute('app_stage');
         }
 
         $form = $this->createFormBuilder()

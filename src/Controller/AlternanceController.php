@@ -38,7 +38,7 @@ class AlternanceController extends AbstractController
     public function update(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier cette alternance');
+            return $this->redirectToRoute('app_alternance');
         }
 
         $form = $this->createForm(AlternanceType::class, $alternance);
@@ -102,7 +102,7 @@ class AlternanceController extends AbstractController
     public function delete(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer cette alternance');
+            return $this->redirectToRoute('app_alternance');
         }
 
         $form = $this->createFormBuilder()

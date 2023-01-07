@@ -68,12 +68,12 @@ class CandidatureController extends AbstractController
         ]);
     }
 
-    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
     #[Route('/candidature/{id}/update', name: 'app_candidature_update', requirements: ['id' => '\d+'])]
     public function update(Candidature $candidature, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getAuthor()->getId()) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier cette candidature');
+        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId()) {
+            return $this->redirectToRoute('app_profil_candidatures');
         }
 
         $em = $doctrine->getManager();
