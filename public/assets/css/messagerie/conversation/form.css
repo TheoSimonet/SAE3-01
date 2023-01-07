@@ -5,3 +5,46 @@
     max-height: 150px;
     overflow-y: auto;
 }
+
+form[name="conversation"] {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+}
+
+select {
+    background-color: var(--black);
+    border: none;
+}
+
+option {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 20px;
+    margin: 0 5px;
+    text-align: center;
+}
+
+.conversation__form__submit__box button {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    padding: 5px 15px;
+    border-radius: 20px;
+}
+
+option:checked {
+    background: var(--green) linear-gradient(0deg, var(--green) 0%, var(--green) 100%);
+    color: var(--white);
+}
+
+select:focus {
+    outline: none;
+}
