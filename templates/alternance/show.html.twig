@@ -18,7 +18,7 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ alternance.titre }}</h2>
-            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            <p id="projet__author"><span class="important">Auteur:</span> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
         </div>
     </div>

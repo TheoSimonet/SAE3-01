@@ -23,7 +23,7 @@
                 <div class="projet__item">
                     <div class="projet__item__content">
                         <div class="projet__item__titre"><span class="important">Alternance:</span> {{ alternance.titre }}</div>
-                        <div class="projet__item__author"><p>Publié par, <span class="important">@author</span>.</p></div>
+                        <div class="projet__item__author"><p>Publié par, <span class="important"> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</span>.</p></div>
                     </div>
                     <div class="projet__item__actions">
                         <a id="show" href="{{ path('app_alternance_show', {id: alternance.id}) }}"><i class='bx bxs-show'></i></a>

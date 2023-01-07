@@ -52,12 +52,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Stage::class, orphanRemoval: true)]
     private Collection $stages;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: Alternance::class)]
+    private Collection $alternances;
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
         $this->messages = new ArrayCollection();
         $this->conversations = new ArrayCollection();
         $this->stages = new ArrayCollection();
+        $this->alternances = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -299,6 +303,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($stage->getAuthor() === $this) {
                 $stage->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Alternance>
+     */
+    public function getAlternances(): Collection
+    {
+        return $this->alternances;
+    }
+
+    public function addAlternance(Alternance $alternance): self
+    {
+        if (!$this->alternances->contains($alternance)) {
+            $this->alternances->add($alternance);
+            $alternance->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAlternance(Alternance $alternance): self
+    {
+        if ($this->alternances->removeElement($alternance)) {
+            // set the owning side to null (unless already changed)
+            if ($alternance->getAuthor() === $this) {
+                $alternance->setAuthor(null);
             }
         }
 
