@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Modification de la candidature n°{{ candidature.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>Modification de la candidature au stage : {{ candidature.idStage.titre }}</p>
+    </div>
+    <div class="right__center">
+        {{ form_start(form) }}
+        {{ form_row(form.cvFilename) }}
+        {{ form_row(form.Valider) }}
+        <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
