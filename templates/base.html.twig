@@ -38,71 +38,102 @@
             <div class="left__image__box">
                 <a href="{{ path('app_accueil') }}"><img src="{{ asset('assets/img/logo-nobg.png') }}" alt=""/></a>
             </div>
+            {% if app.user %}
+                <div>
+                    <p id="hello__user">
+                        Bonjour <span class="important">{{ app.user.firstname }}</span> !
+                    </p>
+                    <p id="show__user__profile">
+                        <a id="show__user__profile__link" href="{{ path('app_profil') }}">
+                            <i class='bx bxs-user'></i>
+                            Voir mon profil
+                        </a>
+                    </p>
+                </div>
+            {% endif %}
         </div>
         <div class="left__center">
-            <ul>
-                {% if app.user %}
+            <div class="nav__part">
+                <p class="nav__part__title">Accueil</p>
+                <ul class="nav__part__list">
                     <li>
-                        <a href="{{ path('app_profil') }}">
-                            <i class='bx bxs-user'></i>
-                            Profil
+                        <a href="{{ path('app_informations') }}">
+                            <i class="bx bx-info-circle"></i>
+                            Informations
                         </a>
                     </li>
-                {% endif %}
-                <li>
-                    <a href="{{ path('app_informations') }}">
-                        <i class="bx bx-info-circle"></i>
-                        Informations
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_decouvrir') }}">
-                        <i class="bx bx-bullseye"></i>
-                        Découvrir
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ path('app_faq') }}">
-                        <i class="bx bx-question-mark"></i>
-                        F.A.Q
-                    </a>
-                </li>
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
-                    or is_granted('ROLE_ENTREPRISE') %}
                     <li>
-                        <a href="{{ path('app_conversation') }}">
-                            <i class='bx bxs-chat'></i>
-                            Messagerie
+                        <a href="{{ path('app_decouvrir') }}">
+                            <i class="bx bx-bullseye"></i>
+                            Découvrir
                         </a>
                     </li>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')%}
                     <li>
-                        <a href="{{ path('app_projet_ter') }}">
-                            <i class='bx bxs-shopping-bag'></i>
-                            Projets TER
+                        <a href="{{ path('app_faq') }}">
+                            <i class="bx bx-question-mark"></i>
+                            F.A.Q
                         </a>
                     </li>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
-                    or is_granted('ROLE_ENTREPRISE') %}
-                    <li>
-                        <a href="{{ path('app_stage') }}">
-                            <i class='bx bxs-briefcase-alt'></i>
-                            Stages
-                        </a>
-                    </li>
-                {% endif %}
-                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
-                    or is_granted('ROLE_ENTREPRISE') %}
-                    <li>
-                        <a href="{{ path('app_alternance') }}">
-                            <i class='bx bxs-briefcase'></i>
-                            Alternances
-                        </a>
-                    </li>
-                {% endif %}
-            </ul>
+                </ul>
+            </div>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') %}
+                <div class="nav__part">
+                    <p class="nav__part__title">Projets</p>
+                    <ul class="nav__part__list">
+                        <li>
+                            <a href="{{ path('app_projet_ter') }}">
+                                <i class='bx bxs-shopping-bag'></i>
+                                Projets TER
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_stage') }}">
+                                <i class='bx bxs-briefcase-alt'></i>
+                                Stages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_alternance') }}">
+                                <i class='bx bxs-briefcase'></i>
+                                Alternances
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            {% if is_granted('ROLE_ENTREPRISE') %}
+                <div class="nav__part">
+                    <p class="nav__part__title">Projets</p>
+                    <ul class="nav__part__list">
+                        <li>
+                            <a href="{{ path('app_stage') }}">
+                                <i class='bx bxs-briefcase-alt'></i>
+                                Stages
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_alternance') }}">
+                                <i class='bx bxs-briefcase'></i>
+                                Alternances
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
+                or is_granted('ROLE_ENTREPRISE') %}
+                <div class="nav__part">
+                    <p class="nav__part__title">Communiquer</p>
+                    <ul class="nav__part__list">
+                        <li>
+                            <a href="{{ path('app_conversation') }}">
+                                <i class='bx bxs-chat'></i>
+                                Messagerie
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
         </div>
         <div class="left__bottom">
             {% if app.user %}
