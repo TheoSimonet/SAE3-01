@@ -18,6 +18,10 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ alternance.titre }}</h2>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+                <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
+            {% endif %}
             <p id="projet__author"><span class="important">Auteur:</span> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
         </div>
