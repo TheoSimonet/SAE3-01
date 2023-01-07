@@ -5,6 +5,21 @@
 {% endblock %}
 
 {% block body %}
-    <p>Candidatures de {{ user.firstname }} {{ user.lastname }}</p>
+    {% if user.candidatures|length == 0 %}
+        Vous n'avez pas encore effectué de candidature à un stage.
+    {% else %}
+        <h1>Voici la liste de vos candidatures, {{ user.firstname }}</h1>
+
+        <ul>
+            {% for candidature in candidatures %}
+                <li>
+                    Candidature au stage {{ candidature.idStage.titre }}, faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}.
+
+                    Voici votre CV pour ce stage :
+                    <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 {% endblock %}
 

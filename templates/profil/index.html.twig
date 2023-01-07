@@ -37,7 +37,7 @@
         </li>
         {% if is_granted('ROLE_ETUDIANT') %}
         <li>
-            Candidatures : cliquez ici pour voir vos candidatures aux différents stages proposés.
+            Candidatures : cliquez <a href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
         </li>
         {% endif %}
     </ul>
