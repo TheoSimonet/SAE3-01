@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ConversationRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -32,7 +33,7 @@ class Conversation
     private ?bool $locked = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     public function __construct()
     {
@@ -63,6 +64,14 @@ class Conversation
     public function getParticipant(): Collection
     {
         return $this->participant;
+    }
+
+
+    public function setParticipant(Collection $participants): self
+    {
+        $this->participant = $participants;
+
+        return $this;
     }
 
     public function addParticipant(User $participant): self
@@ -135,12 +144,12 @@ class Conversation
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
