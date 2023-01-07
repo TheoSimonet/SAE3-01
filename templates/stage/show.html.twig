@@ -18,6 +18,10 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ stage.titre }}</h2>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+                <a id="edit" href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                <a id="delete" href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
+            {% endif %}
             <p id="projet__author"><span class="important">Auteur:</span> {{ stage.author.firstname }} {{ stage.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
 
