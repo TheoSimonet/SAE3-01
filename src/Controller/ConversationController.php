@@ -10,6 +10,7 @@ use App\Repository\ConversationRepository;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -74,31 +75,39 @@ class ConversationController extends AbstractController
     #[Route('/conversation/{id}', name: 'app_conversation_show', requirements: ['id' => '\d+'])]
     public function show(Conversation $conversation, ManagerRegistry $doctrine, Request $request): Response
     {
-        $message = new Message();
         $user = $this->getUser();
 
-        $form = $this->createForm(MessageType::class, $message);
-        $form->add('save', SubmitType::class);
+        if ($conversation->getAuthor() === $user || $conversation->getParticipant()->contains($user)) {
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $message->setContent($form->getData()->getContent());
-            $message->setConversation($conversation);
-            $message->setSendAt(new DateTimeImmutable('now'));
-            $message->setSenderId($user);
+            $message = new Message();
 
-            $em = $doctrine->getManager();
-            $em->persist($message);
-            $em->flush();
+            $form = $this->createForm(MessageType::class, $message);
+            $form->add('save', SubmitType::class);
 
-            return $this->redirectToRoute('app_conversation_show', [
-                'id' => $conversation->getId(),
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $message->setContent($form->getData()->getContent());
+                $message->setConversation($conversation);
+                $message->setSendAt(new DateTimeImmutable('now'));
+                $message->setSenderId($user);
+
+                $em = $doctrine->getManager();
+                $em->persist($message);
+                $em->flush();
+
+                return $this->redirectToRoute('app_conversation_show', [
+                    'id' => $conversation->getId(),
+                ]);
+            }
+
+            return $this->render('conversation/show.html.twig', [
+                'form' => $form->createView(),
+                'conversation' => $conversation,
             ]);
+
         }
 
-        return $this->render('conversation/show.html.twig', [
-            'form' => $form->createView(),
-            'conversation' => $conversation,
-        ]);
+        throw new AccessDeniedException("Vous devez être l'auteur ou participant d'une conversation pour y accéder.");
+
     }
 }
