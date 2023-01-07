@@ -18,7 +18,9 @@
         <div class="return__close__space">
             <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
             {% if conversation.locked == false and conversation.author == app.user %}
-                <p id="close__conversation__button"><a href=""><i class='bx bxs-lock-alt'></i></a></p>
+                <p id="close__conversation__button"><a
+                            href="{{ path('app_conversation_close', {id: conversation.id}) }}"><i
+                                class='bx bxs-lock-alt'></i></a></p>
             {% endif %}
         </div>
     </div>
@@ -33,7 +35,11 @@
             {% endif %}
             <div class="conv__center">
                 {% if conversation.messages|length == 0 %}
-                    <p class="start__talk">Commencez à discuter dès maintenant</p>
+                    {% if conversation.locked %}
+                        <p class="start__talk">Il n'y avait aucun message dans cette discussion</p>
+                    {% else %}
+                        <p class="start__talk">Commencez à discuter dès maintenant</p>
+                    {% endif %}
                 {% endif %}
                 {% for message in conversation.messages %}
                     <div class="message__item {{ message.senderid.id == app.user.id ? "align__right" : "align__left" }}">
