@@ -13,7 +13,21 @@ class ProfilController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $user = $this->getUser();
+
         return $this->render('profil/index.html.twig', [
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/profil/candidatures', name: 'app_profil_candidatures')]
+    public function candidatureShow(): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $candidatures = $user->getCandidatures();
+
+        return $this->render('profil/candidature_show.html.twig', [
+            'candidatures' => $candidatures,
             'user' => $user,
         ]);
     }
