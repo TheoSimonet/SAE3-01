@@ -6,6 +6,7 @@ use App\Entity\Candidature;
 use App\Entity\Stage;
 use App\Form\CandidatureType;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -16,6 +17,7 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 
 class CandidatureController extends AbstractController
 {
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
     #[Route('/candidature/new', name: 'app_candidature_new')]
     public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
     {
@@ -34,7 +36,7 @@ class CandidatureController extends AbstractController
             if ($cvFile) {
                 $originalFilename = pathinfo($cvFile->getClientOriginalName(), PATHINFO_FILENAME);
                 $safeFilename = $slugger->slug($originalFilename);
-                $newFilename = $safeFilename . '-' . uniqid() . '.' . $cvFile->guessExtension();
+                $newFilename = $safeFilename.'-'.uniqid().'.'.$cvFile->guessExtension();
 
                 try {
                     $cvFile->move(
