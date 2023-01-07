@@ -31,4 +31,17 @@ class ProfilController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/profil/stages', name: 'app_profil_stages')]
+    public function stageShow(): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $stages = $user->getStages();
+
+        return $this->render('profil/stage_show.html.twig', [
+            'stages' => $stages,
+            'user' => $user,
+        ]);
+    }
 }

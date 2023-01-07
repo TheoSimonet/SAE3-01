@@ -40,5 +40,10 @@
             Candidatures : cliquez <a href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
         </li>
         {% endif %}
+        {% if is_granted('ROLE_ENTREPRISE') %}
+            <li>
+                Stages proposés : cliquez <a href="{{ path('app_profil_stages') }}">ici</a> pour voir les stages que vous avez proposé.
+            </li>
+        {% endif %}
     </ul>
 {% endblock %}
