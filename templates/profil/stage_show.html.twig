@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Stages proposés par {{ user.firstname }} {{ user.lastname }}
+{% endblock %}
+
+{% block body %}
+    {% if user.stages|length == 0 %}
+        Vous n'avez pas encore proposé de stage.
+    {% else %}
+        <h1>Voici la liste des stages que vous avez proposé, {{ user.firstname }}</h1>
+
+        <ul>
+            {% for stage in stages %}
+                <li>
+                    Stage n°{{ stage.id }}, {{ stage.titre }}
+                    <a href="{{ path('app_stage_show', {id: stage.id}) }}">Voir plus</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

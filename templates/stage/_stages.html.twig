@@ -22,15 +22,11 @@
             {% for stage in stages %}
                 <div class="projet__item">
                     <div class="projet__item__content">
-                        <div class="projet__item__titre"><span class="important">Stage:</span>{{ stage.titre }}</div>
+                        <div class="projet__item__titre"><span class="important">Stage: </span>{{ stage.titre }}</div>
                         <div class="projet__item__author"><p>Publié par, <span class="important"> {{ stage.author.firstname }} {{ stage.author.lastname }}</span>.</p></div>
                     </div>
                     <div class="projet__item__actions">
                         <a id="show" href="{{ path('app_stage_show', {id: stage.id}) }}"><i class='bx bxs-show'></i></a>
-                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
-                            <a id="edit" href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                            <a id="delete" href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
