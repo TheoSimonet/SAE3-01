@@ -136,18 +136,25 @@ form[name="message"] {
     gap: 15px;
 }
 
-#close__conversation__button {
+#close__conversation__button, #edit__conversation__button {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#close__conversation__button i {
+#close__conversation__button a, #edit__conversation__button a {
+    color: var(--white);
+}
+
+#close__conversation__button i, #edit__conversation__button i {
     padding: 10px;
     border-radius: 50%;
+}
+
+#close__conversation__button i {
     background-color: var(--red);
 }
 
-#close__conversation__button a {
-    color: var(--white);
+#edit__conversation__button i {
+    background-color: var(--black);
 }
