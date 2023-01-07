@@ -54,6 +54,10 @@ class StageController extends AbstractController
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier ce stage');
+        }
+
         $form = $this->createForm(StageType::class, $stage);
         $form->add('save', SubmitType::class);
 
@@ -112,6 +116,10 @@ class StageController extends AbstractController
     #[Route('/stage/{id}/delete', name: 'app_stage_delete', requirements: ['id' => '\d+'])]
     public function delete(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer ce stage');
+        }
+
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class, [
                 'attr' => ['class' => 'projet__form__delete'],
