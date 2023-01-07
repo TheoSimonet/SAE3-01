@@ -10,7 +10,6 @@ use App\Repository\ConversationRepository;
 use DateTimeImmutable;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -107,7 +106,7 @@ class ConversationController extends AbstractController
 
         }
 
-        throw new AccessDeniedException("Vous devez être l'auteur ou participant d'une conversation pour y accéder.");
+        return $this->redirectToRoute('app_conversation');
 
     }
 
@@ -125,5 +124,48 @@ class ConversationController extends AbstractController
         return $this->redirectToRoute('app_conversation_show', [
             'id' => $conversation->getId(),
         ]);
+    }
+
+    #[Route('/conversation/{id}/update', name: 'app_conversation_update', requirements: ['id' => '\d+'])]
+    public function update(Conversation $conversation, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        $user = $this->getUser();
+
+        if ($conversation->getAuthor() === $user) {
+
+            $form = $this->createForm(ConversationType::class, $conversation);
+            $form->add('save', SubmitType::class);
+
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+
+                $entityManager = $doctrine->getManager();
+
+                $conversation->setSubject($form->getData()->getSubject());
+                $conversation->setParticipant($form->getData()->getParticipant());
+
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_conversation_show', [
+                    'id' => $conversation->getId(),
+                ]);
+
+            }
+
+            return $this->render('conversation/update.html.twig', [
+                'conversation' => $conversation,
+                'form' => $form->createView(),
+            ]);
+
+        } else if ($conversation->getParticipant()->contains($user)) {
+
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+
+        }
+
+        return $this->redirectToRoute('app_conversation');
+
     }
 }
