@@ -22,10 +22,9 @@ class ConversationType extends AbstractType
             ])
             ->add('participant', EntityType::class,
                 [
-                    'required' => true,
                     'class' => User::class,
                     'multiple' => true,
-                    'expanded' => true,
+                    'expanded' => false,
                     'choice_label' => function (User $user) {
                         return $user->getFirstName() . ' ' . $user->getLastname();
                     },
