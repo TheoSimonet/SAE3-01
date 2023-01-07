@@ -19,7 +19,7 @@
             <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
             {% if conversation.locked == false and conversation.author == app.user %}
                 <p id="edit__conversation__button">
-                    <a href="">
+                    <a href="{{ path('app_conversation_update', {id: conversation.id}) }}">
                         <i class='bx bxs-edit-alt'></i>
                     </a>
                 </p>
