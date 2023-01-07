@@ -14,6 +14,7 @@
             {% for stage in stages %}
                 <li>
                     Stage n°{{ stage.id }}, {{ stage.titre }}
+                    <a href="{{ path('app_stage_show', {id: stage.id}) }}">Voir plus</a>
                 </li>
             {% endfor %}
         </ul>
