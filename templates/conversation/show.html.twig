@@ -15,7 +15,12 @@
             Conversation n°{{ conversation.id }}
         </p>
         <p class="object__head">Objet: {{ conversation.subject }}</p>
-        <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
+        <div class="return__close__space">
+            <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
+            {% if conversation.locked == false and conversation.author == app.user %}
+                <p id="close__conversation__button"><a href=""><i class='bx bxs-lock-alt'></i></a></p>
+            {% endif %}
+        </div>
     </div>
     <div class="right__center">
         <div class="conv__space {{ conversation.locked ? 'conv__close' : 'conv__open' }}">
