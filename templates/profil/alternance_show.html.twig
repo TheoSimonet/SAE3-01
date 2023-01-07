@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Alternances proposées par {{ user.firstname }} {{ user.lastname }}
+{% endblock %}
+
+{% block body %}
+    {% if user.alternances|length == 0 %}
+        Vous n'avez pas encore proposé d'alternance.
+    {% else %}
+        <h1>Voici la liste des alternance que vous avez proposé, {{ user.firstname }}</h1>
+
+        <ul>
+            {% for alternance in alternances %}
+                <li>
+                    Alternance n°{{ alternance.id }}, {{ alternance.titre }}
+                    <a href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

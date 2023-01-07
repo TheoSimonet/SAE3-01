@@ -44,4 +44,17 @@ class ProfilController extends AbstractController
             'user' => $user,
         ]);
     }
+
+    #[Route('/profil/alternances', name: 'app_profil_alternances')]
+    public function alternanceShow(): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $alternances = $user->getAlternances();
+
+        return $this->render('profil/alternance_show.html.twig', [
+            'alternances' => $alternances,
+            'user' => $user,
+        ]);
+    }
 }
