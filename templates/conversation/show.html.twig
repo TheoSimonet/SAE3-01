@@ -18,9 +18,16 @@
         <div class="return__close__space">
             <a class="return__button" href="{{ path('app_conversation') }}">Retour</a>
             {% if conversation.locked == false and conversation.author == app.user %}
-                <p id="close__conversation__button"><a
-                            href="{{ path('app_conversation_close', {id: conversation.id}) }}"><i
-                                class='bx bxs-lock-alt'></i></a></p>
+                <p id="edit__conversation__button">
+                    <a href="">
+                        <i class='bx bxs-edit-alt'></i>
+                    </a>
+                </p>
+                <p id="close__conversation__button">
+                    <a href="{{ path('app_conversation_close', {id: conversation.id}) }}">
+                        <i class='bx bxs-lock-alt'></i>
+                    </a>
+                </p>
             {% endif %}
         </div>
     </div>
