@@ -10,18 +10,20 @@
     {% endif %}
     {% if user.roles[0] == "ROLE_USER" %}
         <h2>Vous êtes connectés en tant qu'utilisateur.</h2>
+        Attendez qu'un administrateur du site vous accorde un rôle.
     {% endif %}
     {% if user.roles[0] == "ROLE_ETUDIANT" %}
-        <h2>Vous êtes connectés en tant qu'étudiant.</h2>
+        <h2>Vous êtes connectés en tant qu'étudiant(e).</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_ENTREPRISE" %}
         <h2>Vous êtes connectés en tant que personnel d'une entreprise.</h2>
     {% endif %}
     {% if user.roles[0] == "ROLE_ENSEIGNANT" %}
-        <h2>Vous êtes connectés en tant qu'enseignant.</h2>
+        <h2>Vous êtes connectés en tant qu'enseignant(e).</h2>
     {% endif %}
 
     <h2>Informations personnelles :</h2>
+    <a href="{{ path('app_profil_update') }}">Modifier</a>
     <ul>
         <li>
             Nom : {{ user.firstname }}
@@ -43,6 +45,9 @@
         {% if is_granted('ROLE_ENTREPRISE') %}
             <li>
                 Stages proposés : cliquez <a href="{{ path('app_profil_stages') }}">ici</a> pour voir les stages que vous avez proposé.
+            </li>
+            <li>
+                Alternances proposées : cliquez <a href="{{ path('app_profil_alternances') }}">ici</a> pour voir les alternances que vous avez proposé.
             </li>
         {% endif %}
     </ul>

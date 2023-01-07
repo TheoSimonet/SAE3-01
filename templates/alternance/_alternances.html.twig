@@ -23,14 +23,10 @@
                 <div class="projet__item">
                     <div class="projet__item__content">
                         <div class="projet__item__titre"><span class="important">Alternance:</span> {{ alternance.titre }}</div>
-                        <div class="projet__item__author"><p>Publié par, <span class="important">@author</span>.</p></div>
+                        <div class="projet__item__author"><p>Publié par, <span class="important"> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</span>.</p></div>
                     </div>
                     <div class="projet__item__actions">
                         <a id="show" href="{{ path('app_alternance_show', {id: alternance.id}) }}"><i class='bx bxs-show'></i></a>
-                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
-                            <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                            <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}

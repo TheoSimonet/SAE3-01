@@ -76,6 +76,7 @@ class AlternanceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $alternance->setTitre($form->getData()->getTitre());
             $alternance->setDescription($form->getData()->getDescription());
+            $alternance->setAuthor($this->getUser());
 
             $em = $doctrine->getManager();
             $em->persist($alternance);
