@@ -109,10 +109,50 @@ class CandidatureController extends AbstractController
                 $em->flush();
             }
 
-            return $this->redirectToRoute('app_profil_stages');
+            return $this->redirectToRoute('app_profil_candidatures');
         }
 
         return $this->render('candidature/update.html.twig', [
+            'candidature' => $candidature,
+            'form' => $form->createView(),
+        ]);
+    }
+
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
+    #[Route('/candidature/{id}/delete', name: 'app_candidature_delete', requirements: ['id' => '\d+'])]
+    public function delete(Candidature $candidature, Request $request, ManagerRegistry $doctrine): Response
+    {
+        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId()) {
+            return $this->redirectToRoute('app_profil_candidatures');
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__delete'],
+            ])
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__cancel'],
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            if ($form->getClickedButton() === $form->get('delete')) {
+                $entityManager->remove($candidature);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_profil_candidatures');
+            }
+
+            if ($form->getClickedButton() === $form->get('cancel')) {
+                return $this->redirectToRoute('app_profil_candidatures');
+            }
+        }
+
+        return $this->render('candidature/delete.html.twig', [
             'candidature' => $candidature,
             'form' => $form->createView(),
         ]);
