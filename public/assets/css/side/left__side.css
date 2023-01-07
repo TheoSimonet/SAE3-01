@@ -119,6 +119,10 @@
     color: var(--white);
 }
 
+.left__center ul li a {
+    text-transform: uppercase;
+}
+
 /* END CENTER */
 
 /* --------------------------- */
