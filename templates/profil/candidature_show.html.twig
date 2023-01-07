@@ -16,6 +16,8 @@
                     Candidature au stage {{ candidature.idStage.titre }}, faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}.
 
                     Voici votre CV pour ce stage :
+                    <a href="{{ path('app_candidature_update', {id: candidature.id}) }}">Modifier</a>
+                    <a href="{{ path('app_candidature_delete', {id: candidature.id}) }}">Supprimer</a>
                     <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
                 </li>
             {% endfor %}

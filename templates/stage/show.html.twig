@@ -18,7 +18,7 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ stage.titre }}</h2>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == stage.author.id %}
                 <a id="edit" href="{{ path('app_stage_update', {id: stage.id}) }}"><i class='bx bxs-edit-alt'></i></a>
                 <a id="delete" href="{{ path('app_stage_delete', {id: stage.id}) }}"><i class='bx bxs-trash'></i></a>
             {% endif %}
@@ -31,7 +31,7 @@
         </div>
     </div>
     {% set x = 1 %}
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == stage.author.id %}
             {% for candidature in stage.candidatures %}
                 <h2>Candidature n°{{ x }}</h2>
                 <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
