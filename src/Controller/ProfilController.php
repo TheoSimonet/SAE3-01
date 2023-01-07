@@ -2,7 +2,13 @@
 
 namespace App\Controller;
 
+use App\Entity\Alternance;
+use App\Form\AlternanceType;
+use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -55,6 +61,30 @@ class ProfilController extends AbstractController
         return $this->render('profil/alternance_show.html.twig', [
             'alternances' => $alternances,
             'user' => $user,
+        ]);
+    }
+
+    #[Route('/profil/update', name: 'app_profil_update')]
+    public function update(Request $request, ManagerRegistry $doctrine): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->add('Enregistrer', SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            $user->set($form->getData()->get());
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_profil');
+        }
+
+        return $this->render('alternance/update.html.twig', [
+            'alternance' => $alternance,
+            'form' => $form->createView(),
         ]);
     }
 }
