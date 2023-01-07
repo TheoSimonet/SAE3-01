@@ -60,11 +60,6 @@ class ConversationController extends AbstractController
             ]);
         }
 
-//        return $this->render('conversation/index.html.twig', [
-//            'conversation' => $conversation,
-//            'form' => $form->createView(),
-//        ]);
-
         return $this->render('conversation/create.html.twig', [
             'conversation' => $conversation,
             'form' => $form->createView()
