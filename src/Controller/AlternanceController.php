@@ -37,6 +37,10 @@ class AlternanceController extends AbstractController
     #[Route('/alternance/{id}/update', name: 'app_alternance_update', requirements: ['id' => '\d+'])]
     public function update(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier cette alternance');
+        }
+
         $form = $this->createForm(AlternanceType::class, $alternance);
         $form->add('save', SubmitType::class);
 
@@ -97,6 +101,10 @@ class AlternanceController extends AbstractController
     #[Route('/alternance/{id}/delete', name: 'app_alternance_delete', requirements: ['id' => '\d+'])]
     public function delete(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer cette alternance');
+        }
+
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class, [
                 'attr' => ['class' => 'projet__form__delete'],
