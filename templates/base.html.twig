@@ -75,18 +75,26 @@
                             Messagerie
                         </a>
                     </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')%}
                     <li>
                         <a href="{{ path('app_projet_ter') }}">
                             <i class='bx bxs-shopping-bag'></i>
                             Projets TER
                         </a>
                     </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
+                    or is_granted('ROLE_ENTREPRISE') %}
                     <li>
                         <a href="{{ path('app_stage') }}">
                             <i class='bx bxs-briefcase-alt'></i>
                             Stages
                         </a>
                     </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
+                    or is_granted('ROLE_ENTREPRISE') %}
                     <li>
                         <a href="{{ path('app_alternance') }}">
                             <i class='bx bxs-briefcase'></i>
