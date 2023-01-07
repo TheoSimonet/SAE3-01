@@ -110,4 +110,20 @@ class ConversationController extends AbstractController
         throw new AccessDeniedException("Vous devez être l'auteur ou participant d'une conversation pour y accéder.");
 
     }
+
+    #[Route('/conversation/{id}/close', name: 'app_conversation_close', requirements: ['id' => '\d+'])]
+    public function close(Conversation $conversation, Request $request, ManagerRegistry $doctrine): Response
+    {
+
+        if ($this->getUser() !== $conversation->getAuthor()) {
+            return $this->redirectToRoute('app_conversation_show', ['id' => $conversation->getId()]);
+        }
+
+        $conversation->setLocked(true);
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('app_conversation_show', [
+            'id' => $conversation->getId(),
+        ]);
+    }
 }
