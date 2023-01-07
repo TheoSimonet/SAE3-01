@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Edition de vos données personnelles, {{ user.firstname }}
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Edition de vos données personnelles, {{ user.firstname }}
+        </p>
+    </div>
+    <div class="right__center">
+        {{ form_start(form) }}
+        <p class="projet__form__label__title">Nom :</p>
+        {{ form_row(form.lastname, {'label': " "}) }}
+        <p class="projet__form__label__title">Prénom :</p>
+        {{ form_row(form.firstname, {'label': " "}) }}
+        <p class="projet__form__label__title">Email :</p>
+        {{ form_row(form.email, {'label': " "}) }}
+        <p class="projet__form__label__title">Numéro de téléphone :</p>
+        {{ form_row(form.phone, {'label': " "}) }}
+        <p class="projet__form__label__title">Mot de passe :</p>
+        {{ form_row(form.plainPassword, {'label': " "}) }}
+        <div class="projet__form__submit__box">
+            {{ form_row(form.save, {'label': "Enregister" }) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

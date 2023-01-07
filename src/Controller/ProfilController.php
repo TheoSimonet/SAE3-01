@@ -4,12 +4,14 @@ namespace App\Controller;
 
 use App\Entity\Alternance;
 use App\Form\AlternanceType;
+use App\Form\UserType;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class ProfilController extends AbstractController
@@ -65,18 +67,27 @@ class ProfilController extends AbstractController
     }
 
     #[Route('/profil/update', name: 'app_profil_update')]
-    public function update(Request $request, ManagerRegistry $doctrine): Response
+    public function update(UserPasswordHasherInterface $userPasswordHasher, Request $request, ManagerRegistry $doctrine): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
         $user = $this->getUser();
         $form = $this->createForm(UserType::class, $user);
-        $form->add('Enregistrer', SubmitType::class);
+        $form->add('save', SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager = $doctrine->getManager();
 
-            $user->set($form->getData()->get());
+            $user->setFirstname($form->getData()->getFirstname());
+            $user->setLastname($form->getData()->getLastname());
+            $user->setEmail($form->getData()->getEmail());
+            $user->setPhone($form->getData()->getPhone());
+            $user->setPassword(
+                $userPasswordHasher->hashPassword(
+                    $user,
+                    $form->get('plainPassword')->getData()
+                )
+            );
             $entityManager->flush();
 
             return $this->redirectToRoute('app_profil');
