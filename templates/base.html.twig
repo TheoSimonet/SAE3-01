@@ -134,6 +134,19 @@
                     </ul>
                 </div>
             {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="nav__part">
+                    <p class="nav__part__title">Administration</p>
+                    <ul class="nav__part__list">
+                        <li>
+                            <a href="{{ path('admin') }}">
+                                <i class='bx bxs-cog'></i>
+                                Accéder
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endif %}
         </div>
         <div class="left__bottom">
             {% if app.user %}
