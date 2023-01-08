@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Séléction d'un projet TER
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>Séléction du projet {{ projet.titre }}</p>
+    </div>
+    <div class="right__center">
+        {{ form_start(form) }}
+        {{ form_row(form.save, {'label': "Choisir ce projet"}) }}
+        <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
+        {{ form_end(form) }}
+    </div>
+{% endblock %}

@@ -26,6 +26,10 @@
             <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
             <p id="projet__desc"><span class="important">Date de publication:</span> {{ projet.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
             <p id="projet__desc"><span class="important">Niveau:</span> {{ projet.libProjet }}</p>
+
+            {% if is_granted('ROLE_ETUDIANT') %}
+                <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">Choisir</a>
+            {% endif %}
         </div>
     </div>
 {% endblock %}
