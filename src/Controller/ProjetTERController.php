@@ -56,6 +56,7 @@ class ProjetTERController extends AbstractController
             $projet->setDescription($form->getData()->getDescription());
             $projet->setAuthor($this->getUser());
             $projet->setDate(new \DateTimeImmutable('now'));
+            $projet->setLibProjet($form->getData()->getLibProjet());
             $entityManager->flush();
 
             return $this->redirectToRoute('app_projet_ter', [
@@ -83,6 +84,7 @@ class ProjetTERController extends AbstractController
             $projet->setDescription($form->getData()->getDescription());
             $projet->setAuthor($this->getUser());
             $projet->setDate(new \DateTimeImmutable('now'));
+            $projet->setLibProjet($form->getData()->getLibProjet());
 
             $em = $doctrine->getManager();
             $em->persist($projet);
