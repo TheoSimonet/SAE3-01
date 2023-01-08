@@ -34,7 +34,7 @@
                 {% endif %}
             {% endfor %}
 
-            {% if is_granted('ROLE_ETUDIANT') and not dejaSelectionne %}
+            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')) and not dejaSelectionne %}
                 <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">Choisir</a>
             {% endif %}
         </div>

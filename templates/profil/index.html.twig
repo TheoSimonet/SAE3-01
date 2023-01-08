@@ -37,7 +37,7 @@
         <li>
             Numéro de téléphone : {{ user.phone }}
         </li>
-        {% if is_granted('ROLE_ETUDIANT') %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') %}
         <li>
             Candidatures : cliquez <a href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
         </li>
@@ -45,7 +45,7 @@
             Projets TER choisis : cliquez <a href="{{ path('app_profil_selections') }}">ici</a> pour voir les différents projets que vous avez choisi.
         </li>
         {% endif %}
-        {% if is_granted('ROLE_ENTREPRISE') %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
             <li>
                 Stages proposés : cliquez <a href="{{ path('app_profil_stages') }}">ici</a> pour voir les stages que vous avez proposé.
             </li>
@@ -53,7 +53,7 @@
                 Alternances proposées : cliquez <a href="{{ path('app_profil_alternances') }}">ici</a> pour voir les alternances que vous avez proposé.
             </li>
         {% endif %}
-        {% if is_granted('ROLE_ENSEIGNANT') %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
             <li>
                 Projets TER proposés : cliquez <a href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
             </li>
