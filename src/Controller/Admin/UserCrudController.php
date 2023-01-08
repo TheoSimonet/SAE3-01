@@ -6,11 +6,8 @@ use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TelephoneField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use Faker\Provider\PhoneNumber;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -18,7 +15,6 @@ class UserCrudController extends AbstractCrudController
     {
         return User::class;
     }
-
 
     public function configureFields(string $pageName): iterable
     {
