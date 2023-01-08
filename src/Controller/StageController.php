@@ -38,7 +38,7 @@ class StageController extends AbstractController
     #[Route('/stage/detail-candidature/{id}/', name: 'app_stage_detail-candidature', requirements: ['id' => '\d+'])]
     public function candidatureShow(Candidature $candidature): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage');
         }
 
@@ -49,7 +49,7 @@ class StageController extends AbstractController
     #[Route('/stage/{id}/retenues/', name: 'app_stage_retenues', requirements: ['id' => '\d+'])]
     public function candidatureRetenue(Stage $stage): Response
     {
-        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $stage->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage');
         }
 
@@ -60,7 +60,7 @@ class StageController extends AbstractController
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+        if (($this->getUser()->getId() !== $stage->getAuthor()->getId()) and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage');
         }
 
@@ -122,7 +122,7 @@ class StageController extends AbstractController
     #[Route('/stage/{id}/delete', name: 'app_stage_delete', requirements: ['id' => '\d+'])]
     public function delete(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $stage->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage');
         }
 

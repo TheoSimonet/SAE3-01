@@ -37,7 +37,7 @@ class AlternanceController extends AbstractController
     #[Route('/alternance/{id}/update', name: 'app_alternance_update', requirements: ['id' => '\d+'])]
     public function update(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_alternance');
         }
 
@@ -101,7 +101,7 @@ class AlternanceController extends AbstractController
     #[Route('/alternance/{id}/delete', name: 'app_alternance_delete', requirements: ['id' => '\d+'])]
     public function delete(Alternance $alternance, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $alternance->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_alternance');
         }
 
