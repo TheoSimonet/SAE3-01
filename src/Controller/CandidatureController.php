@@ -79,7 +79,7 @@ class CandidatureController extends AbstractController
     #[Route('/candidature/{id}/update', name: 'app_candidature_update', requirements: ['id' => '\d+'])]
     public function update(Candidature $candidature, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId()) {
+        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_profil_candidatures');
         }
 
@@ -129,7 +129,7 @@ class CandidatureController extends AbstractController
     #[Route('/candidature/{id}/delete', name: 'app_candidature_delete', requirements: ['id' => '\d+'])]
     public function delete(Candidature $candidature, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId()) {
+        if ($this->getUser()->getId() !== $candidature->getIdUser()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_profil_candidatures');
         }
 
@@ -169,7 +169,7 @@ class CandidatureController extends AbstractController
     #[Route('/candidature/{id}/retenir', name: 'app_candidature_retenir', requirements: ['id' => '\d+'])]
     public function retenir(Candidature $candidature, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage_show', ['id' => $candidature->getIdStage()->getId()]);
         }
 
@@ -206,7 +206,7 @@ class CandidatureController extends AbstractController
     #[Route('/candidature/{id}/abandon', name: 'app_candidature_abandon', requirements: ['id' => '\d+'])]
     public function abandonner(Candidature $candidature, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
     {
-        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId()) {
+        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_stage_show', ['id' => $candidature->getIdStage()->getId()]);
         }
 

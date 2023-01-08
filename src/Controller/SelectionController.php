@@ -56,7 +56,7 @@ class SelectionController extends AbstractController
     #[Route('/selection/{id}/delete', name: 'app_selection_delete', requirements: ['id' => '\d+'])]
     public function delete(Selection $selection, Request $request, ManagerRegistry $doctrine): Response
     {
-        if ($this->getUser()->getId() !== $selection->getIdUser()->getId()) {
+        if ($this->getUser()->getId() !== $selection->getIdUser()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_profil_selections');
         }
 
