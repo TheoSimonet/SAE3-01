@@ -26,6 +26,7 @@ class SelectionController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $selection->setIdUser($this->getUser());
+            $selection->setIdProjet($projet);
             $selection->setDate(new \DateTimeImmutable('now'));
 
             $em->persist($selection);

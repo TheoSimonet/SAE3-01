@@ -33,6 +33,15 @@ class ProjetTERController extends AbstractController
         return $this->render('projet_ter/show.html.twig', ['projet' => $projet]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
+    #[Route('/projet_ter/{id}/select', name: 'app_projet_ter_select', requirements: ['id' => '\d+'])]
+    public function select(ProjetTER $projet): Response
+    {
+        return $this->redirectToRoute('app_selection_create', [
+            'idProjet' => $projet->getId(),
+        ]);
+    }
+
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT')")]
     #[Route('/projet_ter/{id}/update', name: 'app_projet_ter_update', requirements: ['id' => '\d+'])]
     public function update(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
