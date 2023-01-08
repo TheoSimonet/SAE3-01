@@ -34,15 +34,6 @@ class StageController extends AbstractController
         return $this->render('stage/show.html.twig', ['stage' => $stage]);
     }
 
-    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
-    #[Route('/stage/{id}/candidate', name: 'app_stage_candidate', requirements: ['id' => '\d+'])]
-    public function candidate(Stage $stage): Response
-    {
-        return $this->redirectToRoute('app_candidature_new', [
-            'idStage' => $stage->getId(),
-        ]);
-    }
-
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/detail-candidature/{id}/', name: 'app_stage_detail-candidature', requirements: ['id' => '\d+'])]
     public function candidatureShow(Candidature $candidature): Response
