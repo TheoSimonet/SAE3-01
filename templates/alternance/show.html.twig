@@ -22,7 +22,7 @@
                 <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
                 <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
             {% endif %}
-            <p id="projet__author"><span class="important">Auteur:</span> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</p>
+            <p id="projet__author"><span class="important">Personne ayant publié l'alternance:</span> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
         </div>
     </div>
