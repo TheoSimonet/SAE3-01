@@ -41,6 +41,9 @@
         <li>
             Candidatures : cliquez <a href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
         </li>
+        <li>
+            Projets TER choisis : cliquez <a href="{{ path('app_profil_selections') }}">ici</a> pour voir les différents projets que vous avez choisi.
+        </li>
         {% endif %}
         {% if is_granted('ROLE_ENTREPRISE') %}
             <li>
