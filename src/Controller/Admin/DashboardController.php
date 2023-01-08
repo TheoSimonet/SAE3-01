@@ -2,6 +2,16 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Alternance;
+use App\Entity\Candidature;
+use App\Entity\Conversation;
+use App\Entity\Event;
+use App\Entity\Faq;
+use App\Entity\Message;
+use App\Entity\ProjetTER;
+use App\Entity\Selection;
+use App\Entity\Stage;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -41,6 +51,15 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
+        yield MenuItem::linkToCrud('Alternance', 'fas fa-list', Alternance::class);
+        yield MenuItem::linkToCrud('Candidature', 'fas fa-list', Candidature::class);
+        yield MenuItem::linkToCrud('Conversation', 'fas fa-list', Conversation::class);
+        yield MenuItem::linkToCrud('Event', 'fas fa-list', Event::class);
+        yield MenuItem::linkToCrud('Faq', 'fas fa-list', Faq::class);
+        yield MenuItem::linkToCrud('Message', 'fas fa-list', Message::class);
+        yield MenuItem::linkToCrud('Projet TER', 'fas fa-list', ProjetTER::class);
+        yield MenuItem::linkToCrud('Selection', 'fas fa-list', Selection::class);
+        yield MenuItem::linkToCrud('Stage', 'fas fa-list', Stage::class);
+        yield MenuItem::linkToCrud('User', 'fa fa-user', User::class);
     }
 }
