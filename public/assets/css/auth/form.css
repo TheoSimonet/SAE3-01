@@ -1,0 +1,67 @@
+.auth__form {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.auth__head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: var(--white);
+    font-size: 1.2rem;
+}
+
+.auth__head i {
+    color: var(--primary);
+}
+
+.auth__no__register {
+    text-align: center;
+    color: var(--white);
+}
+
+.auth__no__register a {
+    color: var(--primary);
+}
+.auth__input__label {
+    text-transform: uppercase;
+    color: var(--primary);
+}
+
+.auth__inputs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.auth__part button {
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 5px 10px;
+    border: none;
+    border-radius: 20px;
+}
+
+.auth__errormsg {
+    background-color: var(--red);
+    color: var(--white);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+.terms {
+    color: var(--white);
+}
+
+.terms label {
+    margin-right: 5px;
+}
