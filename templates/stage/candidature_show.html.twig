@@ -6,6 +6,8 @@
 
 {% block body %}
     <p>CV de {{ candidature.idUser.firstname }} {{ candidature.idUser.lastname }}</p>
-    <a href="{{ path('app_candidature_retenir', {id: candidature.id}) }}">Retenir</a>
+    {% if candidature.retenue == 0 %}
+        <a href="{{ path('app_candidature_retenir', {id: candidature.id}) }}">Retenir</a>
+    {% endif %}
     <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
 {% endblock %}

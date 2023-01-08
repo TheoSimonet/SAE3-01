@@ -30,6 +30,10 @@
             {% endif %}
         </div>
     </div>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == stage.author.id %}
+        Visualisez les candidatures que vous avez retenues <a href="{{ path('app_stage_retenues', {id: stage.id}) }}">ici</a>.
+    {% endif %}
+
     {% set x = 1 %}
         {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == stage.author.id %}
             {% for candidature in stage.candidatures %}

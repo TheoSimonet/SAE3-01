@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Candidatures retenues pour le stage {{ stage.titre }}
+{% endblock %}
+
+{% block body %}
+    <h1>Liste des candidatures retenues pour le stage {{ stage.titre }}</h1>
+
+    {% set x = 1 %}
+    {% for candidature in stage.candidatures %}
+        {% if candidature.retenue == 1 %}
+            <h2>Candidature n°{{ x }}</h2>
+            <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
+            <p>Faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+            <a href="{{ path('app_stage_detail-candidature', {id: candidature.id}) }}">Voir plus</a>
+            {% set x = x + 1 %}
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+

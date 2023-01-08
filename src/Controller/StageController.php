@@ -42,6 +42,13 @@ class StageController extends AbstractController
     }
 
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
+    #[Route('/stage/{id}/retenues/', name: 'app_stage_retenues', requirements: ['id' => '\d+'])]
+    public function candidatureRetenue(Stage $stage): Response
+    {
+        return $this->render('stage/candidature_retenues.html.twig', ['stage' => $stage]);
+    }
+
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/stage/{id}/update', name: 'app_stage_update', requirements: ['id' => '\d+'])]
     public function update(Stage $stage, Request $request, ManagerRegistry $doctrine): Response
     {
