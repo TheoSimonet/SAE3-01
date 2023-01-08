@@ -55,6 +55,7 @@ class CandidatureController extends AbstractController
                 $candidature->setIdUser($this->getUser());
                 $candidature->setIdStage($stage);
                 $candidature->setDate(new \DateTimeImmutable('now'));
+                $candidature->setRetenue(false);
                 $em->persist($candidature);
                 $em->flush();
             }
