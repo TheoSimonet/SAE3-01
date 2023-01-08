@@ -63,4 +63,16 @@ class SelectionRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findEqual(int $idUser, int $idProjet): array
+    {
+        return $this->createQueryBuilder('s')
+            ->where('s.idUser = :idUser')
+            ->setParameter('idUser', $idUser)
+            ->andWhere('s.idProjet = :idProjet')
+            ->setParameter('idProjet', $idProjet)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
