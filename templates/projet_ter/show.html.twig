@@ -18,6 +18,10 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ projet.titre }}</h2>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+                <a id="edit" href="{{ path('app_projet_ter_update', {id: projet.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                <a  id="delete" href="{{ path('app_projet_ter_delete', {id: projet.id}) }}"><i class='bx bxs-trash'></i></a>
+            {% endif %}
             <p id="projet__author"><span class="important">Auteur:</span> {{ projet.author.firstname }} {{ projet.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
             <p id="projet__desc"><span class="important">Date de publication:</span> {{ projet.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>

@@ -28,10 +28,6 @@
                     </div>
                     <div class="projet__item__actions">
                         <a id="show" href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}"><i class='bx bxs-show'></i></a>
-                        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
-                            <a id="edit" href="{{ path('app_projet_ter_update', {id: projetTER.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                            <a  id="delete" href="{{ path('app_projet_ter_delete', {id: projetTER.id}) }}"><i class='bx bxs-trash'></i></a>
-                        {% endif %}
                     </div>
                 </div>
             {% endfor %}
