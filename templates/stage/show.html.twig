@@ -25,7 +25,14 @@
             <p id="projet__author"><span class="important">Personne ayant publié le stage:</span> {{ stage.author.firstname }} {{ stage.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ stage.description }}</p>
 
-            {% if is_granted('ROLE_ETUDIANT') %}
+            {% set dejaSelectionne = false %}
+            {% for candidature in stage.candidatures %}
+                {% if candidature.idUser.id == app.user.id %}
+                    {% set dejaSelectionne = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% if is_granted('ROLE_ETUDIANT') and not dejaSelectionne %}
                 <a href="{{ path('app_candidature_new', {idStage: stage.id}) }}">Candidater</a>
             {% endif %}
         </div>
