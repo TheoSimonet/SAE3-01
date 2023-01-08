@@ -30,6 +30,9 @@ class ProjetTER
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $libProjet = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -85,6 +88,18 @@ class ProjetTER
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function getLibProjet(): ?string
+    {
+        return $this->libProjet;
+    }
+
+    public function setLibProjet(string $libProjet): self
+    {
+        $this->libProjet = $libProjet;
 
         return $this;
     }
