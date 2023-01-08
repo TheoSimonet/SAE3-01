@@ -38,7 +38,22 @@ class StageController extends AbstractController
     #[Route('/stage/detail-candidature/{id}/', name: 'app_stage_detail-candidature', requirements: ['id' => '\d+'])]
     public function candidatureShow(Candidature $candidature): Response
     {
+        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId()) {
+            return $this->redirectToRoute('app_stage');
+        }
+
         return $this->render('stage/candidature_show.html.twig', ['candidature' => $candidature]);
+    }
+
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
+    #[Route('/stage/{id}/retenues/', name: 'app_stage_retenues', requirements: ['id' => '\d+'])]
+    public function candidatureRetenue(Stage $stage): Response
+    {
+        if ($this->getUser()->getId() !== $stage->getAuthor()->getId()) {
+            return $this->redirectToRoute('app_stage');
+        }
+
+        return $this->render('stage/candidature_retenues.html.twig', ['stage' => $stage]);
     }
 
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]

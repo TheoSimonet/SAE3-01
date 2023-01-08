@@ -16,6 +16,7 @@
                     Selection n°{{ selection.id }},
                     Vous avez choisi le projet suivant : {{ selection.idProjet.titre }}
                     <a href="{{ path('app_projet_ter_show', {id: selection.idProjet.id}) }}">Voir plus</a>
+                    <a href="{{ path('app_selection_delete', {id: selection.id}) }}">Se désister</a>
                 </li>
             {% endfor %}
         </ul>

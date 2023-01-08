@@ -53,4 +53,44 @@ class SelectionController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
+    #[Route('/selection/{id}/delete', name: 'app_selection_delete', requirements: ['id' => '\d+'])]
+    public function delete(Selection $selection, Request $request, ManagerRegistry $doctrine): Response
+    {
+        if ($this->getUser()->getId() !== $selection->getIdUser()->getId()) {
+            return $this->redirectToRoute('app_profil_selections');
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__delete'],
+            ])
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__cancel'],
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            if ($form->getClickedButton() === $form->get('delete')) {
+                $entityManager->remove($selection);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_profil_selections');
+            }
+
+            if ($form->getClickedButton() === $form->get('cancel')) {
+                return $this->redirectToRoute('app_profil_selections');
+            }
+        }
+
+        return $this->render('selection/delete.html.twig', [
+            'selection' => $selection,
+            'form' => $form->createView(),
+        ]);
+    }
 }
