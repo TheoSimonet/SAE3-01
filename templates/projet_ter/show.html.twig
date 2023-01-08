@@ -27,7 +27,14 @@
             <p id="projet__desc"><span class="important">Date de publication:</span> {{ projet.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
             <p id="projet__desc"><span class="important">Niveau:</span> {{ projet.libProjet }}</p>
 
-            {% if is_granted('ROLE_ETUDIANT') %}
+            {% set dejaSelectionne = false %}
+            {% for selection in projet.selections %}
+                {% if selection.idUser.id == app.user.id %}
+                    {% set dejaSelectionne = true %}
+                {% endif %}
+            {% endfor %}
+
+            {% if is_granted('ROLE_ETUDIANT') and not dejaSelectionne %}
                 <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">Choisir</a>
             {% endif %}
         </div>
