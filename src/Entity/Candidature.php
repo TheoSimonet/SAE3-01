@@ -28,6 +28,9 @@ class Candidature
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
+    #[ORM\Column]
+    private ?bool $retenue = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -77,6 +80,18 @@ class Candidature
     public function setDate(\DateTimeInterface $date): self
     {
         $this->date = $date;
+
+        return $this;
+    }
+
+    public function isRetenue(): ?bool
+    {
+        return $this->retenue;
+    }
+
+    public function setRetenue(bool $retenue): self
+    {
+        $this->retenue = $retenue;
 
         return $this;
     }
