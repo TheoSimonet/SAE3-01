@@ -63,4 +63,16 @@ class CandidatureRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function findEqual(int $idUser, int $idStage): array
+    {
+        return $this->createQueryBuilder('c')
+            ->where('c.idUser = :idUser')
+            ->setParameter('idUser', $idUser)
+            ->andWhere('c.idStage = :idStage')
+            ->setParameter('idStage', $idStage)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }
