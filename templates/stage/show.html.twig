@@ -32,7 +32,7 @@
                 {% endif %}
             {% endfor %}
 
-            {% if is_granted('ROLE_ETUDIANT') and dejaSelectionne %}
+            {% if is_granted('ROLE_ETUDIANT') and not dejaSelectionne %}
                 <a href="{{ path('app_candidature_new', {idStage: stage.id}) }}">Candidater</a>
             {% endif %}
         </div>

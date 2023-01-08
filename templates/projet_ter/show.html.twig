@@ -39,14 +39,20 @@
             {% endif %}
         </div>
     </div>
-    {% set x = 1 %}
     {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
-        {% for selection in projet.selections %}
-            <h2>Sélection n°{{ x }}</h2>
-            <p>{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
-            <p>Faite le {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
-            {% set x = x + 1 %}
-        {% endfor %}
+        {% if projet.selections|length > 0 %}
+            <h2>Liste des étudiants ayant sélectionné votre projet :</h2>
+
+            {% set x = 1 %}
+            {% for selection in projet.selections %}
+                <h3>Sélection n°{{ x }}</h3>
+                <p>{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
+                <p>Faite le {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+                {% set x = x + 1 %}
+            {% endfor %}
+        {% else %}
+            <h2>Aucun étudiant n'a sélectionné ce projet.</h2>
+        {% endif %}
     {% endif %}
 {% endblock %}
 
