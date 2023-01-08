@@ -50,5 +50,10 @@
                 Alternances proposées : cliquez <a href="{{ path('app_profil_alternances') }}">ici</a> pour voir les alternances que vous avez proposé.
             </li>
         {% endif %}
+        {% if is_granted('ROLE_ENSEIGNANT') %}
+            <li>
+                Projets TER proposés : cliquez <a href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
+            </li>
+        {% endif %}
     </ul>
 {% endblock %}
