@@ -6,11 +6,9 @@ use App\Entity\ProjetTER;
 use App\Entity\Selection;
 use App\Form\SelectionType;
 use App\Repository\SelectionRepository;
-use Cassandra\Exception\AlreadyExistsException;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Exception\AlreadySubmittedException;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +29,7 @@ class SelectionController extends AbstractController
 
         $areEqual = $selections->findEqual($this->getUser()->getId(), $projet->getId());
         if (0 != count($areEqual)) {
-            throw new AlreadySubmittedException('Vous avez déjà sélectionné ce projet');
+            return $this->redirectToRoute('app_projet_ter');
         }
 
         $form->handleRequest($request);

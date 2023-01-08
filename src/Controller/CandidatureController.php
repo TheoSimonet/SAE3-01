@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Candidature;
 use App\Entity\Stage;
 use App\Form\CandidatureType;
+use App\Repository\CandidatureRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,7 +21,7 @@ class CandidatureController extends AbstractController
 {
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')")]
     #[Route('/candidature/new', name: 'app_candidature_new')]
-    public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger)
+    public function new(ManagerRegistry $doctrine, Request $request, SluggerInterface $slugger, CandidatureRepository $candidatures)
     {
         $em = $doctrine->getManager();
         $stage = $em->getRepository(Stage::class)->find($request->query->get('idStage'));
@@ -28,8 +29,13 @@ class CandidatureController extends AbstractController
         $candidature = new Candidature();
         $form = $this->createForm(CandidatureType::class, $candidature);
         $form->add('Valider', SubmitType::class);
-        $form->handleRequest($request);
 
+        $areEqual = $candidatures->findEqual($this->getUser()->getId(), $stage->getId());
+        if (0 != count($areEqual)) {
+            return $this->redirectToRoute('app_stage');
+        }
+
+        $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var UploadedFile $cvFile */
             $cvFile = $form->get('cvFilename')->getData();
