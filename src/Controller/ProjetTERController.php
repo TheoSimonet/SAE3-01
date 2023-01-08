@@ -37,6 +37,10 @@ class ProjetTERController extends AbstractController
     #[Route('/projet_ter/{id}/update', name: 'app_projet_ter_update', requirements: ['id' => '\d+'])]
     public function update(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $projet->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier ce projet');
+        }
+
         $form = $this->createForm(ProjetTERType::class, $projet);
         $form->add('save', SubmitType::class);
 
@@ -99,6 +103,10 @@ class ProjetTERController extends AbstractController
     #[Route('/projet_ter/{id}/delete', name: 'app_projet_ter_delete', requirements: ['id' => '\d+'])]
     public function delete(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
+        if ($this->getUser()->getId() !== $projet->getAuthor()->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer ce projet');
+        }
+
         $form = $this->createFormBuilder()
             ->add('delete', SubmitType::class, [
                 'attr' => ['class' => 'projet__form__delete'],
