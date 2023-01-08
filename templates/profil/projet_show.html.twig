@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Projets TER proposés par {{ user.firstname }} {{ user.lastname }}
+{% endblock %}
+
+{% block body %}
+    {% if user.projetTERs|length == 0 %}
+        Vous n'avez pas encore proposé de projet TER.
+    {% else %}
+        <h1>Voici la liste des projets TER que vous avez proposé, {{ user.firstname }}</h1>
+
+        <ul>
+            {% for projet in projets %}
+                <li>
+                    Projet n°{{ projet.id }}, {{ projet.titre }}
+                    <a href="{{ path('app_projet_ter_show', {id: projet.id}) }}">Voir plus</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

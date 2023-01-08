@@ -55,6 +55,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'author', targetEntity: Alternance::class)]
     private Collection $alternances;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: ProjetTER::class, orphanRemoval: true)]
+    private Collection $projetTERs;
+
+    #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Selection::class, orphanRemoval: true)]
+    private Collection $selections;
+
     public function __construct()
     {
         $this->candidatures = new ArrayCollection();
@@ -62,6 +68,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->conversations = new ArrayCollection();
         $this->stages = new ArrayCollection();
         $this->alternances = new ArrayCollection();
+        $this->projetTERs = new ArrayCollection();
+        $this->selections = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -333,6 +341,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($alternance->getAuthor() === $this) {
                 $alternance->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ProjetTER>
+     */
+    public function getProjetTERs(): Collection
+    {
+        return $this->projetTERs;
+    }
+
+    public function addProjetTER(ProjetTER $projetTER): self
+    {
+        if (!$this->projetTERs->contains($projetTER)) {
+            $this->projetTERs->add($projetTER);
+            $projetTER->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProjetTER(ProjetTER $projetTER): self
+    {
+        if ($this->projetTERs->removeElement($projetTER)) {
+            // set the owning side to null (unless already changed)
+            if ($projetTER->getAuthor() === $this) {
+                $projetTER->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Selection>
+     */
+    public function getSelections(): Collection
+    {
+        return $this->selections;
+    }
+
+    public function addSelection(Selection $selection): self
+    {
+        if (!$this->selections->contains($selection)) {
+            $this->selections->add($selection);
+            $selection->setIdUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSelection(Selection $selection): self
+    {
+        if ($this->selections->removeElement($selection)) {
+            // set the owning side to null (unless already changed)
+            if ($selection->getIdUser() === $this) {
+                $selection->setIdUser(null);
             }
         }
 

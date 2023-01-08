@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Projets TER choisis par {{ user.firstname }} {{ user.lastname }}
+{% endblock %}
+
+{% block body %}
+    {% if user.selections|length == 0 %}
+        Vous n'avez pas encore choisi de projet TER.
+    {% else %}
+        <h1>Voici la liste des projets TER que vous avez choisi, {{ user.firstname }}</h1>
+
+        <ul>
+            {% for selection in selections %}
+                <li>
+                    Selection n°{{ selection.id }},
+                    Vous avez choisi le projet suivant : {{ selection.idProjet.titre }}
+                    <a href="{{ path('app_projet_ter_show', {id: selection.idProjet.id}) }}">Voir plus</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}

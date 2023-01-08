@@ -66,6 +66,32 @@ class ProfilController extends AbstractController
         ]);
     }
 
+    #[Route('/profil/projets', name: 'app_profil_projets')]
+    public function projetShow(): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $projets = $user->getProjetTERs();
+
+        return $this->render('profil/projet_show.html.twig', [
+            'projets' => $projets,
+            'user' => $user,
+        ]);
+    }
+
+    #[Route('/profil/selections', name: 'app_profil_selections')]
+    public function selectionShow(): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED');
+        $user = $this->getUser();
+        $selections = $user->getSelections();
+
+        return $this->render('profil/selection_show.html.twig', [
+            'selections' => $selections,
+            'user' => $user,
+        ]);
+    }
+
     #[Route('/profil/update', name: 'app_profil_update')]
     public function update(UserPasswordHasherInterface $userPasswordHasher, Request $request, ManagerRegistry $doctrine): Response
     {

@@ -18,10 +18,29 @@
     <div class="right__center">
         <div class="projet__show__item">
             <h2>{{ projet.titre }}</h2>
-            <p id="projet__author"><span class="important">Auteur:</span> @author</p>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
+                <a id="edit" href="{{ path('app_projet_ter_update', {id: projet.id}) }}"><i class='bx bxs-edit-alt'></i></a>
+                <a  id="delete" href="{{ path('app_projet_ter_delete', {id: projet.id}) }}"><i class='bx bxs-trash'></i></a>
+            {% endif %}
+            <p id="projet__author"><span class="important">Enseignant en charge du projet:</span> {{ projet.author.firstname }} {{ projet.author.lastname }}</p>
             <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
+            <p id="projet__desc"><span class="important">Date de publication:</span> {{ projet.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+            <p id="projet__desc"><span class="important">Niveau:</span> {{ projet.libProjet }}</p>
+
+            {% if is_granted('ROLE_ETUDIANT') %}
+                <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">Choisir</a>
+            {% endif %}
         </div>
     </div>
+    {% set x = 1 %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
+        {% for selection in projet.selections %}
+            <h2>Sélection n°{{ x }}</h2>
+            <p>{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
+            <p>Faite le {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+            {% set x = x + 1 %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 
