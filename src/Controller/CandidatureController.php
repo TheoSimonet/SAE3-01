@@ -158,4 +158,41 @@ class CandidatureController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE')")]
+    #[Route('/candidature/{id}/retenir', name: 'app_candidature_retenir', requirements: ['id' => '\d+'])]
+    public function retenir(Candidature $candidature, Request $request, ManagerRegistry $doctrine, SluggerInterface $slugger): Response
+    {
+        if ($this->getUser()->getId() !== $candidature->getIdStage()->getAuthor()->getId()) {
+            return $this->redirectToRoute('app_stage_show', ['id' => $candidature->getIdStage()->getId()]);
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('save', SubmitType::class)
+            ->add('cancel', SubmitType::class)
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $doctrine->getManager();
+
+            if ($form->getClickedButton() === $form->get('save')) {
+                $candidature->setRetenue(true);
+
+                $em->persist($candidature);
+                $em->flush();
+
+                return $this->redirectToRoute('app_stage_show', ['id' => $candidature->getIdStage()->getId()]);
+            }
+            if ($form->getClickedButton() === $form->get('cancel')) {
+                return $this->redirectToRoute('app_stage_show', ['id' => $candidature->getIdStage()->getId()]);
+            }
+        }
+
+        return $this->render('candidature/retenir.html.twig', [
+            'candidature' => $candidature,
+            'form' => $form->createView(),
+        ]);
+    }
 }
