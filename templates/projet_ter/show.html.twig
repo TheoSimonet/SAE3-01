@@ -32,6 +32,15 @@
             {% endif %}
         </div>
     </div>
+    {% set x = 1 %}
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
+        {% for selection in projet.selections %}
+            <h2>Sélection n°{{ x }}</h2>
+            <p>{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
+            <p>Faite le {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+            {% set x = x + 1 %}
+        {% endfor %}
+    {% endif %}
 {% endblock %}
 
 
