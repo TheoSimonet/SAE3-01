@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjetTERRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -32,6 +34,14 @@ class ProjetTER
 
     #[ORM\Column(length: 255)]
     private ?string $libProjet = null;
+
+    #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Selection::class, orphanRemoval: true)]
+    private Collection $selections;
+
+    public function __construct()
+    {
+        $this->selections = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -100,6 +110,36 @@ class ProjetTER
     public function setLibProjet(string $libProjet): self
     {
         $this->libProjet = $libProjet;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Selection>
+     */
+    public function getSelections(): Collection
+    {
+        return $this->selections;
+    }
+
+    public function addSelection(Selection $selection): self
+    {
+        if (!$this->selections->contains($selection)) {
+            $this->selections->add($selection);
+            $selection->setIdProjet($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSelection(Selection $selection): self
+    {
+        if ($this->selections->removeElement($selection)) {
+            // set the owning side to null (unless already changed)
+            if ($selection->getIdProjet() === $this) {
+                $selection->setIdProjet(null);
+            }
+        }
 
         return $this;
     }
