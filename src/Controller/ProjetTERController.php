@@ -50,6 +50,8 @@ class ProjetTERController extends AbstractController
 
             $projet->setTitre($form->getData()->getTitre());
             $projet->setDescription($form->getData()->getDescription());
+            $projet->setAuthor($this->getUser());
+            $projet->setDate(new \DateTimeImmutable('now'));
             $entityManager->flush();
 
             return $this->redirectToRoute('app_projet_ter', [
@@ -75,6 +77,8 @@ class ProjetTERController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $projet->setTitre($form->getData()->getTitre());
             $projet->setDescription($form->getData()->getDescription());
+            $projet->setAuthor($this->getUser());
+            $projet->setDate(new \DateTimeImmutable('now'));
 
             $em = $doctrine->getManager();
             $em->persist($projet);
