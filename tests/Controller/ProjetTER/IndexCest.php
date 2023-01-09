@@ -45,4 +45,19 @@ class IndexCest
         $I->amOnPage('/projet_ter');
         $I->seeResponseCodeIs(403);
     }
+
+    public function constainsWhenTeacher(ControllerTester $I)
+    {
+        $user = UserFactory::createOne(['email' => 'root@example.com',
+            'password' => 'admin',
+            'roles' => ['ROLE_ENSEIGNANT'],
+            'firstname' => 'admin',
+            'lastname' => 'admin']);
+        $realUser = $user->object();
+
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/projet_ter');
+        $I->seeResponseCodeIsSuccessful();
+        $I->see('Créer', 'a');
+    }
 }
