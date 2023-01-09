@@ -1,5 +1,6 @@
 <?php
 
+declare(strict_types=1);
 
 namespace App\Tests\Controller\Stage;
 
@@ -7,12 +8,9 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function constains(ControllerTester $I)
     {
-    }
-
-    // tests
-    public function tryToTest(ControllerTester $I)
-    {
+        $I->amOnPage('/stage');
+        $I->seeResponseCodeIsSuccessful();
     }
 }
