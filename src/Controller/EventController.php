@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Event;
 use App\Form\EventType;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EventController extends AbstractController
 {
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/event', name: 'app_event')]
     public function index(ManagerRegistry $doctrine): Response
     {
@@ -24,6 +26,7 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or  is_granted('ROLE_ENSEIGNANT')")]
     #[Route('/event/create', name: 'app_event_create')]
     public function create(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -45,16 +48,18 @@ class EventController extends AbstractController
         ]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') or is_granted('ROLE_ENTREPRISE')")]
     #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', ['event' => $event]);
     }
 
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT')")]
     #[Route('/event/{id}/delete', name: 'app_event_delete', requirements: ['id' => '\d+'])]
     public function delete(Event $event, Request $request, ManagerRegistry $doctrine): Response
     {
-        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+        if (!in_array('ROLE_ADMIN' or 'ROLE_ENSEIGNANT', $this->getUser()->getRoles())) {
             return $this->redirectToRoute('app_event');
         }
 
@@ -85,6 +90,7 @@ class EventController extends AbstractController
                 ]);
             }
         }
+
         return $this->render('event/delete.html.twig', [
             'event' => $event,
             'form' => $form->createView(),
