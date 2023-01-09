@@ -65,11 +65,22 @@ a {
     text-decoration: none;
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
+input[type="text"], input[type="email"], input[type="password"], select {
     box-sizing: border-box;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
     padding: 5px;
     border: 3px solid var(--primary);
+}
+
+option {
+    padding: 3px;
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+textarea {
+    padding: 8px;
+    border-radius: var(--border-smooth);
 }
 
 /* ------------------------------ */
