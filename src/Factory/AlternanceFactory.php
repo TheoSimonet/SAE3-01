@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Alternance>
  *
- * @method        Alternance|Proxy create(array|callable $attributes = [])
- * @method static Alternance|Proxy createOne(array $attributes = [])
- * @method static Alternance|Proxy find(object|array|mixed $criteria)
- * @method static Alternance|Proxy findOrCreate(array $attributes)
- * @method static Alternance|Proxy first(string $sortedField = 'id')
- * @method static Alternance|Proxy last(string $sortedField = 'id')
- * @method static Alternance|Proxy random(array $attributes = [])
- * @method static Alternance|Proxy randomOrCreate(array $attributes = [])
+ * @method        Alternance|Proxy                     create(array|callable $attributes = [])
+ * @method static Alternance|Proxy                     createOne(array $attributes = [])
+ * @method static Alternance|Proxy                     find(object|array|mixed $criteria)
+ * @method static Alternance|Proxy                     findOrCreate(array $attributes)
+ * @method static Alternance|Proxy                     first(string $sortedField = 'id')
+ * @method static Alternance|Proxy                     last(string $sortedField = 'id')
+ * @method static Alternance|Proxy                     random(array $attributes = [])
+ * @method static Alternance|Proxy                     randomOrCreate(array $attributes = [])
  * @method static AlternanceRepository|RepositoryProxy repository()
- * @method static Alternance[]|Proxy[] all()
- * @method static Alternance[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Alternance[]|Proxy[] createSequence(array|callable $sequence)
- * @method static Alternance[]|Proxy[] findBy(array $attributes)
- * @method static Alternance[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Alternance[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Alternance[]|Proxy[]                 all()
+ * @method static Alternance[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Alternance[]|Proxy[]                 createSequence(array|callable $sequence)
+ * @method static Alternance[]|Proxy[]                 findBy(array $attributes)
+ * @method static Alternance[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Alternance[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class AlternanceFactory extends ModelFactory
 {
@@ -39,17 +39,12 @@ final class AlternanceFactory extends ModelFactory
         parent::__construct();
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function getDefaults(): array
     {
         return [
-            'author' => UserFactory::new(),
-            'description' => self::faker()->text(255),
-            'titre' => self::faker()->text(255),
+            'author' => UserFactory::createOne(['roles' => ['ROLE_ENTREPRISE']]),
+            'description' => self::faker()->realTextBetween(100, 300),
+            'titre' => self::faker()->realText(100),
         ];
     }
 
