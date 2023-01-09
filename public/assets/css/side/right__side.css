@@ -28,6 +28,7 @@
 .right__center {
     padding: 15px;
     max-height: 95%;
+    max-width: 60vw;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -43,6 +44,7 @@
 /* BOTTOM */
 
 .right__bottom {
+    text-align: center;
     padding: 10px 0;
     display: flex;
     justify-content: center;

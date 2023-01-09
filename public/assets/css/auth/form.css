@@ -40,7 +40,16 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 95%;
     gap: 20px;
+}
+
+.auth__part  {
+    width: 100%;
+}
+
+.auth__part input {
+    width: 100%;
 }
 
 .auth__part button {
