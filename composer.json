@@ -95,7 +95,8 @@
       "php bin/console doctrine:database:create",
       "php bin/console doctrine:migrations:migrate --no-interaction",
       "php bin/console doctrine:fixtures:load --no-interaction"
-    ]
+    ],
+    "test:codeception": "php vendor/bin/codecept run"
   },
   "conflict": {
     "symfony/symfony": "*"
@@ -126,6 +127,7 @@
   "scripts-descriptions": {
     "start": "Lancement du serveur Web de test",
     "test:cs": "Vérification du code",
-    "fix:cs": "Correction du code"
+    "fix:cs": "Correction du code",
+    "test:codeception": "Lance les tests avec Codeception"
   }
 }
