@@ -234,12 +234,62 @@
 }
 
 #selection__title {
-    font-size: var(--fs-medium);
+    font-size: var(--fs-normal);
     background-color: var(--primary);
     padding: 15px;
     color: var(--white);
     border-radius: var(--border-smooth);
     text-align: center;
+}
+
+#candidature__retenues  {
+    text-align: center;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: var(--black);
+    margin: 10px 0;
+    font: var(--fs-normal);
+}
+
+#candidature__retenues a {
+    color: var(--white);
+}
+
+#show_more {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    background-color: var(--primary);
+    padding: 5px;
+    border-radius: var(--border-smooth);
+}
+
+#show_more a {
+    color: var(--white);
+}
+
+#no_candidate {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 15px;
+    border-radius: var(--border-smooth);
+}
+
+#frame__pdf {
+    width: 70vw;
+height: 80vh;
+}
+
+.retenir__candidat {
+    text-align: center;
+    color: var(--white);
+    background-color: var(--black);
+    padding: 10px;
+    border-radius: var(--border-smooth);
+
 }
 
 @media screen and (min-width: 300px) {
