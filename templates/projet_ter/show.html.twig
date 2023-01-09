@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -9,6 +9,15 @@
 {% endblock %}
 
 {% block body %}
+
+    {% set dejaSelectionne = false %}
+
+    {% for selection in projet.selections %}
+        {% if selection.idUser.id == app.user.id %}
+            {% set dejaSelectionne = true %}
+        {% endif %}
+    {% endfor %}
+
     <div class="right__top">
         <p>
             <i class='bx bxs-briefcase-alt-2'></i>
@@ -16,44 +25,89 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="projet__show__item">
-            <h2>{{ projet.titre }}</h2>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
-                <a id="edit" href="{{ path('app_projet_ter_update', {id: projet.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                <a  id="delete" href="{{ path('app_projet_ter_delete', {id: projet.id}) }}"><i class='bx bxs-trash'></i></a>
-            {% endif %}
-            <p id="projet__author"><span class="important">Enseignant en charge du projet:</span> {{ projet.author.firstname }} {{ projet.author.lastname }}</p>
-            <p id="projet__desc"><span class="important">Description:</span> {{ projet.description }}</p>
-            <p id="projet__desc"><span class="important">Date de publication:</span> {{ projet.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
-            <p id="projet__desc"><span class="important">Niveau:</span> {{ projet.libProjet }}</p>
+        <div class="projet__show__space">
+            <div class="projet__show__item">
 
-            {% set dejaSelectionne = false %}
-            {% for selection in projet.selections %}
-                {% if selection.idUser.id == app.user.id %}
-                    {% set dejaSelectionne = true %}
+                <div id="head">
+                    <p class="show__item__title">
+                        {{ projet.titre }}
+                    </p>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
+                    <div id="actions">
+                        <a id="edit" href="{{ path('app_projet_ter_update', {id: projet.id}) }}">
+                            <i class='bx bxs-edit-alt'></i>
+                        </a>
+                        <a id="delete" href="{{ path('app_projet_ter_delete', {id: projet.id}) }}">
+                            <i class='bx bxs-trash'></i>
+                        </a>
+                    </div>
                 {% endif %}
-            {% endfor %}
 
-            {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')) and not dejaSelectionne %}
-                <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">Choisir</a>
+                <div id="projet__content">
+                    <p id="projet__author">
+                <span class="important">
+                    Enseignant en charge du projet:
+                </span>
+                        {{ projet.author.firstname }} {{ projet.author.lastname }}
+                    </p>
+                    <p id="projet__desc">
+                <span class="important">
+                    Description:
+                </span>
+                        {{ projet.description }}
+                    </p>
+                    <p id="projet__desc">
+                <span class="important">
+                    Date de publication:
+                </span>
+                        {{ projet.date|date("d/m/Y",  "Europe/Paris") }}
+                    </p>
+                    <p id="projet__desc">
+                <span class="important">
+                    Niveau:
+                </span>
+                        {{ projet.libProjet }}
+                    </p>
+                </div>
+
+                {% if (is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT')) and not dejaSelectionne %}
+                    <div id="choice">
+                        <a href="{{ path('app_selection_create', {idProjet: projet.id}) }}">
+                            Choisir
+                        </a>
+                    </div>
+                {% endif %}
+            </div>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
+                {% if projet.selections|length > 0 %}
+                    <div class="projet__selection">
+                        <p id="selection__title">Etudiant(s) ayant sélectionné ce projet :</p>
+                        <div id="selections__list">
+                            {% for selection in projet.selections %}
+                                <div class="selection__item">
+                                    <div id="selection__number">
+                                        <p>{{ loop.index }}</p>
+                                    </div>
+                                    <div>
+                                        <p id="selection__identity">{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
+                                        <p id="selection__date">Selectionné
+                                            le: {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}
+                                        </p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="projet__selection__empty">
+                        <p>Aucun étudiant n'a sélectionné ce projet.</p>
+                    </div>
+                {% endif %}
             {% endif %}
         </div>
     </div>
-    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') and app.user.id == projet.author.id %}
-        {% if projet.selections|length > 0 %}
-            <h2>Liste des étudiants ayant sélectionné votre projet :</h2>
-
-            {% set x = 1 %}
-            {% for selection in projet.selections %}
-                <h3>Sélection n°{{ x }}</h3>
-                <p>{{ selection.idUser.firstname }} {{ selection.idUser.lastName }}</p>
-                <p>Faite le {{ selection.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
-                {% set x = x + 1 %}
-            {% endfor %}
-        {% else %}
-            <h2>Aucun étudiant n'a sélectionné ce projet.</h2>
-        {% endif %}
-    {% endif %}
 {% endblock %}
 
 

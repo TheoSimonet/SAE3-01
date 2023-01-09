@@ -13,10 +13,9 @@
 
 form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
     background-color: var(--black);
-    padding: 10px;
-    max-width: 400px;
-    min-width: 250px;
-    border-radius: 20px;
+    padding: 20px;
+    width: 100%;
+    border-radius: var(--border-smooth);
 }
 
 .projet__form__label__title {
@@ -24,17 +23,20 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
     text-transform: uppercase;
     font-weight: var(--w-2);
     margin-bottom: 4px;
+    font-size: var(--fs-normal);
 }
 
 .projet__form__submit__box {
+    margin: 15px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: var(--fs-little);
 }
 
 .projet__form__submit__box button {
-    padding: 10px 40px;
-    border-radius: 20px;
+    padding: 5px 10px;
+    border-radius: var(--border-smooth);
     background-color: var(--primary);
     border: none;
     color: var(--white);
@@ -53,13 +55,18 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
 
 .projet__form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
+}
+
+.projet__form button {
+    font-size: var(--fs-normal);
 }
 
 .projet__form__delete__message {
+    font-size: var(--fs-normal);
     text-align: center;
     animation: red_pulse infinite 2s ease-in-out;
 }
@@ -90,27 +97,6 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
     background-color: var(--red);
 }
 
-.projet__show__item {
-    background-color: var(--black);
-    padding: 20px;
-    border-radius: 20px;
-    width: 250px;
-}
-
-.projet__show__item h2 {
-    text-align: center;
-    color: var(--white);
-    margin-bottom: 20px;
-}
-
-.projet__show__item {
-    color: var(--white);
-}
-
-#projet__desc {
-    max-width: 100%;
-}
-
 @keyframes red_pulse {
     0% {
         color: var(--white);
@@ -120,5 +106,26 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
     }
     100% {
         color: var(--white);
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .projet__form {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 500px) {
+    form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .projet__show__item {
+        max-width: 550px;
+    }
+    form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
+        width: 500px;
     }
 }

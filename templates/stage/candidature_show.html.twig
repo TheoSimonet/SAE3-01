@@ -1,15 +1,27 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet.css') }}"/>
+{% endblock %}
+
 {% block title %}
     CV de {{ candidature.idUser.firstname }} {{ candidature.idUser.lastname }}
 {% endblock %}
 
 {% block body %}
-    <p>CV de {{ candidature.idUser.firstname }} {{ candidature.idUser.lastname }}</p>
-    {% if candidature.retenue == 0 %}
-        <a href="{{ path('app_candidature_retenir', {id: candidature.id}) }}">Retenir</a>
-    {% else %}
-        <a href="{{ path('app_candidature_abandon', {id: candidature.id}) }}">Ne plus retenir</a>
-    {% endif %}
-    <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+    <div class="right__top">
+        <p>Candidat:</p>
+        <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastname }}</p>
+    </div>
+    <div class="right__center">
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+            {% if candidature.retenue == 0 %}
+                <a class="retenir__candidat" href="{{ path('app_candidature_retenir', {id: candidature.id}) }}">Retenir le candidat</a>
+            {% else %}
+                <a class="retenir__candidat" href="{{ path('app_candidature_abandon', {id: candidature.id}) }}">Ne plus retenir</a>
+            {% endif %}
+        {% endif %}
+        <iframe id="frame__pdf" src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}"></iframe>
+    </div>
+
 {% endblock %}

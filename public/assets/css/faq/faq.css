@@ -6,11 +6,15 @@
     justify-content: center;
     align-content: center;
     gap: 5px;
+    font-size: var(--fs-very-little);
 }
 
 .create i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--white);
-    border-radius: 50%;
+    border-radius: var(--border-rounded);
     color: var(--black);
 }
 
@@ -21,10 +25,10 @@
     justify-content: center;
     gap: 5px;
     color: var(--white);
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
     background-color: var(--black);
     padding: 4px 25px;
-    border: 2px solid var(--primary);
+    border: 3px solid var(--primary);
 }
 
 /* END CREATE BUTTON */
@@ -40,20 +44,22 @@
 /* END JS CLASS */
 
 .faq__item {
-    min-width: 250px;
-    max-width: 250px;
-    border-radius: 10px;
+    border-radius: var(--border-smooth);
     background-color: var(--black);
-    padding: 12px;
+    padding: var(--border-smooth);
     color: var(--white);
     transition: all 0.4s ease-in-out;
     overflow-wrap: break-word;
 }
 
+.faq__content__text {
+    font-size: var(--fs-normal);
+}
+
 .faq__item__actions {
     padding: 12px 0;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     justify-content: center;
     align-items: center;
@@ -65,7 +71,7 @@
     align-items: center;
     justify-content: center;
     padding: 8px;
-    border-radius: 50%;
+    border-radius: var(--border-rounded);
     color: var(--white);
 }
 
@@ -88,9 +94,8 @@
 
 form[name="faq"] {
     background-color: var(--black);
-    padding: 10px;
+    padding: 20px;
     max-width: 400px;
-    min-width: 250px;
     border-radius: 20px;
 }
 
@@ -98,6 +103,7 @@ form[name="faq"] {
     color: var(--primary);
     text-transform: uppercase;
     font-weight: var(--w-2);
+    font-size: var(--fs-normal);
     margin-bottom: 4px;
 }
 
@@ -109,11 +115,12 @@ form[name="faq"] {
 }
 
 .faq__form__submit__box button {
-    padding: 10px 40px;
+    padding: 5px 20px;
     border-radius: 20px;
     background-color: var(--primary);
     border: none;
     color: var(--white);
+    font-size: var(--fs-normal);
 }
 
 .faq__form__delete__message {
@@ -123,7 +130,7 @@ form[name="faq"] {
 
 .faq__form {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 15px;
@@ -132,7 +139,7 @@ form[name="faq"] {
 .faq__delete__box {
     background-color: var(--black);
     padding: 20px;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -143,7 +150,7 @@ form[name="faq"] {
 
 .faq__form__delete_action button {
     padding: 5px 20px;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
     border: none;
     color: var(--white);
 }
@@ -165,5 +172,45 @@ form[name="faq"] {
     }
     100% {
         color: var(--white);
+    }
+}
+
+@media screen and (min-width: 300px) {
+    .faq__item__actions {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    .create {
+        font-size: var(--fs-little);
+    }
+
+    form[name="faq"] {
+        min-width: 300px;
+    }
+
+    .faq__form {
+        flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .faq__item {
+        max-width: 500px;
+    }
+
+    .create {
+        font-size: var(--fs-normal);
+    }
+
+    form[name="faq"] {
+        min-width: 400px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .faq__item {
+        max-width: 700px;
     }
 }

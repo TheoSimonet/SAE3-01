@@ -1,7 +1,7 @@
 .auth__form {
     background-color: var(--black);
     padding: 20px;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -15,7 +15,8 @@
     justify-content: center;
     padding: 10px;
     color: var(--white);
-    font-size: 1.2rem;
+    font-size: var(--fs-medium);
+    text-align: center;
 }
 
 .auth__head i {
@@ -25,6 +26,7 @@
 .auth__no__register {
     text-align: center;
     color: var(--white);
+    font-size: var(--fs-very-little);
 }
 
 .auth__no__register a {
@@ -33,6 +35,7 @@
 .auth__input__label {
     text-transform: uppercase;
     color: var(--primary);
+    font-size: var(--fs-normal);
 }
 
 .auth__inputs {
@@ -40,28 +43,72 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 95%;
     gap: 20px;
 }
 
+.auth__part  {
+    max-width: 100%;
+}
+
 .auth__part button {
+    max-width: 100%;
+    font-size: var(--fs-little);
+    overflow: hidden;
+    white-space: nowrap;
+    display: block;
+    text-overflow: ellipsis;
+}
+
+.auth__part input {
+    width: 100%;
+}
+
+.auth__part button {
+    border: 2px solid var(--white);
     background-color: var(--primary);
     color: var(--white);
     padding: 5px 10px;
-    border: none;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
 }
 
 .auth__errormsg {
+    text-align: center;
     background-color: var(--red);
     color: var(--white);
     padding: 10px;
-    border-radius: 20px;
+    border-radius: var(--border-smooth);
 }
 
 .terms {
     color: var(--white);
+    text-align: center;
+    font-size: var(--fs-very-little);
 }
 
 .terms label {
     margin-right: 5px;
+}
+
+.terms div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+@media screen and (min-width: 500px) {
+    form[name="registration_form"] {
+        width: 350px;
+    }
+
+    .auth__part input {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    form[name="registration_form"] {
+        width: 500px;
+    }
 }
