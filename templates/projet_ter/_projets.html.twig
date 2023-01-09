@@ -6,32 +6,56 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="projet__top">
-            <div class="search__bar">
-                <input type="text" placeholder="Rechercher un projet" id="search__bar">
-                <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
+        <div class="projet__space">
+            <div class="projet__top">
+                {% if projetsTER|length > 0 %}
+                    <div class="search__bar">
+                        <input type="text" placeholder="Rechercher" id="search__bar">
+                        <div class="search__icon"><i class='bx bx-search-alt-2'></i></div>
+                    </div>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+                    <div class="create">
+                        <a href="{{ path('app_projet_ter_create') }}">Créer</a>
+                        <div class="search__icon"><i class='bx bx-plus'></i></div>
+                    </div>
+                {% endif %}
             </div>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
-                <div class="create">
-                    <a href="{{ path('app_projet_ter_create') }}">Créer</a>
-                    <div class="search__icon"><i class='bx bx-plus'></i></div>
-                </div>
-            {% endif %}
-        </div>
-        <div class="projet__bottom">
-            {% for projetTER in projetsTER %}
-                <div class="projet__item">
-                    <div class="projet__item__content">
-                        <div class="projet__item__titre"><span class="important">Projet:</span> {{ projetTER.titre }}</div>
-                        <div class="projet__item__author"><p>Publié par <span class="important"> {{ projetTER.author.firstname }} {{ projetTER.author.lastname }}
-                                le {{ projetTER.date|date("d/m/Y à H:i",  "Europe/Paris") }}</span>.</p></div>
-                        <div class="projet__item__titre"><span class="important">Niveau:</span> {{ projetTER.libProjet }}</div>
-                    </div>
-                    <div class="projet__item__actions">
-                        <a id="show" href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}"><i class='bx bxs-show'></i></a>
-                    </div>
-                </div>
-            {% endfor %}
+            <div class="projet__bottom">
+                {% if projetsTER|length == 0 %}
+                    <p id="information__empty">Il n'y a actuellement aucun projet...</p>
+                {% else %}
+                    {% for projetTER in projetsTER %}
+                        <div class="projet__item">
+                            <div class="projet__item__content">
+                                <div class="projet__item__titre"><span
+                                            class="important">Projet:</span> {{ projetTER.titre }}
+                                </div>
+                                <div class="projet__item__titre">
+                                    <p>
+                                        <span class="important">
+                                            Auteur:
+                                        </span>
+                                        {{ projetTER.author.firstname }} {{ projetTER.author.lastname }}</p></div>
+                                <div class="projet__item__titre">
+                                    <p>
+                                        <span class="important">
+                                            Date:
+                                        </span>
+                                        {{ projetTER.date|date("d/m/Y",  "Europe/Paris") }}
+                                    </p>
+                                </div>
+                                <div class="projet__item__titre"><span
+                                            class="important">Niveau:</span> {{ projetTER.libProjet }}</div>
+                            </div>
+                            <div class="projet__item__actions">
+                                <a id="show" href="{{ path('app_projet_ter_show', {id: projetTER.id}) }}"><i
+                                            class='bx bxs-show'></i></a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
     </div>
 
