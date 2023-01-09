@@ -20,6 +20,13 @@
                 <td>{{ event.startTime|date('Y-m-d H:i:s') }}</td>
                 <td>{{ event.endTime|date('Y-m-d H:i:s') }}</td>
                 <td>{{ event.description|default('') }}</td>
+                <td>{% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
+                    <div class="create">
+                        <a href="/event/{event.id}/delete" >Supprimer</a>
+                    </div>
+                    {% endif %}
+                </td>
+
             </tr>
         {% endfor %}
         </tbody>
