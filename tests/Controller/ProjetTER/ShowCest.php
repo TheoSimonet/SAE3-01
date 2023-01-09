@@ -43,4 +43,21 @@ class ShowCest
         $I->seeElement('#edit');
         $I->seeElement('#delete');
     }
+
+    public function containsWhenStudent(ControllerTester $I)
+    {
+        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+            'password' => 'teddy',
+            'roles' => ['ROLE_ETUDIANT'],
+            'firstname' => 'teddy',
+            'lastname' => 'ping']);
+        $realUser = $user->object();
+
+        $projet = ProjetTERFactory::createOne();
+
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/projet_ter/'.$projet->getId());
+        $I->seeResponseCodeIsSuccessful();
+        $I->see('choisir', 'a');
+    }
 }
