@@ -11,6 +11,10 @@
 /* TOP */
 
 .right__top{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 15px 5px;
     font-size: var(--fs-big);
     background-color: var(--primary);
