@@ -22,4 +22,11 @@ class IndexCest
         $I->seeResponseCodeIsSuccessful();
         $I->seeInTitle('Liste des projets TER');
     }
+
+    public function redirectionWhenNotAuthenticated(ControllerTester $I)
+    {
+        $I->amOnPage('/projet_ter');
+        $I->seeResponseCodeIsSuccessful();
+        $I->canSeePageRedirectsTo('/projet_ter', '/login');
+    }
 }
