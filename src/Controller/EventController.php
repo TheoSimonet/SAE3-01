@@ -44,4 +44,10 @@ class EventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
+    public function show(Event $event): Response
+    {
+        return $this->render('event/show.html.twig', ['event' => $event]);
+    }
+
 }

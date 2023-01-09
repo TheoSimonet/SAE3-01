@@ -24,7 +24,9 @@
         {% endfor %}
         </tbody>
     </table>
-    <div class="create">
-        <a href="{{ path('app_event_create') }}">Créer</a>
-    </div>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted ('ROLE_ENSEIGNANT') %}
+        <div class="create">
+            <a href="{{ path('app_event_create') }}">Créer</a>
+        </div>
+    {% endif %}
 {% endblock %}
