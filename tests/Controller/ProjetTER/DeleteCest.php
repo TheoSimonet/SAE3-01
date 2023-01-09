@@ -25,4 +25,28 @@ class DeleteCest
         $I->seeResponseCodeIsSuccessful();
         $I->amOnPage('/projet_ter/'.$projet->getId().'/delete');
     }
+
+    public function randomUserCannotDelete(ControllerTester $I)
+    {
+        $author = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+            'password' => 'teddy',
+            'roles' => ['ROLE_ENSEIGNANT'],
+            'firstname' => 'teddy',
+            'lastname' => 'ping']);
+
+        $randomUser = UserFactory::createOne(['email' => 'teddy.pong@example.com',
+            'password' => 'teddy',
+            'roles' => ['ROLE_ENSEIGNANT'],
+            'firstname' => 'teddy',
+            'lastname' => 'pong']);
+        $realRandomUser = $randomUser->object();
+
+        $projet = ProjetTERFactory::createOne(['author' => $author]);
+
+        $I->amLoggedInAs($realRandomUser);
+        $I->amOnPage('/projet_ter/'.$projet->getId());
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/projet_ter/'.$projet->getId().'/delete');
+        $I->canSeePageRedirectsTo('/projet_ter/'.$projet->getId().'/delete', '/projet_ter');
+    }
 }
