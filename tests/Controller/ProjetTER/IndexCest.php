@@ -3,16 +3,23 @@
 
 namespace App\Tests\Controller\ProjetTER;
 
+use App\Factory\UserFactory;
 use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function _before(ControllerTester $I)
+    public function constainsWhenAdmin(ControllerTester $I)
     {
-    }
+        $user = UserFactory::createOne(['email' => 'root@example.com',
+            'password' => 'admin',
+            'roles' => ['ROLE_ADMIN'],
+            'firstname' => 'admin',
+            'lastname' => 'admin']);
+        $realUser = $user->object();
 
-    // tests
-    public function tryToTest(ControllerTester $I)
-    {
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/projet_ter');
+        $I->seeResponseCodeIsSuccessful();
+        $I->seeInTitle('Liste des projets TER');
     }
 }
