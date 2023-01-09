@@ -2,9 +2,6 @@
 
 /* GENERAL */
 * {
-
-    font-size: 16px;
-
     /** COULEURS **/
     --primary: #009cdf;
     --white: #ffffff;
@@ -24,12 +21,21 @@
     --w-1: 900;
 
     /** FONT-SIZE **/
-    --fs-big: 1.3rem;
-    --fs-normal: 1rem;
-    --fs-little: 0.8rem;
+    --fs-big: 1.14rem;
+    --fs-medium: 1.09rem;
+    --fs-normal: 0.98rem;
+    --fs-little: 0.95rem;
+    --fs-very-little: 0.85rem;
+
+    /** OTHERS **/
+    --border-smooth: 20px;
+    --border-rounded: 50%;
 }
 
 html {
+
+    font-size: 14px;
+
     background: url(../img/back.png) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -52,10 +58,18 @@ ul {
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 a {
     text-decoration: none;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+    box-sizing: border-box;
+    border-radius: 20px;
+    padding: 5px;
+    border: 3px solid var(--primary);
 }
 
 /* ------------------------------ */
@@ -87,4 +101,16 @@ a {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
     border-radius: 20px;
+}
+
+@media screen and (min-width: 500px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    html {
+        font-size: 17px;
+    }
 }
