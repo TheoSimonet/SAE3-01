@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+{% endblock %}
+
+{% block title %}
+    Visualisation de l'event n°{{ event.id }}
+{% endblock %}
+
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Visualisation de l'event n°{{ event.id }}
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="projet__show__item">
+            <h2>{{ event.title }}</h2>
+            <p id="projet__desc"><span class="important">Description:</span> {{ event.text }}</p>
+            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+                <a id="delete" href="{{ path('app_event_delete', {id: event.id}) }}"><i class='bx bxs-trash'></i></a>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

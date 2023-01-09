@@ -1,0 +1,11 @@
+{% block body %}
+    {{ form_start(form) }}
+    <p class="projet__form__label__title">Titre de l'event:</p>
+    {{ form_row(form.title, {'label': ' '}) }}
+    <p class="projet__form__label__title">Description de l'event:</p>
+    {{ form_row(form.text, {'label': ' '}) }}
+    <div class="projet__form__submit__box">
+        {{ form_row(form.save, {'label': label_submit }) }}
+    </div>
+    {{ form_end(form) }}
+{% endblock %}

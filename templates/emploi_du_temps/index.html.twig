@@ -7,16 +7,15 @@
 {% endblock %}
 
 {% block body %}
-    <div class="right__top">
-        <p>
-            <i class="bx bx-news"></i>
-            Dernières actualités
-        </p>
-    </div>
+    {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+
+    {% endif %}
     <div class="right__center">
         <div class="actu__item">
             <div class="actu__item__title">
-                <p>Emploi du temps</p>
+                <p>
+                    Emploi du temps
+                </p>
             </div>
             <div class="actu__item__content">
                 <div class="content__text">
