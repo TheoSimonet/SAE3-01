@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/candidature/form.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -19,8 +19,10 @@
         <div class="projet__delete__box">
             <p class="projet__form__delete__message">Êtes-vous sûr de vouloir retirer cette candidature de vos choix ?</p>
             {{ form_start(form, { 'attr' : { 'class': 'projet__form' } }) }}
-            {{ form_row(form.save, { 'label': 'Oui' }) }}
-            {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
+            <div class="buttons__space">
+                {{ form_row(form.save, { 'label': 'Oui', 'attr': {'class': 'retenir'} }) }}
+                {{ form_row(form.cancel, { 'label': 'Annuler', 'attr': {'class': 'cancel'} }) }}
+            </div>
             {{ form_end(form) }}
         </div>
     </div>

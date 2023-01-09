@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/candidature/form.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -16,12 +16,14 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="projet__delete__box">
+        <div class="candidature__form">
             <p class="projet__form__delete__message">Êtes-vous sûr de vouloir retenir cette candidature ?</p>
-                {{ form_start(form, { 'attr' : { 'class': 'projet__form' } }) }}
-                {{ form_row(form.save, { 'label': 'Retenir' }) }}
-                {{ form_row(form.cancel, { 'label': 'Annuler' }) }}
-                {{ form_end(form) }}
+            {{ form_start(form, { 'attr' : { 'class': 'projet__form' } }) }}
+            <div class="buttons__space">
+                {{ form_row(form.save, { 'label': 'Retenir', 'attr' : {'class': 'retenir'}}) }}
+                {{ form_row(form.cancel, { 'label': 'Annuler', 'attr' : {'class': 'cancel'}}) }}
+            </div>
+            {{ form_end(form) }}
         </div>
     </div>
 {% endblock %}

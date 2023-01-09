@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/candidature/form.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -10,13 +10,15 @@
 
 {% block body %}
     <div class="right__top">
-       <p>Candidature au stage n°{{ stage.titre }}</p>
+       <p>Candidature au stage n°{{ stage.id }}</p>
     </div>
     <div class="right__center">
         {{ form_start(form) }}
         {{ form_row(form.cvFilename) }}
-        {{ form_row(form.Valider) }}
-        <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
+        <div class="buttons">
+            {{ form_row(form.Valider) }}
+            <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
+        </div>
         {{ form_end(form) }}
     </div>
 {% endblock %}
