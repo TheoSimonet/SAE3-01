@@ -33,7 +33,7 @@
 .right__center {
     padding: 15px;
     max-height: 95%;
-    max-width: 80vw;
+    max-width: 95vw;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
