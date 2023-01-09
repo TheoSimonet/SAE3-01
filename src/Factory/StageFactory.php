@@ -42,7 +42,7 @@ final class StageFactory extends ModelFactory
     protected function getDefaults(): array
     {
         return [
-            'author' => UserFactory::createOne(['roles' => ['ROLE_ENSEIGNANT']]),
+            'author' => UserFactory::createOne(['roles' => ['ROLE_ENTREPRISE']]),
             'description' => self::faker()->realTextBetween(100, 300),
             'titre' => self::faker()->realText(100),
         ];

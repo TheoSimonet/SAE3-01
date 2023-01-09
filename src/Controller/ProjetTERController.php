@@ -38,7 +38,7 @@ class ProjetTERController extends AbstractController
     public function update(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $projet->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas modifier ce projet');
+            return $this->redirectToRoute('app_projet_ter');
         }
 
         $form = $this->createForm(ProjetTERType::class, $projet);
@@ -106,7 +106,7 @@ class ProjetTERController extends AbstractController
     public function delete(ProjetTER $projet, Request $request, ManagerRegistry $doctrine): Response
     {
         if ($this->getUser()->getId() !== $projet->getAuthor()->getId() and !in_array("ROLE_ADMIN", $this->getUser()->getRoles())) {
-            throw $this->createAccessDeniedException('Vous ne pouvez pas supprimer ce projet');
+            return $this->redirectToRoute('app_projet_ter');
         }
 
         $form = $this->createFormBuilder()
