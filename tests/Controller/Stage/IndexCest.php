@@ -9,7 +9,7 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
-    public function constainsWhenAuthenticated(ControllerTester $I)
+    public function constainsWhenAdmin(ControllerTester $I)
     {
         $user = UserFactory::createOne(['email' => 'root@example.com',
             'password' => 'admin',
@@ -24,10 +24,26 @@ class IndexCest
         $I->seeInTitle('Liste des stages');
     }
 
-    public function constainsWhenNotAuthenticated(ControllerTester $I)
+    public function redirectionWhenNotAuthenticated(ControllerTester $I)
     {
         $I->amOnPage('/stage');
         $I->seeResponseCodeIsSuccessful();
         $I->canSeePageRedirectsTo('/stage', '/login');
+    }
+
+    public function redirectionWhenUser(ControllerTester $I)
+    {
+        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+            'password' => 'teddy',
+            'roles' => ['ROLE_USER'],
+            'firstname' => 'teddy',
+            'lastname' => 'ping']);
+        $realUser = $user->object();
+
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/');
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/stage');
+        $I->seeResponseCodeIs(403);
     }
 }
