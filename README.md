@@ -29,3 +29,8 @@ Vérification du code :
 
 Correction du code :
 * ``composer fix:cs``
+
+## Tests
+
+Lancement des tests :
+* ``composer test:codeception``
