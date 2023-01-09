@@ -29,4 +29,20 @@ class IndexCest
         $I->seeResponseCodeIsSuccessful();
         $I->canSeePageRedirectsTo('/alternance', '/login');
     }
+
+    public function redirectionWhenUser(ControllerTester $I)
+    {
+        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+            'password' => 'teddy',
+            'roles' => ['ROLE_USER'],
+            'firstname' => 'teddy',
+            'lastname' => 'ping']);
+        $realUser = $user->object();
+
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/');
+        $I->seeResponseCodeIsSuccessful();
+        $I->amOnPage('/alternance');
+        $I->seeResponseCodeIs(403);
+    }
 }
