@@ -44,10 +44,50 @@ class EventController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
     #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
     public function show(Event $event): Response
     {
         return $this->render('event/show.html.twig', ['event' => $event]);
     }
 
+    #[Route('/event/{id}/delete', name: 'app_event_delete', requirements: ['id' => '\d+'])]
+    public function delete(Event $event, Request $request, ManagerRegistry $doctrine): Response
+    {
+        if (!in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            return $this->redirectToRoute('app_event');
+        }
+
+        $form = $this->createFormBuilder()
+            ->add('delete', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__delete'],
+            ])
+            ->add('cancel', SubmitType::class, [
+                'attr' => ['class' => 'projet__form__cancel'],
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+
+            if ($form->getClickedButton() === $form->get('delete')) {
+                $entityManager->remove($event);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('app_event');
+            }
+
+            if ($form->getClickedButton() === $form->get('cancel')) {
+                return $this->redirectToRoute('app_event_show', [
+                    'id' => $event->getId(),
+                ]);
+            }
+        }
+        return $this->render('event/delete.html.twig', [
+            'stage' => $event,
+            'form' => $form->createView(),
+        ]);
+    }
 }
