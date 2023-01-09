@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Stage>
  *
- * @method        Stage|Proxy create(array|callable $attributes = [])
- * @method static Stage|Proxy createOne(array $attributes = [])
- * @method static Stage|Proxy find(object|array|mixed $criteria)
- * @method static Stage|Proxy findOrCreate(array $attributes)
- * @method static Stage|Proxy first(string $sortedField = 'id')
- * @method static Stage|Proxy last(string $sortedField = 'id')
- * @method static Stage|Proxy random(array $attributes = [])
- * @method static Stage|Proxy randomOrCreate(array $attributes = [])
+ * @method        Stage|Proxy                     create(array|callable $attributes = [])
+ * @method static Stage|Proxy                     createOne(array $attributes = [])
+ * @method static Stage|Proxy                     find(object|array|mixed $criteria)
+ * @method static Stage|Proxy                     findOrCreate(array $attributes)
+ * @method static Stage|Proxy                     first(string $sortedField = 'id')
+ * @method static Stage|Proxy                     last(string $sortedField = 'id')
+ * @method static Stage|Proxy                     random(array $attributes = [])
+ * @method static Stage|Proxy                     randomOrCreate(array $attributes = [])
  * @method static StageRepository|RepositoryProxy repository()
- * @method static Stage[]|Proxy[] all()
- * @method static Stage[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Stage[]|Proxy[] createSequence(array|callable $sequence)
- * @method static Stage[]|Proxy[] findBy(array $attributes)
- * @method static Stage[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Stage[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Stage[]|Proxy[]                 all()
+ * @method static Stage[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Stage[]|Proxy[]                 createSequence(array|callable $sequence)
+ * @method static Stage[]|Proxy[]                 findBy(array $attributes)
+ * @method static Stage[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Stage[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class StageFactory extends ModelFactory
 {
@@ -39,17 +39,12 @@ final class StageFactory extends ModelFactory
         parent::__construct();
     }
 
-    /**
-     * @see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories
-     *
-     * @todo add your default values here
-     */
     protected function getDefaults(): array
     {
         return [
-            'author' => UserFactory::new(),
-            'description' => self::faker()->text(255),
-            'titre' => self::faker()->text(255),
+            'author' => UserFactory::createOne(['roles' => ['ROLE_ENSEIGNANT']]),
+            'description' => self::faker()->realTextBetween(100, 300),
+            'titre' => self::faker()->realText(100),
         ];
     }
 
