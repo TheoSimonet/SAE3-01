@@ -46,4 +46,19 @@ class IndexCest
         $I->amOnPage('/stage');
         $I->seeResponseCodeIs(403);
     }
+
+    public function constainsWhenCompany(ControllerTester $I)
+    {
+        $user = UserFactory::createOne(['email' => 'root@example.com',
+            'password' => 'admin',
+            'roles' => ['ROLE_ENTREPRISE'],
+            'firstname' => 'admin',
+            'lastname' => 'admin']);
+        $realUser = $user->object();
+
+        $I->amLoggedInAs($realUser);
+        $I->amOnPage('/stage');
+        $I->seeResponseCodeIsSuccessful();
+        $I->see('Créer', 'a');
+    }
 }
