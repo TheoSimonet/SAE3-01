@@ -12,6 +12,7 @@
 
 .right__top{
     padding: 15px 5px;
+    font-size: var(--fs-big);
     background-color: var(--primary);
     text-transform: uppercase;
     text-align: center;
@@ -28,7 +29,7 @@
 .right__center {
     padding: 15px;
     max-height: 95%;
-    max-width: 60vw;
+    max-width: 80vw;
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -47,6 +48,7 @@
     text-align: center;
     padding: 10px 0;
     display: flex;
+    font-size: var(--fs-little);
     justify-content: center;
     align-items: center;
     background-color: var(--primary);
