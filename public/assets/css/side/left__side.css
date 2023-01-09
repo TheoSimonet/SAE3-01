@@ -20,7 +20,9 @@
     grid-template-columns: 190px 40px;
     position: absolute;
     width: 230px;
+    max-width: 90vw;
     height: 100vh;
+    max-height: 100vh;
     font-size: 14px;
     background-color: var(--black);
     transform-origin: left;
