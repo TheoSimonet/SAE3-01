@@ -22,4 +22,11 @@ class IndexCest
         $I->seeResponseCodeIsSuccessful();
         $I->seeInTitle('Liste des alternances');
     }
+
+    public function redirectionWhenNotAuthenticated(ControllerTester $I)
+    {
+        $I->amOnPage('/alternance');
+        $I->seeResponseCodeIsSuccessful();
+        $I->canSeePageRedirectsTo('/alternance', '/login');
+    }
 }
