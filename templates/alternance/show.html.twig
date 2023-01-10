@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -16,16 +16,44 @@
         </p>
     </div>
     <div class="right__center">
-        <div class="projet__show__item">
-            <h2>{{ alternance.titre }}</h2>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == alternance.author.id %}
-                <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}"><i class='bx bxs-edit-alt'></i></a>
-                <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}"><i class='bx bxs-trash'></i></a>
-            {% endif %}
-            <p id="projet__author"><span class="important">Personne ayant publié l'alternance:</span> {{ alternance.author.firstname }} {{ alternance.author.lastname }}</p>
-            <p id="projet__desc"><span class="important">Description:</span> {{ alternance.description }}</p>
+        <div class="projet__show__space" id="alternance__space">
+            <div class="projet__show__item">
+
+                <div id="head">
+                    <p class="show__item__title">
+                        {{ alternance.titre }}
+                    </p>
+                </div>
+
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') and app.user.id == alternance.author.id %}
+                    <div id="actions">
+                        <a id="edit" href="{{ path('app_alternance_update', {id: alternance.id}) }}">
+                            <i class='bx bxs-edit-alt'></i>
+                        </a>
+                        <a id="delete" href="{{ path('app_alternance_delete', {id: alternance.id}) }}">
+                            <i class='bx bxs-trash'></i>
+                        </a>
+                    </div>
+                {% endif %}
+
+                <div class="projet__content">
+
+                    <p id="projet__author">
+                        <span class="important">
+                            Enseignant en charge du projet:
+                        </span>
+                        {{ alternance.author.firstname }} {{ alternance.author.lastname }}
+                    </p>
+
+                    <p id="projet__desc">
+                        <span class="important">
+                            Description:
+                        </span>
+                        {{ alternance.description }}
+                    </p>
+
+                </div>
+            </div>
         </div>
     </div>
 {% endblock %}
-
-
