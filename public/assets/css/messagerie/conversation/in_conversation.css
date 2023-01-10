@@ -50,7 +50,7 @@
 
 form[name="message"] {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 10px;
@@ -64,9 +64,9 @@ form[name="message"] {
     background-color: var(--white);
     border-radius: 5px;
     min-height: 10px;
-    max-height: 20px;
+    max-height: 100%;
     min-width: 100px;
-    max-width: 150px;
+    max-width: 100%;
 }
 
 #message_save {
@@ -96,6 +96,7 @@ form[name="message"] {
     padding: 0 5px;
     max-height: 90%;
     overflow-y: auto;
+    width: 100%;
 }
 
 .conv__center div:not(:last-child) {
@@ -157,4 +158,37 @@ form[name="message"] {
 
 #edit__conversation__button i {
     background-color: var(--black);
+}
+
+@media screen and (max-width: 250px) {
+    .return__close__space {
+        flex-direction: column;
+    }
+}
+
+@media screen and (min-width: 400px) {
+    form[name="message"] {
+        flex-direction: row;
+    }
+    #message_content {
+        width: 200px;
+    }
+}
+
+@media screen and (min-width: 600px) {
+    .conv__space {
+        width: 500px;
+    }
+    #message_content {
+        width: 300px;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .conv__space {
+        width: 550px;
+    }
+    #message_content {
+        width: 400px;
+    }
 }
