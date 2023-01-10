@@ -114,6 +114,18 @@ textarea {
     border-radius: 20px;
 }
 
+@keyframes red_pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--red);
+    }
+    100% {
+        color: var(--white);
+    }
+}
+
 @media screen and (min-width: 500px) {
     html {
         font-size: 14px;
