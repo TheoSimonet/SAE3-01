@@ -20,8 +20,8 @@
             <p class="projet__form__delete__message">Êtes-vous sûr de vouloir retirer cette candidature de vos choix ?</p>
             {{ form_start(form, { 'attr' : { 'class': 'projet__form' } }) }}
             <div class="buttons__space">
-                {{ form_row(form.save, { 'label': 'Oui', 'attr': {'class': 'retenir'} }) }}
                 {{ form_row(form.cancel, { 'label': 'Annuler', 'attr': {'class': 'cancel'} }) }}
+                {{ form_row(form.save, { 'label': 'Oui', 'attr': {'class': 'retenir'} }) }}
             </div>
             {{ form_end(form) }}
         </div>

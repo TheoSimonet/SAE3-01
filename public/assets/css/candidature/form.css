@@ -21,7 +21,7 @@ form[name="candidature"] .buttons {
     gap: 15px;
 }
 
-form[name="candidature"] input[type="file"]{
+form[name="candidature"] input[type="file"] {
     width: 100%;
 }
 
@@ -33,11 +33,11 @@ form[name="candidature"] input[type="file"]{
     font-size: var(--fs-normal);
 }
 
-.buttons button{
+.buttons button {
     background-color: var(--primary);
 }
 
-.buttons a{
+.buttons a {
     background-color: var(--red);
 }
 
@@ -63,31 +63,91 @@ form[name="candidature"] input[type="file"]{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-gap: 10px;
+    gap: 10px;
 }
 
 .retenir {
-    background-color: var(--primary);
-}
-
-.cancel {
     background-color: var(--red);
 }
 
-@keyframes red_pulse {
-    0% {
-        color: var(--white);
-    }
-    50% {
-        color: var(--red);
-    }
-    100% {
-        color: var(--white);
-    }
+.cancel {
+    background-color: var(--primary);
+}
+
+.projet__delete__box {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+.retenue__empty {
+    text-align: center;
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    color: var(--white);
+}
+
+.candidatures__list__title p {
+    text-align: center;
+    background-color: var(--primary);
+    color: var(--white);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+}
+
+.candidatures__list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+}
+
+.candidature__item {
+    background-color: var(--black);
+    color: var(--white);
+    padding: 15px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.show__more {
+    background-color: var(--primary);
+    padding: 5px 10px;
+    border-radius: var(--border-smooth);
+    font-size: var(--fs-normal);
+}
+
+.show__more a {
+    color: var(--white);
+}
+
+.number p {
+    display: flex;
+    justify-content: center;align-items: center;
+    height: 40px;
+    width: 40px;
+    padding: 10px;
+    border-radius: var(--border-smooth);
+    background-color: var(--primary);
 }
 
 @media screen and (min-width: 400px) {
     .buttons__space {
         flex-direction: row;
+    }
+}
+
+@media screen and (min-width: 700px) {
+    .candidature__item {
+        flex-direction: row;
+        gap: 10px;
     }
 }

@@ -16,8 +16,8 @@
         {{ form_start(form) }}
         {{ form_row(form.cvFilename) }}
         <div class="buttons">
-            {{ form_row(form.Valider) }}
             <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
+            {{ form_row(form.Valider) }}
         </div>
         {{ form_end(form) }}
     </div>
