@@ -63,4 +63,13 @@ class EventRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
+    public function orderedByDate(): array
+    {
+        return $this->createQueryBuilder('e')
+            ->orderBy('e.startTime', 'DESC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
 }

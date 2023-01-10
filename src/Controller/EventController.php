@@ -19,11 +19,17 @@ class EventController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $em = $doctrine->getManager();
-        $events = $em->getRepository(Event::class)->findAll();
+        $events = $em->getRepository(Event::class)->orderedByDate();
 
         return $this->render('event/index.html.twig', [
             'events' => $events,
         ]);
+    }
+    #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')")]
+    #[Route('/event/{id}', name: 'app_event_show', requirements: ['id' => '\d+'])]
+    public function show(Event $event): Response
+    {
+        return $this->render('event/show.html.twig', ['event' => $event]);
     }
 
     #[Security("is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT')")]
@@ -110,7 +116,7 @@ class EventController extends AbstractController
             }
 
             if ($form->getClickedButton() === $form->get('cancel')) {
-                return $this->redirectToRoute('app_event_show', [
+                return $this->redirectToRoute('app_event', [
                     'id' => $event->getId(),
                 ]);
             }
