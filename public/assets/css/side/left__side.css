@@ -109,17 +109,15 @@
 
 #hello__user {
     margin-bottom: 20px;
-    font-size: 16px;
+    font-size: var(--fs-medium);
 }
 
 #show__user__profile a {
+    font-size: var(--fs-very-little);
     color: var(--white);
-}
-
-#show__user__profile__link {
     background-color: var(--primary);
-    padding: 10px;
-    border-radius: 20px;
+    padding: 8px;
+    border-radius: var(--border-smooth);
 }
 
 /* END TOP */
@@ -151,7 +149,7 @@
 
 .nav__part__title {
     text-transform: uppercase;
-    font-size: 16px;
+    font-size: var(--fs-little);
     color: var(--primary);
     font-weight: var(--w-3);
     margin-bottom: 3px;
@@ -159,6 +157,10 @@
 
 .nav__part__list {
     margin-left: 10px;
+}
+
+.nav__part__list a, .nav__part__list i {
+    font-size: var(--fs-very-little);
 }
 
 /* END CENTER */
