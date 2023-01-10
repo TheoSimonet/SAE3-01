@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/form/form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/selection/form.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -13,9 +13,14 @@
         <p>Séléction du projet {{ projet.titre }}</p>
     </div>
     <div class="right__center">
-        {{ form_start(form) }}
-        {{ form_row(form.save, {'label': "Choisir ce projet"}) }}
-        <a href="{{ app.request.headers.get('referer') }}">Annuler</a>
-        {{ form_end(form) }}
+        <div class="choice__selection__box">
+            <p>Êtes vous sûr de vouloir sélectionner ce projet ?</p>
+            {{ form_start(form) }}
+            <div id="buttons">
+                <a id="cancel" href="{{ app.request.headers.get('referer') }}">Annuler</a>
+                {{ form_row(form.save, {'label': "Choisir ce projet", 'attr': {'class': 'save'}}) }}
+            </div>
+            {{ form_end(form) }}
+        </div>
     </div>
 {% endblock %}
