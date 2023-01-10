@@ -33,6 +33,13 @@
                             </div>
                     {% endif %}
                 </td>
+                <td>
+                    {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') or is_granted('ROLE_ETUDIANT') %}
+                        <div class="look">
+                            <a href="{{ path('app_event_show', {id: event.id}) }}">Voir plus</a>
+                        </div>
+                    {% endif %}
+                </td>
 
             </tr>
         {% endfor %}
