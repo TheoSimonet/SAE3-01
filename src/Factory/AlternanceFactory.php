@@ -43,7 +43,7 @@ final class AlternanceFactory extends ModelFactory
     {
         return [
             'author' => UserFactory::createOne(['roles' => ['ROLE_ENTREPRISE']]),
-            'description' => self::faker()->realTextBetween(100, 300),
+            'description' => self::faker()->realTextBetween(100, 255),
             'titre' => self::faker()->realText(100),
         ];
     }

@@ -44,7 +44,7 @@ final class ProjetTERFactory extends ModelFactory
         return [
             'author' => UserFactory::createOne(['roles' => ['ROLE_ENSEIGNANT']]),
             'date' => self::faker()->dateTime(),
-            'description' => self::faker()->realTextBetween(100, 300),
+            'description' => self::faker()->realTextBetween(100, 255),
             'libProjet' => 'Master 1',
             'titre' => self::faker()->realText(100),
         ];
