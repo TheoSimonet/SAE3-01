@@ -1,0 +1,40 @@
+#buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+#cancel, .save {
+    border: none;
+    color: var(--white);
+    padding: 5px 10px;
+    border-radius: var(--border-smooth);
+}
+
+#cancel {
+    background-color: var(--primary);
+}
+
+.save {
+    background-color: var(--red);
+}
+
+.choice__selection__box {
+    text-align: center;
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+}
+
+.choice__selection__box p {
+    margin-bottom: 10px;
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+@media screen and (min-width: 400px) {
+    #buttons {
+        flex-direction: row;
+    }
+}

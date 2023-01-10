@@ -54,7 +54,11 @@
                             <p class="author"><i class='bx bx-user'></i> {{ message.senderid.firstname }}</p>
                         {% endif %}
                         <p class="message">{{ message.content }}</p>
-                        <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+                        {% if "now"|date("d/m/Y",  "Europe/Paris") == message.sendat|date("d/m/Y",  "Europe/Paris") %}
+                            <p class="date">Aujourd'hui à {{ message.sendat|date("H:i",  "Europe/Paris") }}</p>
+                        {% else %}
+                            <p class="date">Envoyé le {{ message.sendat|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+                        {% endif %}
                     </div>
                 {% endfor %}
             </div>

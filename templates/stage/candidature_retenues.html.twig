@@ -4,29 +4,52 @@
     Candidatures retenues pour le stage {{ stage.titre }}
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/candidature/form.css') }}"/>
+{% endblock %}
+
 {% block body %}
+
     {% set retenues = 0 %}
+
     {% for candidature in stage.candidatures %}
         {% if candidature.retenue == 1 %}
             {% set retenues = retenues + 1 %}
         {% endif %}
     {% endfor %}
 
-    {% if retenues > 0 %}
-        <h1>Liste des candidatures retenues pour le stage {{ stage.titre }}</h1>
+    <div class="right__top">
+        <p>Candidatures retenues</p>
+        <p>Stage n°{{ stage.id }}</p>
+    </div>
+    <div class="right__center">
 
-        {% set x = 1 %}
-        {% for candidature in stage.candidatures %}
-            {% if candidature.retenue == 1 %}
-                <h2>Candidature n°{{ x }}</h2>
-                <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
-                <p>Faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
-                <a href="{{ path('app_stage_detail-candidature', {id: candidature.id}) }}">Voir plus</a>
-                {% set x = x + 1 %}
-            {% endif %}
-        {% endfor %}
-    {% else %}
-        <h1>Aucune candidature retenue pour le stage {{ stage.titre }}</h1>
-    {% endif %}
+        {% if stage.candidatures|length > 0 and retenues > 0 %}
+            <div class="candidatures__list__title">
+                <p>Liste des candidatures retenues pour le stage {{ stage.titre }}</p>
+            </div>
+            <div class="candidatures__list">
+                {% for candidature in stage.candidatures %}
+                    {% if candidature.retenue %}
+                        <div class="candidature__item">
+                            <div class="number">
+                                <p>{{ loop.index }}</p>
+                            </div>
+                            <div class="content">
+                                <p><span class="important">Auteur: </span>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastName }}</p>
+                                <p><span class="important">Date: </span>{{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}</p>
+                            </div>
+                            <div class="show__more">
+                                <a href="{{ path('app_stage_detail-candidature', {id: candidature.id}) }}">Voir plus</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="retenue__empty">Aucune candidature retenue pour le stage {{ stage.titre }}</p>
+        {% endif %}
+    </div>
+
 {% endblock %}
 
