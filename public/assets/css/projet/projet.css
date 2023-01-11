@@ -168,7 +168,6 @@
 #choice a:hover {
     background-color: var(--dark-primary);
     transition-duration: .3s;
-
 }
 
 .projet__show__item {
@@ -283,10 +282,16 @@
     background-color: var(--primary);
     padding: 5px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
 }
 
 #show_more a {
     color: var(--white);
+}
+
+#show_more:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #no_candidate {
@@ -307,7 +312,13 @@ height: 80vh;
     background-color: var(--black);
     padding: 10px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
+}
 
+.retenir__candidat:hover {
+    color: var(--white);
+    background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 #alternance__space {

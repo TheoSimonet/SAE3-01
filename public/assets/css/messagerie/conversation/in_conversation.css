@@ -45,6 +45,12 @@
     background-color: var(--black);
     padding: 5px 15px;
     border-radius: 20px;
+    transition-duration: .3s;
+}
+
+.return__button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 
@@ -75,6 +81,14 @@ form[name="message"] {
     color: var(--white);
     background-color: var(--black);
     border-radius: 20px;
+    transition-duration: .3s;
+}
+
+#message_save:hover {
+    border: 2px solid var(--white);
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .conv__close {
@@ -154,10 +168,22 @@ form[name="message"] {
 
 #close__conversation__button i {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+#close__conversation__button i:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 #edit__conversation__button i {
     background-color: var(--black);
+    transition-duration: .3s;
+}
+
+#edit__conversation__button i:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 @media screen and (max-width: 250px) {

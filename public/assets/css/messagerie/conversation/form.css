@@ -32,6 +32,13 @@ option {
     border-radius: 20px;
     margin: 0 5px;
     text-align: center;
+    transition-duration: .3s;
+}
+
+option:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .conversation__form__submit__box button {
@@ -40,6 +47,13 @@ option {
     border: none;
     padding: 5px 15px;
     border-radius: 20px;
+    transition-duration: .3s;
+}
+
+.conversation__form__submit__box button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 option:checked {
