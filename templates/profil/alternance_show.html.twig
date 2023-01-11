@@ -4,19 +4,35 @@
     Alternances proposées par {{ user.firstname }} {{ user.lastname }}
 {% endblock %}
 
-{% block body %}
-    {% if user.alternances|length == 0 %}
-        Vous n'avez pas encore proposé d'alternance.
-    {% else %}
-        <h1>Voici la liste des alternance que vous avez proposé, {{ user.firstname }}</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
+{% endblock %}
 
-        <ul>
-            {% for alternance in alternances %}
-                <li>
-                    Alternance n°{{ alternance.id }}, {{ alternance.titre }}
-                    <a href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Liste des alternances proposées
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="profil__title">
+            {% if user.alternances|length == 0 %}
+                    Vous n'avez pas encore proposé d'alternance.
+                </div>
+            {% else %}
+                    <h2>Voici la liste des alternance que vous avez proposé, <span class="important">{{ user.firstname }}</span></h2>
+                </div>
+                <ul>
+                    {% for alternance in alternances %}
+                        <div class="profil__content">
+                            <li>
+                                <span class="important">Alternance n°{{ alternance.id }} :</span> {{ alternance.titre }}
+                                <a class="see__more" href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
+                            </li>
+                        </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+    </div>
 {% endblock %}

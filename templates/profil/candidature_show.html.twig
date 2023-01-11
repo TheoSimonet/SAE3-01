@@ -4,23 +4,49 @@
     Candidatures de {{ user.firstname }} {{ user.lastname }}
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
+{% endblock %}
+
 {% block body %}
-    {% if user.candidatures|length == 0 %}
-        Vous n'avez pas encore effectué de candidature à un stage.
-    {% else %}
-        <h1>Voici la liste de vos candidatures, {{ user.firstname }}</h1>
+    <div class="right__top">
+        <p>
+            <i class='bx bx-user'></i>
+            Liste de vos candidatures
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="profil__title">
+            {% if user.candidatures|length == 0 %}
+                    Vous n'avez pas encore effectué de candidature à un stage.
+                </div>
+            {% else %}
+                <h2>Voici la liste de vos candidatures, <span class="important">{{ user.firstname }}</span></h2>
+                </div>
+                <ul>
 
-        <ul>
-            {% for candidature in candidatures %}
-                <li>
-                    Candidature au stage {{ candidature.idStage.titre }}, faite le {{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}.
+                    {% for candidature in candidatures %}
+                        <div class="profil__content">
+                            <li>
+                                Candidature au stage : <span class="important">{{ candidature.idStage.titre }}</span>, faite le <span class="important">{{ candidature.date|date("d/m/Y à H:i",  "Europe/Paris") }}</span>.
 
-                    Voici votre CV pour ce stage :
-                    <a href="{{ path('app_candidature_update', {id: candidature.id}) }}">Modifier</a>
-                    <a href="{{ path('app_candidature_delete', {id: candidature.id}) }}">Supprimer</a>
-                    <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+                                <div class="profil__candidature">
+                                    Voici votre CV pour ce stage :
+                                    <iframe src="{{ asset('uploads/cvs/' ~ candidature.cvFilename) }}" width="50%" height="500px"> </iframe>
+                                    <div id="actions">
+                                        <a id="edit" href="{{ path('app_candidature_update', {id: candidature.id}) }}">
+                                            <i class='bx bxs-edit-alt'></i>
+                                        </a>
+                                        <a id="delete" href="{{ path('app_candidature_delete', {id: candidature.id}) }}">
+                                            <i class='bx bxs-trash'></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </div>
+                    {% endfor %}
+
+                </ul>
+            {% endif %}
+    </div>
 {% endblock %}

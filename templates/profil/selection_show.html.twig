@@ -4,21 +4,39 @@
     Projets TER choisis par {{ user.firstname }} {{ user.lastname }}
 {% endblock %}
 
-{% block body %}
-    {% if user.selections|length == 0 %}
-        Vous n'avez pas encore choisi de projet TER.
-    {% else %}
-        <h1>Voici la liste des projets TER que vous avez choisi, {{ user.firstname }}</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
+{% endblock %}
 
-        <ul>
-            {% for selection in selections %}
-                <li>
-                    Selection n°{{ selection.id }},
-                    Vous avez choisi le projet suivant : {{ selection.idProjet.titre }}
-                    <a href="{{ path('app_projet_ter_show', {id: selection.idProjet.id}) }}">Voir plus</a>
-                    <a href="{{ path('app_selection_delete', {id: selection.id}) }}">Se désister</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bx-user'></i>
+            Liste des projets choisis
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="profil__title">
+            {% if user.selections|length == 0 %}
+                    Vous n'avez pas encore choisi de projet TER.
+                </div>
+            {% else %}
+                <h2>Voici la liste des projets TER que vous avez choisi, <span class="important">{{ user.firstname }}</span></h2>
+                </div>
+                <ul>
+                    {% for selection in selections %}
+                        <li>
+                            <div class="profil__content">
+                                <span class="important">Selection n°{{ selection.id }}</span>
+                                Vous avez choisi le projet suivant : <span class="important">{{ selection.idProjet.titre }}</span>
+                                <div class="profil__buttons">
+                                    <a class="see__more" href="{{ path('app_projet_ter_show', {id: selection.idProjet.id}) }}">Voir plus</a>
+                                    <a class="desist" href="{{ path('app_selection_delete', {id: selection.id}) }}">Se désister</a>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+    </div>
 {% endblock %}

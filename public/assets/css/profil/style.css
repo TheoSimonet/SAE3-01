@@ -1,0 +1,112 @@
+.profil__head {
+    background-color: var(--primary);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+}
+
+.profil__content {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+    margin-bottom: 10px;
+}
+
+.profil__title {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    justify-content: center;
+    color: var(--white);
+}
+
+.profil__form {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+}
+
+.profil__candidature {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+}
+
+.profil__buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+}
+
+.see__more {
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--white);
+    font-size: var(--fs-little);
+}
+
+.desist {
+    background-color: var(--red);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--white);
+    font-size: var(--fs-little);
+}
+
+#choice a {
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--white);
+    font-size: var(--fs-little);
+}
+
+#link {
+    color: var(--primary);
+}
+
+#item {
+    margin-top: 10px;
+}
+
+#edit, #delete {
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+#edit {
+    background-color: var(--primary);
+}
+
+#delete {
+    background-color: var(--red);
+}
+
+#actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}

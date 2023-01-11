@@ -4,19 +4,35 @@
     Projets TER proposés par {{ user.firstname }} {{ user.lastname }}
 {% endblock %}
 
-{% block body %}
-    {% if user.projetTERs|length == 0 %}
-        Vous n'avez pas encore proposé de projet TER.
-    {% else %}
-        <h1>Voici la liste des projets TER que vous avez proposé, {{ user.firstname }}</h1>
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
+{% endblock %}
 
-        <ul>
-            {% for projet in projets %}
-                <li>
-                    Projet n°{{ projet.id }}, {{ projet.titre }}
-                    <a href="{{ path('app_projet_ter_show', {id: projet.id}) }}">Voir plus</a>
-                </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% block body %}
+    <div class="right__top">
+        <p>
+            <i class='bx bxs-briefcase-alt-2'></i>
+            Liste des projets TER proposés
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="profil__title">
+            {% if user.projetTERs|length == 0 %}
+                    Vous n'avez pas encore proposé de projet TER.
+                </div>
+            {% else %}
+                <h2>Voici la liste des projets TER que vous avez proposé, <span class="important">{{ user.firstname }}</span></h2>
+                </div>
+                <ul>
+                    {% for projet in projets %}
+                    <div class="profil__content">
+                        <li>
+                            <span class="important">Projet n°{{ projet.id }} :</span> {{ projet.titre }}
+                            <a class="see__more" href="{{ path('app_projet_ter_show', {id: projet.id}) }}">Voir plus</a>
+                        </li>
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+    </div>
 {% endblock %}
