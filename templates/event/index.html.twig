@@ -2,6 +2,10 @@
 
 {% block title %}Liste des événements{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/event/event.css') }}"/>
+{% endblock %}
+
 {% block body %}
     <div class="right__top">
         <p>
@@ -10,7 +14,12 @@
         </p>
     </div>
     <div class="right__center">
-        <h1>Liste des événements</h1>
+        {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
+            <div class="create">
+                <a href="{{ path('app_event_create') }}">Créer</a>
+                <div class="search__icon"><i class='bx bx-plus'></i></div>
+            </div>
+        {% endif %}
         <table>
             <thead>
             <tr>
@@ -27,35 +36,16 @@
                     <td>{{ event.startTime|date('Y-m-d H:i:s') }}</td>
                     <td>{{ event.endTime|date('Y-m-d H:i:s') }}</td>
                     <td>{{ event.text|default('') }}</td>
-                    <td>{% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
-                            <div class="delete">
-                                <a href="{{ path('app_event_delete', {id: event.id}) }}" >Supprimer</a>
-                            </div>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
-                            <div class="update">
-                                <a href="{{ path('app_event_update', {id: event.id}) }}">Modifier</a>
-                            </div>
-                        {% endif %}
-                    </td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') or is_granted('ROLE_ETUDIANT') %}
-                            <div class="look">
-                                <a href="{{ path('app_event_show', {id: event.id}) }}">Voir plus</a>
+                            <div class="projet__item__actions">
+                                <a id="show" href="{{ path('app_event_show', {id: event.id}) }}"><i class='bx bxs-show'></i></a>
                             </div>
                         {% endif %}
                     </td>
-
                 </tr>
             {% endfor %}
             </tbody>
         </table>
-        {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
-            <div class="create">
-                <a href="{{ path('app_event_create') }}">Créer</a>
-            </div>
-        {% endif %}
     </div>
 {% endblock %}

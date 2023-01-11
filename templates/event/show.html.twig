@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/projet/projet.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -20,7 +20,14 @@
             <h2>{{ event.title }}</h2>
             <p id="projet__desc"><span class="important">Description:</span> {{ event.text }}</p>
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
-                <a id="delete" href="{{ path('app_event_delete', {id: event.id}) }}"><i class='bx bxs-trash'></i></a>
+                <div id="actions">
+                    <a id="edit" href="{{ path('app_event_update', {id: event.id}) }}">
+                        <i class='bx bxs-edit-alt'></i>
+                    </a>
+                    <a id="delete" href="{{ path('app_event_delete', {id: event.id}) }}">
+                        <i class='bx bxs-trash'></i>
+                    </a>
+                </div>
             {% endif %}
         </div>
     </div>

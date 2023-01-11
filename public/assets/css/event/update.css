@@ -11,19 +11,13 @@
     max-width: 100%;
 }
 
-form[name="projet_ter"], form[name="stage"], form[name="alternance"]{
-    background-color: var(--black);
-    padding: 20px;
-    width: 100%;
-    border-radius: var(--border-smooth);
-}
-
 .projet__form__label__title {
     color: var(--primary);
     text-transform: uppercase;
     font-weight: var(--w-2);
     margin-bottom: 4px;
     font-size: var(--fs-normal);
+    text-align: center;
 }
 
 .projet__form__submit__box {
@@ -115,17 +109,19 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"]{
     }
 }
 
-@media screen and (min-width: 500px) {
-    form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
-        width: 400px;
-    }
+.required{
+    color: var(--primary);
+    text-transform: uppercase;
+    font-weight: var(--w-2);
+    margin-bottom: 4px;
+    font-size: var(--fs-normal);
 }
 
-@media screen and (min-width: 600px) {
-    .projet__show__item {
-        max-width: 550px;
-    }
-    form[name="projet_ter"], form[name="stage"], form[name="alternance"] {
-        width: 500px;
-    }
+.right__center{
+    background-color: var(--black);
+    padding: 20px;
+    width: 50%;
+    border-radius: var(--border-smooth);
+    text-align: center;
+
 }
