@@ -1,0 +1,35 @@
+.profil__head {
+    background-color: var(--primary);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+}
+
+.profil__content {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: var(--white);
+}
+
+#choice a {
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--white);
+    font-size: var(--fs-little);
+}
+
+#link {
+    color: var(--primary);
+}

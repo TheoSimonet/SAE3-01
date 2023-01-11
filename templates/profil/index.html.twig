@@ -2,61 +2,84 @@
 
 {% block title %}Page de profil de {{ user.firstname }}{% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
+{% endblock %}
+
 {% block body %}
-    <h1>Bonjour {{ user.firstname }} !</h1>
+    <div class="right__top">
+        <p>
+            <i class='bx bx-user'></i>
+            Profil
+        </p>
+    </div>
+    <div class="right__center">
+        <div class="profil__head">
+            <h1>Bonjour {{ user.firstname }} !</h1>
 
-    {% if user.roles[0] == "ROLE_ADMIN" %}
-        <h2>Vous êtes connecté(e) en tant qu'administrateur.</h2>
-    {% endif %}
-    {% if user.roles[0] == "ROLE_USER" %}
-        <h2>Vous êtes connecté(e) en tant qu'utilisateur.</h2>
-        Attendez qu'un administrateur du site vous accorde un rôle.
-    {% endif %}
-    {% if user.roles[0] == "ROLE_ETUDIANT" %}
-        <h2>Vous êtes connecté(e) en tant qu'étudiant(e).</h2>
-    {% endif %}
-    {% if user.roles[0] == "ROLE_ENTREPRISE" %}
-        <h2>Vous êtes connecté(e) en tant que personnel d'une entreprise.</h2>
-    {% endif %}
-    {% if user.roles[0] == "ROLE_ENSEIGNANT" %}
-        <h2>Vous êtes connecté(e) en tant qu'enseignant(e).</h2>
-    {% endif %}
+            {% if user.roles[0] == "ROLE_ADMIN" %}
+                <h2>Vous êtes connecté(e) en tant qu'administrateur.</h2>
+            {% endif %}
+            {% if user.roles[0] == "ROLE_USER" %}
+                <h2>Vous êtes connecté(e) en tant qu'utilisateur.</h2>
+                Attendez qu'un administrateur du site vous accorde un rôle.
+            {% endif %}
+            {% if user.roles[0] == "ROLE_ETUDIANT" %}
+                <h2>Vous êtes connecté(e) en tant qu'étudiant(e).</h2>
+            {% endif %}
+            {% if user.roles[0] == "ROLE_ENTREPRISE" %}
+                <h2>Vous êtes connecté(e) en tant que personnel d'une entreprise.</h2>
+            {% endif %}
+            {% if user.roles[0] == "ROLE_ENSEIGNANT" %}
+                <h2>Vous êtes connecté(e) en tant qu'enseignant(e).</h2>
+            {% endif %}
+        </div>
 
-    <h2>Informations personnelles :</h2>
-    <a href="{{ path('app_profil_update') }}">Modifier</a>
-    <ul>
-        <li>
-            Nom : {{ user.firstname }}
-        </li>
-        <li>
-            Prenom : {{ user.lastname }}
-        </li>
-        <li>
-            Email : {{ user.email }}
-        </li>
-        <li>
-            Numéro de téléphone : {{ user.phone }}
-        </li>
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') %}
-        <li>
-            Candidatures : cliquez <a href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
-        </li>
-        <li>
-            Projets TER choisis : cliquez <a href="{{ path('app_profil_selections') }}">ici</a> pour voir les différents projets que vous avez choisi.
-        </li>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
-            <li>
-                Stages proposés : cliquez <a href="{{ path('app_profil_stages') }}">ici</a> pour voir les stages que vous avez proposé.
-            </li>
-            <li>
-                Alternances proposées : cliquez <a href="{{ path('app_profil_alternances') }}">ici</a> pour voir les alternances que vous avez proposé.
-            </li>
-        {% endif %}
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
-            <li>
-                Projets TER proposés : cliquez <a href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
-            </li>
-        {% endif %}
-    </ul>
+        <div class="profil__content">
+            <h2>Informations personnelles :</h2>
+            <div id="choice">
+                <a href="{{ path('app_profil_update') }}">Modifier</a>
+            </div>
+            <ul>
+                <li>
+                    <span class="important">Nom :</span>  {{ user.firstname }}
+                </li>
+                <li>
+                    <span class="important">Prenom :</span>  {{ user.lastname }}
+                </li>
+                <li>
+                    <span class="important">Email :</span>  {{ user.email }}
+                </li>
+                <li>
+                    <span class="important">Numéro de téléphone :</span>  {{ user.phone }}
+                </li>
+            </ul>
+        </div>
+
+        <div class="profil__content">
+            <ul>
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ETUDIANT') %}
+                <li>
+                    <span class="important">Candidatures :</span>  cliquez <a id="link" href="{{ path('app_profil_candidatures') }}">ici</a> pour voir vos candidatures aux différents stages proposés.
+                </li>
+                <li>
+                    <span class="important">Projets TER choisis :</span> cliquez <a id="link" href="{{ path('app_profil_selections') }}">ici</a> pour voir les différents projets que vous avez choisi.
+                </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
+                    <li>
+                        <span class="important">Stages proposés :</span> cliquez <a id="link" href="{{ path('app_profil_stages') }}">ici</a> pour voir les stages que vous avez proposé.
+                    </li>
+                    <li>
+                        <span class="important">Alternances proposées :</span> cliquez <a id="link" href="{{ path('app_profil_alternances') }}">ici</a> pour voir les alternances que vous avez proposé.
+                    </li>
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+                    <li>
+                        <span class="important">Projets TER proposés :</span> cliquez <a id="link" href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 {% endblock %}
