@@ -14,8 +14,6 @@
         </p>
     </div>
     <div class="right__center">
-        <h1>Liste des événements</h1>
-        <br>
         {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
             <div class="create">
                 <a href="{{ path('app_event_create') }}">Créer</a>

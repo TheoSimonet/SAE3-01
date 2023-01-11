@@ -303,9 +303,6 @@
 table{
     border-collapse : separate;
     border-spacing : 30px;
-}
-
-.right__center{
     background-color: var(--black);
     padding: 20px;
     width: 100%;
