@@ -11,21 +11,21 @@ use Zenstruck\Foundry\RepositoryProxy;
 /**
  * @extends ModelFactory<Event>
  *
- * @method        Event|Proxy create(array|callable $attributes = [])
- * @method static Event|Proxy createOne(array $attributes = [])
- * @method static Event|Proxy find(object|array|mixed $criteria)
- * @method static Event|Proxy findOrCreate(array $attributes)
- * @method static Event|Proxy first(string $sortedField = 'id')
- * @method static Event|Proxy last(string $sortedField = 'id')
- * @method static Event|Proxy random(array $attributes = [])
- * @method static Event|Proxy randomOrCreate(array $attributes = [])
+ * @method        Event|Proxy                     create(array|callable $attributes = [])
+ * @method static Event|Proxy                     createOne(array $attributes = [])
+ * @method static Event|Proxy                     find(object|array|mixed $criteria)
+ * @method static Event|Proxy                     findOrCreate(array $attributes)
+ * @method static Event|Proxy                     first(string $sortedField = 'id')
+ * @method static Event|Proxy                     last(string $sortedField = 'id')
+ * @method static Event|Proxy                     random(array $attributes = [])
+ * @method static Event|Proxy                     randomOrCreate(array $attributes = [])
  * @method static EventRepository|RepositoryProxy repository()
- * @method static Event[]|Proxy[] all()
- * @method static Event[]|Proxy[] createMany(int $number, array|callable $attributes = [])
- * @method static Event[]|Proxy[] createSequence(array|callable $sequence)
- * @method static Event[]|Proxy[] findBy(array $attributes)
- * @method static Event[]|Proxy[] randomRange(int $min, int $max, array $attributes = [])
- * @method static Event[]|Proxy[] randomSet(int $number, array $attributes = [])
+ * @method static Event[]|Proxy[]                 all()
+ * @method static Event[]|Proxy[]                 createMany(int $number, array|callable $attributes = [])
+ * @method static Event[]|Proxy[]                 createSequence(array|callable $sequence)
+ * @method static Event[]|Proxy[]                 findBy(array $attributes)
+ * @method static Event[]|Proxy[]                 randomRange(int $min, int $max, array $attributes = [])
+ * @method static Event[]|Proxy[]                 randomSet(int $number, array $attributes = [])
  */
 final class EventFactory extends ModelFactory
 {
@@ -46,11 +46,23 @@ final class EventFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
+        $titre = self::faker()->text(255);
+        $auteur = UserFactory::createOne(['roles' => ['ROLE_ENSEIGNANT']]);
+        $dateDeb = self::faker()->dateTime();
+        $dateFin = self::faker()->dateTime();
+        $dateFin2 = 0;
+        if ($dateDeb > $dateFin) {
+            $dateFin2 = $dateDeb;
+            $dateDeb = $dateFin;
+        } else {
+            $dateFin2 = $dateFin;
+        }
+
         return [
-            'endTime' => self::faker()->dateTime(),
-            'startTime' => self::faker()->dateTime(),
+            'endTime' => $dateFin2,
+            'startTime' => $dateDeb,
             'text' => self::faker()->text(),
-            'title' => self::faker()->text(255),
+            'title' => 'Cours de '.$titre.'('.$auteur.')',
         ];
     }
 
