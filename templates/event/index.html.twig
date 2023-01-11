@@ -27,19 +27,6 @@
                     <td>{{ event.startTime|date('Y-m-d H:i:s') }}</td>
                     <td>{{ event.endTime|date('Y-m-d H:i:s') }}</td>
                     <td>{{ event.text|default('') }}</td>
-                    <td>{% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
-                            <div class="delete">
-                                <a href="{{ path('app_event_delete', {id: event.id}) }}" >Supprimer</a>
-                            </div>
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') %}
-                            <div class="update">
-                                <a href="{{ path('app_event_update', {id: event.id}) }}">Modifier</a>
-                            </div>
-                        {% endif %}
-                    </td>
                     <td>
                         {% if is_granted('ROLE_ADMIN') or is_granted ('ROLE_ENSEIGNANT') or is_granted('ROLE_ETUDIANT') %}
                             <div class="look">
