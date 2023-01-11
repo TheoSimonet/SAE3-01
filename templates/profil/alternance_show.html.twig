@@ -24,14 +24,14 @@
                     <h2>Voici la liste des alternance que vous avez proposé, <span class="important">{{ user.firstname }}</span></h2>
                 </div>
                 <ul>
-                    <div class="profil__content">
                     {% for alternance in alternances %}
-                        <li>
-                            <span class="important">Alternance n°{{ alternance.id }} :</span> {{ alternance.titre }}
-                            <a class="see__more" href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
-                        </li>
+                        <div class="profil__content">
+                            <li>
+                                <span class="important">Alternance n°{{ alternance.id }} :</span> {{ alternance.titre }}
+                                <a class="see__more" href="{{ path('app_alternance_show', {id: alternance.id}) }}">Voir plus</a>
+                            </li>
+                        </div>
                     {% endfor %}
-                    </div>
                 </ul>
             {% endif %}
     </div>
