@@ -20,6 +20,7 @@
     align-items: center;
     gap: 20px;
     color: var(--white);
+    margin-bottom: 10px;
 }
 
 .profil__title {
@@ -27,7 +28,7 @@
     padding: 20px;
     border-radius: var(--border-smooth);
     display: flex;
-    text-align: center;
+    justify-content: center;
     color: var(--white);
 }
 
@@ -35,6 +36,15 @@
     background-color: var(--black);
     padding: 20px;
     border-radius: var(--border-smooth);
+}
+
+.profil__candidature {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
 }
 
 .see__more {
@@ -59,4 +69,29 @@
 
 #item {
     margin-top: 10px;
+}
+
+#edit, #delete {
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 50%;
+}
+
+#edit {
+    background-color: var(--primary);
+}
+
+#delete {
+    background-color: var(--red);
+}
+
+#actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
 }
