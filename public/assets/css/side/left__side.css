@@ -118,6 +118,12 @@
     background-color: var(--primary);
     padding: 8px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
+}
+
+#show__user__profile a:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
 }
 
 /* END TOP */

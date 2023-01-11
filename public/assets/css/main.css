@@ -4,10 +4,12 @@
 * {
     /** COULEURS **/
     --primary: #009cdf;
+    --dark-primary: #005271;
     --white: #ffffff;
     --light-gray: #cacaca;
     --black: #2e2e2e;
     --red: #f30000;
+    --dark-red: #800000;
     --green: #00ba0d;
 
     /** FONT **/

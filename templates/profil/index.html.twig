@@ -80,6 +80,9 @@
                         <span class="important">Projets TER proposés :</span> cliquez <a id="link" href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
                     </li>
                 {% endif %}
+                {% if is_granted('ROLE_USER') %}
+                    Aucune ressource n'est disponible.
+                {% endif %}
             </ul>
         </div>
     </div>

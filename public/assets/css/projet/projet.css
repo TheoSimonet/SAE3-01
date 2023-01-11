@@ -118,11 +118,23 @@
 }
 
 #show, #edit {
+    transition-duration: .3s;
     background-color: var(--primary);
 }
 
+#show:hover, #edit:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+}
+
 #delete {
+    transition-duration: .3s;
     background-color: var(--red);
+}
+
+#delete:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-red);
 }
 
 #actions {
@@ -150,6 +162,13 @@
     padding: 5px 10px;
     color: var(--white);
     font-size: var(--fs-little);
+    transition-duration: .3s;
+}
+
+#choice a:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+
 }
 
 .projet__show__item {
