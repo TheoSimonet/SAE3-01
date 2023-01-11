@@ -22,10 +22,27 @@
     color: var(--white);
 }
 
+.profil__title {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+    display: flex;
+    text-align: center;
+    color: var(--white);
+}
+
 .profil__form {
     background-color: var(--black);
     padding: 20px;
     border-radius: var(--border-smooth);
+}
+
+.see__more {
+    background-color: var(--primary);
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: var(--white);
+    font-size: var(--fs-little);
 }
 
 #choice a {
