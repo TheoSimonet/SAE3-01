@@ -22,6 +22,12 @@
     color: var(--white);
 }
 
+.profil__form {
+    background-color: var(--black);
+    padding: 20px;
+    border-radius: var(--border-smooth);
+}
+
 #choice a {
     background-color: var(--primary);
     border-radius: 20px;
@@ -32,4 +38,8 @@
 
 #link {
     color: var(--primary);
+}
+
+#item {
+    margin-top: 10px;
 }

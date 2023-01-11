@@ -2,6 +2,7 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('assets/css/projet/projet__form.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('assets/css/profil/style.css') }}"/>
 {% endblock %}
 
 {% block title %}
@@ -16,20 +17,22 @@
         </p>
     </div>
     <div class="right__center">
-        {{ form_start(form) }}
-        <p class="projet__form__label__title">Nom :</p>
-        {{ form_row(form.lastname, {'label': " "}) }}
-        <p class="projet__form__label__title">Prénom :</p>
-        {{ form_row(form.firstname, {'label': " "}) }}
-        <p class="projet__form__label__title">Email :</p>
-        {{ form_row(form.email, {'label': " "}) }}
-        <p class="projet__form__label__title">Numéro de téléphone :</p>
-        {{ form_row(form.phone, {'label': " "}) }}
-        <p class="projet__form__label__title">Mot de passe :</p>
-        {{ form_row(form.plainPassword, {'label': " "}) }}
-        <div class="projet__form__submit__box">
-            {{ form_row(form.save, {'label': "Enregister" }) }}
+        <div class="profil__form">
+            {{ form_start(form) }}
+            <p id="item" class="projet__form__label__title">Nom :</p>
+            {{ form_row(form.lastname, {'label': " "}) }}
+            <p id="item" class="projet__form__label__title">Prénom :</p>
+            {{ form_row(form.firstname, {'label': " "}) }}
+            <p id="item" class="projet__form__label__title">Email :</p>
+            {{ form_row(form.email, {'label': " "}) }}
+            <p id="item" class="projet__form__label__title">Numéro de téléphone :</p>
+            {{ form_row(form.phone, {'label': " "}) }}
+            <p id="item" class="projet__form__label__title">Mot de passe :</p>
+            {{ form_row(form.plainPassword, {'label': " "}) }}
+            <div class="projet__form__submit__box">
+                {{ form_row(form.save, {'label': "Enregister" }) }}
+            </div>
+            {{ form_end(form) }}
         </div>
-        {{ form_end(form) }}
     </div>
 {% endblock %}
