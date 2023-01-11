@@ -46,7 +46,7 @@ final class EventFactory extends ModelFactory
      */
     protected function getDefaults(): array
     {
-        $titre = self::faker()->text(255);
+        $titre = self::faker()->text(15);
         $auteur = UserFactory::createOne(['roles' => ['ROLE_ENSEIGNANT']]);
         $dateDeb = self::faker()->dateTime();
         $dateFin = self::faker()->dateTime();
@@ -62,7 +62,7 @@ final class EventFactory extends ModelFactory
             'endTime' => $dateFin2,
             'startTime' => $dateDeb,
             'text' => self::faker()->text(),
-            'title' => 'Cours de '.$titre.'('.$auteur.')',
+            'title' => 'Cours de '.$titre.'('.$auteur->getFirstname().')',
         ];
     }
 
