@@ -40,6 +40,13 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"]{
     background-color: var(--primary);
     border: none;
     color: var(--white);
+    transition-duration: .3s;
+}
+
+.projet__form__submit__box button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .projet__delete__box {
@@ -91,10 +98,24 @@ form[name="projet_ter"], form[name="stage"], form[name="alternance"]{
 
 .projet__form__cancel {
     background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 .projet__form__delete {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+.projet__form__cancel:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
+}
+
+.projet__form__delete:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 @keyframes red_pulse {

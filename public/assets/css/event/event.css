@@ -119,6 +119,12 @@
 
 #show, #edit {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+#show:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #delete {

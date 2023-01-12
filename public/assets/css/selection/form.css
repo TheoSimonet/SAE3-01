@@ -15,10 +15,23 @@
 
 #cancel {
     background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 .save {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+#cancel:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+}
+
+.save:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-red);
+    cursor: pointer;
 }
 
 .choice__selection__box {

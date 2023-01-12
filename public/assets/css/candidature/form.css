@@ -35,10 +35,23 @@ form[name="candidature"] input[type="file"] {
 
 .buttons button {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+.buttons button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .buttons a {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+.buttons a:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 .candidature__form {
@@ -68,10 +81,24 @@ form[name="candidature"] input[type="file"] {
 
 .retenir {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+.retenir:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .cancel {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+.cancel:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .projet__delete__box {
@@ -123,6 +150,12 @@ form[name="candidature"] input[type="file"] {
     padding: 5px 10px;
     border-radius: var(--border-smooth);
     font-size: var(--fs-normal);
+    transition-duration: .3s;
+}
+
+.show__more:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 .show__more a {

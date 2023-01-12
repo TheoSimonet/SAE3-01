@@ -77,10 +77,22 @@
 
 #edit {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+#edit:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
 }
 
 #delete {
+    transition-duration: .3s;
     background-color: var(--red);
+}
+
+#delete:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-red);
 }
 
 .faq__form__texarea__box {
@@ -121,6 +133,14 @@ form[name="faq"] {
     border: none;
     color: var(--white);
     font-size: var(--fs-normal);
+    transition-duration: .3s;
+
+}
+
+.faq__form__submit__box button:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+    cursor: pointer;
 }
 
 .faq__form__delete__message {
@@ -156,11 +176,25 @@ form[name="faq"] {
 }
 
 .faq__form__cancel {
+    transition-duration: .3s;
     background-color: var(--primary);
+}
+
+.faq__form__cancel:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+    cursor: pointer;
 }
 
 .faq__form__delete {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+.faq__form__delete:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-red);
+    cursor: pointer;
 }
 
 @keyframes red_pulse {

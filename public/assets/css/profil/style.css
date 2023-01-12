@@ -60,6 +60,12 @@
     padding: 5px 10px;
     color: var(--white);
     font-size: var(--fs-little);
+    transition-duration: .3s;
+}
+
+.see__more:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 .desist {
@@ -68,6 +74,12 @@
     padding: 5px 10px;
     color: var(--white);
     font-size: var(--fs-little);
+    transition-duration: .3s;
+}
+
+.desist:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 #choice a {
@@ -76,6 +88,12 @@
     padding: 5px 10px;
     color: var(--white);
     font-size: var(--fs-little);
+    transition-duration: .3s;
+}
+
+#choice a:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #link {
@@ -97,10 +115,22 @@
 
 #edit {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+#edit:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #delete {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+#delete:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 #actions {
@@ -109,4 +139,20 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+}
+
+.profil__waiting_admin {
+    animation: red_pulse infinite 2s ease-in-out;
+}
+
+@keyframes red_pulse {
+    0% {
+        color: var(--white);
+    }
+    50% {
+        color: var(--red);
+    }
+    100% {
+        color: var(--white);
+    }
 }

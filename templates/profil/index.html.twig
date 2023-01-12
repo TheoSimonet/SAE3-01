@@ -22,7 +22,9 @@
             {% endif %}
             {% if user.roles[0] == "ROLE_USER" %}
                 <h2>Vous êtes connecté(e) en tant qu'utilisateur.</h2>
-                Attendez qu'un administrateur du site vous accorde un rôle.
+                <div class="profil__waiting_admin">
+                    Attendez qu'un administrateur du site vous accorde un rôle.
+                </div>
             {% endif %}
             {% if user.roles[0] == "ROLE_ETUDIANT" %}
                 <h2>Vous êtes connecté(e) en tant qu'étudiant(e).</h2>
@@ -79,6 +81,9 @@
                     <li>
                         <span class="important">Projets TER proposés :</span> cliquez <a id="link" href="{{ path('app_profil_projets') }}">ici</a> pour voir les projets que vous avez proposé.
                     </li>
+                {% endif %}
+                {% if not is_granted('ROLE_ADMIN') and not is_granted('ROLE_ETUDIANT') and not is_granted('ROLE_ENTREPRISE') and not is_granted('ROLE_ENSEIGNANT') %}
+                    Aucune ressource n'est disponible.
                 {% endif %}
             </ul>
         </div>

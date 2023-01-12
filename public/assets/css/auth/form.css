@@ -70,6 +70,13 @@
     color: var(--white);
     padding: 5px 10px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
+}
+
+.auth__part button:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+    cursor: pointer;
 }
 
 .auth__errormsg {

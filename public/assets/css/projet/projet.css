@@ -118,11 +118,23 @@
 }
 
 #show, #edit {
+    transition-duration: .3s;
     background-color: var(--primary);
 }
 
+#show:hover, #edit:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-primary);
+}
+
 #delete {
+    transition-duration: .3s;
     background-color: var(--red);
+}
+
+#delete:hover {
+    transition-duration: .3s;
+    background-color: var(--dark-red);
 }
 
 #actions {
@@ -150,6 +162,12 @@
     padding: 5px 10px;
     color: var(--white);
     font-size: var(--fs-little);
+    transition-duration: .3s;
+}
+
+#choice a:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 .projet__show__item {
@@ -248,10 +266,16 @@
     background-color: var(--black);
     margin: 10px 0;
     font: var(--fs-normal);
+    transition-duration: .3s;
 }
 
 #candidature__retenues a {
     color: var(--white);
+}
+
+#candidature__retenues:hover  {
+    background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 #show_more {
@@ -264,10 +288,16 @@
     background-color: var(--primary);
     padding: 5px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
 }
 
 #show_more a {
     color: var(--white);
+}
+
+#show_more:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #no_candidate {
@@ -288,7 +318,13 @@ height: 80vh;
     background-color: var(--black);
     padding: 10px;
     border-radius: var(--border-smooth);
+    transition-duration: .3s;
+}
 
+.retenir__candidat:hover {
+    color: var(--white);
+    background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 #alternance__space {
