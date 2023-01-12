@@ -14,7 +14,7 @@
         <p>{{ candidature.idUser.firstname }} {{ candidature.idUser.lastname }}</p>
     </div>
     <div class="right__center">
-        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENSEIGNANT') %}
+        {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_ENTREPRISE') %}
             {% if candidature.retenue == 0 %}
                 <a class="retenir__candidat" href="{{ path('app_candidature_retenir', {id: candidature.id}) }}">Retenir le candidat</a>
             {% else %}

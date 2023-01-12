@@ -120,8 +120,7 @@
                     </ul>
                 </div>
             {% endif %}
-            {% if is_granted('ROLE_USER') or is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT')
-                or is_granted('ROLE_ENTREPRISE') %}
+            {% if is_granted('ROLE_USER') or is_granted('ROLE_ENTREPRISE') %}
                 <div class="nav__part">
                     <p class="nav__part__title">Communiquer</p>
                     <ul class="nav__part__list">
@@ -131,12 +130,14 @@
                                 Messagerie
                             </a>
                         </li>
-                        <li>
-                            <a href="{{ path('app_event') }}">
-                                <i class='bx bx-table'></i>
-                                Agenda
-                            </a>
-                        </li>
+                        {% if is_granted('ROLE_ETUDIANT') or is_granted('ROLE_ENSEIGNANT') %}
+                            <li>
+                                <a href="{{ path('app_event') }}">
+                                    <i class='bx bx-table'></i>
+                                    Agenda
+                                </a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
             {% endif %}
