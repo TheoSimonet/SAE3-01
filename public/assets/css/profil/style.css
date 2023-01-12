@@ -103,10 +103,22 @@
 
 #edit {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+#edit:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
 }
 
 #delete {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+#delete:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 #actions {

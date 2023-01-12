@@ -34,6 +34,13 @@
     background-color: var(--primary);
     border: none;
     color: var(--white);
+    transition-duration: .3s;
+}
+
+.projet__form__submit__box button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .projet__delete__box {

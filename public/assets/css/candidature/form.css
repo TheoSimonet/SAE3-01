@@ -35,10 +35,23 @@ form[name="candidature"] input[type="file"] {
 
 .buttons button {
     background-color: var(--primary);
+    transition-duration: .3s;
+}
+
+.buttons button:hover {
+    background-color: var(--dark-primary);
+    transition-duration: .3s;
+    cursor: pointer;
 }
 
 .buttons a {
     background-color: var(--red);
+    transition-duration: .3s;
+}
+
+.buttons a:hover {
+    background-color: var(--dark-red);
+    transition-duration: .3s;
 }
 
 .candidature__form {
