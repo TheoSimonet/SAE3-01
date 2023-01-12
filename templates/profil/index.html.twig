@@ -22,7 +22,9 @@
             {% endif %}
             {% if user.roles[0] == "ROLE_USER" %}
                 <h2>Vous êtes connecté(e) en tant qu'utilisateur.</h2>
-                Attendez qu'un administrateur du site vous accorde un rôle.
+                <div class="profil__waiting_admin">
+                    Attendez qu'un administrateur du site vous accorde un rôle.
+                </div>
             {% endif %}
             {% if user.roles[0] == "ROLE_ETUDIANT" %}
                 <h2>Vous êtes connecté(e) en tant qu'étudiant(e).</h2>

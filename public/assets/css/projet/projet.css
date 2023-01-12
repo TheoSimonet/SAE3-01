@@ -266,10 +266,16 @@
     background-color: var(--black);
     margin: 10px 0;
     font: var(--fs-normal);
+    transition-duration: .3s;
 }
 
 #candidature__retenues a {
     color: var(--white);
+}
+
+#candidature__retenues:hover  {
+    background-color: var(--primary);
+    transition-duration: .3s;
 }
 
 #show_more {
