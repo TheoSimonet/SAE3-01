@@ -13,21 +13,24 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[ApiResource]
-#[Get]
-#[Put]
-#[Patch]
+#[ApiResource(normalizationContext: ['groups' => ['get_User']])]
+#[Get(normalizationContext: ['groups' => ['get_User']])]
+#[Put(denormalizationContext: ['groups' => ['set_User']])]
+#[Patch(denormalizationContext: ['groups' => ['set_User']])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_User'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -37,15 +40,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['set_User'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 40)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Candidature::class, orphanRemoval: true)]
