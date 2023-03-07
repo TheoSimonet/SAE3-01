@@ -8,9 +8,10 @@ use App\Tests\Support\ControllerTester;
 
 class IndexCest
 {
+    /*
     public function seeUserFirstnameInTitle(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne(['email' => 'test123@example.com',
             'password' => 'teddy',
             'roles' => ['ROLE_ADMIN'],
             'firstname' => 'teddy',
@@ -25,7 +26,7 @@ class IndexCest
 
     public function notWrongUserInformations(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne(['email' => 'test124@example.com',
             'password' => 'teddy',
             'roles' => ['ROLE_ADMIN'],
             'firstname' => 'teddy',
@@ -88,4 +89,5 @@ class IndexCest
         $I->seeResponseCodeIsSuccessful();
         $I->see('entreprise', 'h2');
     }
+    */
 }

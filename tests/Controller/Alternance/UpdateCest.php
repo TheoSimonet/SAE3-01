@@ -11,7 +11,7 @@ class UpdateCest
 {
     public function authorCanUpdate(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',
@@ -28,13 +28,13 @@ class UpdateCest
 
     public function randomUserCannotUpdate(ControllerTester $I)
     {
-        $author = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $author = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',
             'lastname' => 'ping']);
 
-        $randomUser = UserFactory::createOne(['email' => 'teddy.pong@example.com',
+        $randomUser = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',
