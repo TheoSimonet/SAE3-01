@@ -1,4 +1,4 @@
-# Développement d’une application
+# Développement d’une application complexe
 
 [![forthebadge](http://forthebadge.com/images/badges/built-with-love.svg)](http://forthebadge.com)
 
@@ -12,6 +12,8 @@ Programmes/logiciels/ressources utilisés pour développer le projet :
 * [Visual Studio Code](https://code.visualstudio.com/) - Editeur de code
 * [PhpStorm](https://www.jetbrains.com/fr-fr/phpstorm/) - IDE PHP
 * [Trello](https://trello.com/invite/sae30116/ATTI592d3a6dc036482dcb2cc52221ac3cd33DC5A19D) - Outil de gestion de projet en ligne
+* [API Platform](https://api-platform.com/) - Framework web utilisé pour générer des API REST
+* [MS Planner](https://fr.wikipedia.org/wiki/Microsoft_Planner) - Application de planification
 
 ## Auteur(s) :
 * **MANIL Cyril** _alias_ [@mani0022](https://iut-info.univ-reims.fr/gitlab/mani0022)
