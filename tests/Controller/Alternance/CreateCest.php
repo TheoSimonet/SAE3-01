@@ -10,7 +10,7 @@ class CreateCest
 {
     public function companyCanCreate(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',
@@ -24,7 +24,7 @@ class CreateCest
 
     public function userCannotCreate(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ETUDIANT'],
             'firstname' => 'teddy',

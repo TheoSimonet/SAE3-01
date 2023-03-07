@@ -11,7 +11,7 @@ class ShowCest
 {
     public function containsInTitle(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',
@@ -28,7 +28,7 @@ class ShowCest
 
     public function containsWhenAuthor(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENTREPRISE'],
             'firstname' => 'teddy',

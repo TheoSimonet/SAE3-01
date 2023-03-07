@@ -11,7 +11,7 @@ class DeleteCest
 {
     public function authorCanDelete(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENSEIGNANT'],
             'firstname' => 'teddy',
@@ -28,13 +28,13 @@ class DeleteCest
 
     public function randomUserCannotDelete(ControllerTester $I)
     {
-        $author = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $author = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENSEIGNANT'],
             'firstname' => 'teddy',
             'lastname' => 'ping']);
 
-        $randomUser = UserFactory::createOne(['email' => 'teddy.pong@example.com',
+        $randomUser = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_ENSEIGNANT'],
             'firstname' => 'teddy',
