@@ -24,4 +24,14 @@ class UserDenormalizer implements ContextAwareDenormalizerInterface, Denormalize
         $this->passwordHasher = $passwordHasher;
         $this->security = $security;
     }
+
+    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    {
+        if (!isset($context[self::ALREADY_CALLED]) && User::class === $type) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
