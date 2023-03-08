@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
+use App\Controller\GetMeController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,7 +19,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
-#[ApiResource(normalizationContext: ['groups' => ['get_User']])]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/me',
+            controller: GetMeController::class,
+            openapiContext: [
+                'summary' => "Récupérer l'utilisateur courant",
+                'description' => "Permet de récupérer l'utilisateur courant ou de retourner une erreur si aucun utilisateur n'est connecté.",
+                'responses' => [
+                    '200' => ['description' => "Récupération de l'utilisateur courant : OK"],
+                    '401' => ['description' => "/!\ Pas d'utilisateur courant"],
+                ],
+            ],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            security: "is_granted('ROLE_USER')"
+        ),
+
+    ],
+    normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
 #[Put(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
 #[Patch(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
@@ -111,7 +132,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -119,7 +140,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
