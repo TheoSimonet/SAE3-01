@@ -16,6 +16,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
@@ -36,7 +37,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             security: "is_granted('ROLE_USER')"
         ),
-
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
@@ -66,14 +66,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 30)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 40)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 20)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[0-9]/')]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Candidature::class, orphanRemoval: true)]
@@ -132,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
@@ -140,7 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
