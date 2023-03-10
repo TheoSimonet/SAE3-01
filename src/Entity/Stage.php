@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
@@ -14,10 +15,10 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource(order: ['titre' => 'ASC'], )]
+#[ApiResource(normalizationContext: ['groups' => ['get_Stage', 'get_User']], order: ['titre' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
-#[Get(normalizationContext: ['groups' => ['get_Stage']])]
+#[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']])]
 #[GetCollection]
 #[ORM\Entity(repositoryClass: StageRepository::class)]
 class Stage
@@ -41,6 +42,7 @@ class Stage
 
     #[ORM\ManyToOne(inversedBy: 'stages')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Stage', 'get_User'])]
     private ?User $author = null;
 
     public function __construct()
