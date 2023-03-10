@@ -52,6 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -76,7 +77,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 20)]
     #[Groups(['get_User', 'set_User'])]
-    #[Assert\Regex('/^[0-9]/')]
+    #[Assert\Regex('/^[0-9]*$/')]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Candidature::class, orphanRemoval: true)]
