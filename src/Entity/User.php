@@ -19,7 +19,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[ApiResource(
     operations: [
         new GetCollection(
@@ -42,6 +41,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[Get(normalizationContext: ['groups' => ['get_User']])]
 #[Put(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
 #[Patch(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -77,7 +77,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 20)]
     #[Groups(['get_User', 'set_User'])]
-    #[Assert\Regex('/^[0-9]*$/')]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Candidature::class, orphanRemoval: true)]

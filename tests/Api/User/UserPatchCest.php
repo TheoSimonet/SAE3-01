@@ -134,10 +134,9 @@ class UserPatchCest
     protected function invalidDataLeadsToUnprocessableEntityProvider(): array
     {
         return [
-            ['property' => 'phone', 'value' => 'abcd'],
             ['property' => 'firstname', 'value' => '<&">'],
             ['property' => 'lastname', 'value' => '<&">'],
-            ['property' => 'mail', 'value' => 'badmail'],
+            ['property' => 'email', 'value' => 'badmail'],
         ];
     }
 }
