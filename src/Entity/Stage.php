@@ -9,14 +9,31 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateStageController;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource(normalizationContext: ['groups' => ['get_Stage', 'get_User']], order: ['titre' => 'ASC'], )]
+#[ApiResource(operations: [
+    new Post(
+        uriTemplate: '/stages',
+        controller: CreateStageController::class,
+        openapiContext: [
+            'summary' => "Création d'un stage",
+            'description' => "Permet la création d'un stage par un utilisateur enseignant.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_Stage']],
+        security: "is_granted('ROLE_ENTREPRISE')"
+    )], normalizationContext: ['groups' => ['get_Stage', 'get_User']], order: ['titre' => 'ASC']
+)]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']])]
