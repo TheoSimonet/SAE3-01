@@ -16,9 +16,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 #[ApiResource(
     operations: [
         new GetCollection(
@@ -36,12 +36,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             security: "is_granted('ROLE_USER')"
         ),
-
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
 #[Put(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
 #[Patch(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -52,6 +52,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 180, unique: true)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -66,10 +67,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 30)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 40)]
     #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 20)]
@@ -132,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
@@ -140,7 +143,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string)$this->email;
+        return (string) $this->email;
     }
 
     /**
