@@ -22,6 +22,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']])]
 #[GetCollection]
 #[Put(denormalizationContext: ['groups' => ['set_Stage']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
+#[Patch(denormalizationContext: ['groups' => ['set_Stage']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
 #[ORM\Entity(repositoryClass: StageRepository::class)]
 class Stage
 {
