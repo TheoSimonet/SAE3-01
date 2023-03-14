@@ -2,24 +2,26 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiSubresource;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use App\Repository\StageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ApiResource(normalizationContext: ['groups' => ['get_Stage', 'get_User']], order: ['titre' => 'ASC'])]
+#[ApiResource(normalizationContext: ['groups' => ['get_Stage', 'get_User']], order: ['titre' => 'ASC'], )]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']])]
 #[GetCollection]
+#[Put(denormalizationContext: ['groups' => ['set_Stage']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
 #[ORM\Entity(repositoryClass: StageRepository::class)]
 class Stage
 {
@@ -30,11 +32,11 @@ class Stage
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Stage'])]
+    #[Groups(['get_Stage', 'set_Stage'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Stage'])]
+    #[Groups(['get_Stage', 'set_Stage'])]
     private ?string $description = null;
 
     #[ORM\OneToMany(mappedBy: 'idStage', targetEntity: Candidature::class, orphanRemoval: true)]
