@@ -44,4 +44,30 @@ class StageGetCest
         $I->seeResponseIsJson();
         $I->seeResponseIsAnEntity(Stage::class, '/api/stages/1');
     }
+
+    public function anonymousUserCannotGetStageElement(ApiTester $I): void
+    {
+        $userData = [
+            'email' => 'user1@example.com',
+            'firstname' => 'firstname1',
+            'lastname' => 'lastname1',
+            'roles' => ['ROLE_USER'],
+        ];
+        $user = UserFactory::createOne($userData);
+
+        $connected = $user->object();
+
+        $I->amLoggedInAs($connected);
+
+        $stageData = [
+            'titre' => 'Stage en développement web',
+            'description' => 'A la recherche d\'un stagiaire en tant que développeur web',
+        ];
+        StageFactory::createOne($stageData);
+
+        $I->sendGet('/api/stages/1');
+
+        // 3. 'Assert'
+        $I->seeResponseCodeIs(403);
+    }
 }
