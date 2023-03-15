@@ -2,37 +2,55 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ProjetTERRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 
 #[ORM\Entity(repositoryClass: ProjetTERRepository::class)]
+#[ApiResource(normalizationContext: ['groups' => ['get_ProjetTER', 'get_User']], order: ['date' => 'DESC'])]
+#[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
+#[Get(normalizationContext: ['groups' => ['get_ProjetTER', 'get_User']])]
+#[GetCollection]
 class ProjetTER
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_ProjetTER'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_ProjetTER'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_ProjetTER'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'projetTERs')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_ProjetTER', 'get_User'])]
     private ?User $author = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['get_ProjetTER'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_ProjetTER'])]
     private ?string $libProjet = null;
 
     #[ORM\OneToMany(mappedBy: 'idProjet', targetEntity: Selection::class, orphanRemoval: true)]
