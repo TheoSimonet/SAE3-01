@@ -6,10 +6,14 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateProjetTERController;
+use App\Controller\DeleteProjetTERController;
 use App\Controller\UpdateProjetTERController;
 use App\Repository\ProjetTERRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -48,6 +52,33 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
             ],
         ],
         denormalizationContext: ['groups' => ['set_ProjetTER']],
+        security: "is_granted('ROLE_ENSEIGNANT')"
+    ),
+    new Post(
+        uriTemplate: '/projet_t_e_rs',
+        controller: CreateProjetTERController::class,
+        openapiContext: [
+            'summary' => "Création d'un projet TER",
+            'description' => "Permet la création d'un projet TER par un utilisateur enseignant.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_ProjetTER']],
+        security: "is_granted('ROLE_ENSEIGNANT')"
+    ),
+    new Delete(
+        uriTemplate: '/projet_t_e_rs/{id}',
+        controller: DeleteProjetTERController::class,
+        openapiContext: [
+            'summary' => "Suppression d'un projet TER",
+            'description' => "Permet la suppression d'un projet TER par son auteur.",
+            'responses' => [
+                '204' => ['description' => 'Ressource supprimée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être l'auteur du projet TER)"],
+            ],
+        ],
         security: "is_granted('ROLE_ENSEIGNANT')"
     ),
 ], normalizationContext: ['groups' => ['get_ProjetTER', 'get_User']], order: ['date' => 'DESC'])]

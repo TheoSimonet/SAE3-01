@@ -25,10 +25,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
         controller: CreateAlternanceController::class,
         openapiContext: [
             'summary' => "Création d'une alternance",
-            'description' => "Permet la création d'une alternance par un utilisateur enseignant.",
+            'description' => "Permet la création d'une alternance par un utilisateur membre d'une entreprise.",
             'responses' => [
                 '201' => ['description' => 'Ressource crée'],
-                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être membre d'une entreprise)"],
             ],
         ],
         denormalizationContext: ['groups' => ['set_Alternance']],
