@@ -6,12 +6,14 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\CreateAlternanceController;
+use App\Controller\DeleteAlternanceController;
 use App\Repository\AlternanceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -30,6 +32,19 @@ use Symfony\Component\Serializer\Annotation\Groups;
             ],
         ],
         denormalizationContext: ['groups' => ['set_Alternance']],
+        security: "is_granted('ROLE_ENTREPRISE')"
+    ),
+    new Delete(
+        uriTemplate: '/alternances/{id}',
+        controller: DeleteAlternanceController::class,
+        openapiContext: [
+            'summary' => "Suppression d'une alternance",
+            'description' => "Permet la suppression d'une alternance par son auteur.",
+            'responses' => [
+                '204' => ['description' => 'Ressource supprimée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être l'auteur du stage)"],
+            ],
+        ],
         security: "is_granted('ROLE_ENTREPRISE')"
     )], normalizationContext: ['groups' => ['get_Alternance', 'get_User']], order: ['titre' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
