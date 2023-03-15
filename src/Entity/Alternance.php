@@ -9,13 +9,29 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateAlternanceController;
 use App\Repository\AlternanceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: AlternanceRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['get_Alternance', 'get_User']], order: ['titre' => 'ASC'])]
+#[ApiResource(operations: [
+    new Post(
+        uriTemplate: '/alternances',
+        controller: CreateAlternanceController::class,
+        openapiContext: [
+            'summary' => "Création d'une alternance",
+            'description' => "Permet la création d'une alternance par un utilisateur enseignant.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_Alternance']],
+        security: "is_granted('ROLE_ENTREPRISE')"
+    )], normalizationContext: ['groups' => ['get_Alternance', 'get_User']], order: ['titre' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Alternance', 'get_User']])]

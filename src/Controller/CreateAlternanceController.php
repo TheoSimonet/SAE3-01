@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\Stage;
+use App\Entity\Alternance;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,8 +21,8 @@ class CreateAlternanceController extends AbstractController
 
     public function __invoke(Request $request, ManagerRegistry $doctrine): Response
     {
-        $stage = new Stage();
-        $stage->setAuthor($this->security->getUser());
+        $alternance = new Alternance();
+        $alternance->setAuthor($this->security->getUser());
 
         if (!$this->security->isGranted('ROLE_ENTREPRISE')) {
             throw new AccessDeniedException();
@@ -30,14 +30,14 @@ class CreateAlternanceController extends AbstractController
 
         $data = json_decode($request->getContent(), true);
 
-        $stage->setTitre($data['titre']);
-        $stage->setDescription($data['description']);
+        $alternance->setTitre($data['titre']);
+        $alternance->setDescription($data['description']);
 
         $em = $doctrine->getManager();
-        $em->persist($stage);
+        $em->persist($alternance);
         $em->flush();
 
-        return new Response(json_encode($stage), Response::HTTP_CREATED, [
+        return new Response(json_encode($alternance), Response::HTTP_CREATED, [
             'Content-Type' => 'application/json',
         ]);
     }
