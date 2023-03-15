@@ -17,14 +17,19 @@ class StageGetCest
         ];
     }
 
-    public function anonymousUserGetStageElement(ApiTester $I): void
+    public function studentUserGetStageElement(ApiTester $I): void
     {
         $userData = [
             'email' => 'user1@example.com',
             'firstname' => 'firstname1',
             'lastname' => 'lastname1',
+            'roles' => ['ROLE_ETUDIANT'],
         ];
-        UserFactory::createOne($userData);
+        $user = UserFactory::createOne($userData);
+
+        $connected = $user->object();
+
+        $I->amLoggedInAs($connected);
 
         $stageData = [
             'titre' => 'Stage en développement web',

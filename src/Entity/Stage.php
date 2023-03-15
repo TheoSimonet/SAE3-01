@@ -51,7 +51,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 )]
 #[ApiFilter(OrderFilter::class, properties: ['titre', 'description'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
-#[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']])]
+#[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']], security: "is_granted('ROLE_ENTREPRISE') || is_granted('ROLE_ETUDIANT')")]
 #[GetCollection]
 #[Put(denormalizationContext: ['groups' => ['set_Stage']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
 #[Patch(denormalizationContext: ['groups' => ['set_Stage']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
