@@ -32,4 +32,29 @@ class StageDeleteCest
 
         $I->seeResponseCodeIs(403);
     }
+
+    public function companyMemberUserForbiddenToDeleteOtherStage(ApiTester $I): void
+    {
+        $userData = [
+            'email' => 'user1@example.com',
+            'firstname' => 'firstname1',
+            'lastname' => 'lastname1',
+            'roles' => ['ROLE_ENTREPRISE'],
+        ];
+        $user = UserFactory::createOne($userData);
+
+        $connected = $user->object();
+
+        $I->amLoggedInAs($connected);
+
+        $stageData = [
+            'titre' => 'Stage en développement web',
+            'description' => 'A la recherche d\'un stagiaire en tant que développeur web',
+        ];
+        StageFactory::createOne($stageData);
+
+        $I->sendDelete('/api/stages/1');
+
+        $I->seeResponseCodeIs(403);
+    }
 }
