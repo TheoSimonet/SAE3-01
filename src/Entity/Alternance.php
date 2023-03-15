@@ -8,6 +8,8 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
 use App\Repository\AlternanceRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -18,6 +20,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiFilter(SearchFilter::class, properties: ['titre' => 'partial', 'description' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Alternance', 'get_User']])]
 #[GetCollection]
+#[Put(denormalizationContext: ['groups' => ['set_Alternance']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
+#[Patch(denormalizationContext: ['groups' => ['set_Alternance']], security: "is_granted('ROLE_ENTREPRISE') && object.getAuthor() == user")]
 class Alternance
 {
     #[ORM\Id]
@@ -27,11 +31,11 @@ class Alternance
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Alternance'])]
+    #[Groups(['get_Alternance', 'set_Alternance'])]
     private ?string $titre = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Alternance'])]
+    #[Groups(['get_Alternance', 'set_Alternance'])]
     private ?string $description = null;
 
     #[ORM\ManyToOne(inversedBy: 'alternances')]
