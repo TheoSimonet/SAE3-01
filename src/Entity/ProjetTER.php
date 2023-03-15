@@ -9,7 +9,9 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateProjetTERController;
 use App\Controller\UpdateProjetTERController;
 use App\Repository\ProjetTERRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -45,6 +47,20 @@ use Symfony\Component\Validator\Mapping\ClassMetadata;
             'responses' => [
                 '200' => ['description' => 'Ressource modifiée'],
                 '403' => ['description' => "Vous n'êtes pas autorisé à modifier cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_ProjetTER']],
+        security: "is_granted('ROLE_ENSEIGNANT')"
+    ),
+    new Post(
+        uriTemplate: '/projet_t_e_rs',
+        controller: CreateProjetTERController::class,
+        openapiContext: [
+            'summary' => "Création d'un projet TER",
+            'description' => "Permet la création d'un projet TER par un utilisateur enseignant.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
             ],
         ],
         denormalizationContext: ['groups' => ['set_ProjetTER']],
