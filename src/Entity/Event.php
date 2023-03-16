@@ -24,7 +24,7 @@ use ApiPlatform\Metadata\Put;
 #[Get(normalizationContext: ['groups' => ['get_Event', 'get_User']])]
 #[GetCollection]
 #[Put(denormalizationContext: ['groups' => ['set_Event']], security: "is_granted('ROLE_ENSEIGNANT')")]
-
+#[Patch(denormalizationContext: ['groups' => ['set_Event']], security: "is_granted('ROLE_ENSEIGNANT')")]
 class Event
 {
     #[ORM\Id]
