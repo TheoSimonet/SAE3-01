@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
+
 
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
@@ -20,6 +23,7 @@ use ApiPlatform\Metadata\GetCollection;
 #[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'text' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Event', 'get_User']])]
 #[GetCollection]
+#[Put(denormalizationContext: ['groups' => ['set_Event']], security: "is_granted('ROLE_ENSEIGNANT')")]
 
 class Event
 {
@@ -30,19 +34,19 @@ class Event
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['get_Event'])]
+    #[Groups(['get_Event', 'set_Event'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['get_Event'])]
+    #[Groups(['get_Event', 'set_Event'])]
     private ?\DateTimeInterface $startTime = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    #[Groups(['get_Event'])]
+    #[Groups(['get_Event', 'set_Event'])]
     private ?\DateTimeInterface $endTime = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['get_Event'])]
+    #[Groups(['get_Event', 'set_Event'])]
     private ?string $text = null;
 
     public function getId(): ?int
