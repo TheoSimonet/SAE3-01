@@ -6,6 +6,12 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Post;
+use App\Controller\CreateAlternanceController;
+use App\Controller\CreateEventController;
+use App\Controller\DeleteAlternanceController;
+use App\Controller\DeleteEventController;
 use App\Repository\EventRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,8 +20,6 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
-use ApiPlatform\Metadata\Post;
-use App\Controller\CreateEventController;
 
 
 
@@ -34,8 +38,20 @@ use App\Controller\CreateEventController;
         ],
         denormalizationContext: ['groups' => ['set_Event']],
         security: "is_granted('ROLE_ENSEIGNANT')"
+    ),
+    new Delete(
+        uriTemplate: '/event/{id}',
+        controller: DeleteEventController::class,
+        openapiContext: [
+            'summary' => "Suppression d'un event",
+            'description' => "Permet la suppression d'un event par un enseignant.",
+            'responses' => [
+                '204' => ['description' => 'Ressource supprimée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        security: "is_granted('ROLE_ENSEIGNANT')"
     )], normalizationContext: ['groups' => ['get_Event', 'get_User']], order: ['title' => 'ASC'])]
-
 #[ApiFilter(OrderFilter::class, properties: ['title', 'text'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'text' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Event', 'get_User']])]
