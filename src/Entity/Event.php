@@ -14,11 +14,28 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use App\Controller\CreateEventController;
 
 
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['get_Event', 'get_User']], order: ['title' => 'ASC'])]
+#[ApiResource(operations: [
+    new Post(
+        uriTemplate: '/event',
+        controller: CreateEventController::class,
+        openapiContext: [
+            'summary' => "Création d'un event",
+            'description' => "Permet la création d'un event par un utilisateur enseignant.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_Event']],
+        security: "is_granted('ROLE_ENSEIGNANT')"
+    )], normalizationContext: ['groups' => ['get_Event', 'get_User']], order: ['title' => 'ASC'])]
+
 #[ApiFilter(OrderFilter::class, properties: ['title', 'text'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'text' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Event', 'get_User']])]
