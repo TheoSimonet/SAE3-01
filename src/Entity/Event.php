@@ -12,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ApiResource(normalizationContext: ['groups' => ['get_Event', 'get_User']], order: ['title' => 'ASC'])]
+#[ApiFilter(OrderFilter::class, properties: ['title', 'text'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ['title' => 'partial', 'text' => 'partial'])]
 class Event
 {
     #[ORM\Id]
