@@ -4,8 +4,15 @@ namespace App\Entity;
 
 use App\Repository\FaqRepository;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
+#[ApiResource(normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['title' => 'ASC'])]
+
 class Faq
 {
     #[ORM\Id]
