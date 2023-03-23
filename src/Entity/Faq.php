@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Controller\CreateFaqController;
+use App\Controller\DeleteFaqController;
 use App\Repository\FaqRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -15,6 +16,9 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Delete;
+
+
 
 
 
@@ -26,17 +30,29 @@ use ApiPlatform\Metadata\Post;
         uriTemplate: '/faqs',
         controller: CreateFaqController::class,
         openapiContext: [
-            'summary' => "Création d'une faq",
-            'description' => "Permet la création d'une faq par un utilisateur enseignant ou administrateur.",
+            'summary' => "Création d'un event",
+            'description' => "Permet la création d'un event par un utilisateur enseignant.",
             'responses' => [
                 '201' => ['description' => 'Ressource crée'],
-                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant ou administrateur)"],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant)"],
             ],
         ],
         denormalizationContext: ['groups' => ['set_Faq']],
-        security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN)"
+        security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN')"
+    ),
+    new Delete(
+        uriTemplate: '/faqs/{id}',
+        controller: DeleteFaqController::class,
+        openapiContext: [
+            'summary' => "Suppression d'un event",
+            'description' => "Permet la suppression d'un event par un enseignant.",
+            'responses' => [
+                '204' => ['description' => 'Ressource supprimée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être enseignant)"],
+            ],
+        ],
+        security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN')"
     )], normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['question' => 'ASC'])]
-
 #[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Faq']])]

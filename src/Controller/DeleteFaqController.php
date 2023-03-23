@@ -21,7 +21,7 @@ class DeleteFaqController extends AbstractController
 
     public function __invoke(Faq $faq, ManagerRegistry $doctrine): Response
     {
-        if (!$this->security->isGranted('ROLE_ENSEIGNANT') || !$this->security->isGranted('ROLE_ADMIN')) {
+        if (!$this->security->isGranted('ROLE_ADMIN')) {
             throw new AccessDeniedException();
         }
 

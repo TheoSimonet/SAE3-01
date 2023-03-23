@@ -24,7 +24,7 @@ class CreateFaqController extends AbstractController
     {
         $faq = new Faq();
 
-        if (!$this->security->isGranted('ROLE_ENSEIGNANT') || !$this->security->isGranted('ROLE_ADMIN')) {
+        if (!$this->security->isGranted('ROLE_ENSEIGNANT') && $this->security->isGranted('ROLE_ENSEIGNANT') ) {
             throw new AccessDeniedException();
         }
 
