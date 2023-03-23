@@ -23,7 +23,7 @@ use ApiPlatform\Metadata\Put;
 #[Get(normalizationContext: ['groups' => ['get_Faq']])]
 #[GetCollection]
 #[Put(denormalizationContext: ['groups' => ['set_Faq']], security: "is_granted('ROLE_ADMIN') || is_granted('ROLE_ENSEIGNANT')")]
-
+#[Patch(denormalizationContext: ['groups' => ['set_Faq']], security: "is_granted('ROLE_ADMIN') || is_granted('ROLE_ENSEIGNANT')")]
 
 class Faq
 {
