@@ -8,12 +8,17 @@ use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
 use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
 #[ApiResource(normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['title' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
+#[Get(normalizationContext: ['groups' => ['get_Faq']])]
+#[GetCollection]
 
 
 class Faq
@@ -21,12 +26,15 @@ class Faq
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Faq'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['get_Faq'])]
     private ?string $question = null;
 
     #[ORM\Column(length: 500)]
+    #[Groups(['get_Faq'])]
     private ?string $reponse = null;
 
     public function getId(): ?int
