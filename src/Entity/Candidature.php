@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\CandidatureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
-#[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']],
+#[Get(normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']],
     security: "(is_granted('ROLE_ENTREPRISE') && object.getIdStage().getAuthor() == user)
                 || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
 class Candidature
@@ -16,23 +18,29 @@ class Candidature
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_Candidature'])]
     private ?int $id = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Candidature', 'get_Stage'])]
     private ?Stage $idStage = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['get_Candidature', 'get_User'])]
     private ?User $idUser = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['get_Candidature'])]
     private ?string $cvFilename = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Groups(['get_Candidature'])]
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column]
+    #[Groups(['get_Candidature'])]
     private ?bool $retenue = null;
 
     public function getId(): ?int
