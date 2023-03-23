@@ -11,14 +11,18 @@ use ApiPlatform\Metadata\ApiResource;
 use Symfony\Component\Serializer\Annotation\Groups;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Put;
+
 
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['title' => 'ASC'])]
+#[ApiResource(normalizationContext: ['groups' => ['get_Faq']], order: ['title' => 'ASC'])]
 #[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Faq']])]
 #[GetCollection]
+#[Put(denormalizationContext: ['groups' => ['set_Faq']], security: "is_granted('ROLE_ADMIN') || is_granted('ROLE_ENSEIGNANT')")]
 
 
 class Faq
@@ -26,15 +30,15 @@ class Faq
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['get_Faq'])]
+    #[Groups(['get_Faq', 'set_Faq'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 500)]
-    #[Groups(['get_Faq'])]
+    #[Groups(['get_Faq', 'set_Faq'])]
     private ?string $question = null;
 
     #[ORM\Column(length: 500)]
-    #[Groups(['get_Faq'])]
+    #[Groups(['get_Faq', 'set_Faq'])]
     private ?string $reponse = null;
 
     public function getId(): ?int
