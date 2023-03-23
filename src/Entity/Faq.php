@@ -12,6 +12,9 @@ use ApiPlatform\Metadata\ApiResource;
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
 #[ApiResource(normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['title' => 'ASC'])]
+#[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
+#[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
+
 
 class Faq
 {
