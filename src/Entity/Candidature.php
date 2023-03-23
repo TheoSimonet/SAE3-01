@@ -2,11 +2,15 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\Get;
 use App\Repository\CandidatureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
+#[Get(normalizationContext: ['groups' => ['get_Stage', 'get_User']],
+    security: "(is_granted('ROLE_ENTREPRISE') && object.getIdStage().getAuthor() == user)
+                || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
 class Candidature
 {
     #[ORM\Id]
