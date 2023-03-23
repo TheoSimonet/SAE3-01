@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Controller\CreateFaqController;
 use App\Repository\FaqRepository;
 use Doctrine\ORM\Mapping as ORM;
 use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
@@ -14,7 +15,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Post;
-use App\Controller\CreateEventController;
+
 
 
 
@@ -23,7 +24,7 @@ use App\Controller\CreateEventController;
 #[ApiResource(operations: [
     new Post(
         uriTemplate: '/faqs',
-        controller: CreateEventController::class,
+        controller: CreateFaqController::class,
         openapiContext: [
             'summary' => "Création d'une faq",
             'description' => "Permet la création d'une faq par un utilisateur enseignant ou administrateur.",
@@ -34,7 +35,7 @@ use App\Controller\CreateEventController;
         ],
         denormalizationContext: ['groups' => ['set_Faq']],
         security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN)"
-    )], normalizationContext: ['groups' => ['get_Faq', 'get_Faq']], order: ['question' => 'ASC'])]
+    )], normalizationContext: ['groups' => ['get_Faq', 'get_User']], order: ['question' => 'ASC'])]
 
 #[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
