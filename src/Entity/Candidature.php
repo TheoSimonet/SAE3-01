@@ -2,17 +2,33 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\GetCandidatureCollectionController;
 use App\Repository\CandidatureRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
+#[ApiResource(operations: [
+    new GetCollection(
+        uriTemplate: '/candidatures',
+        controller: GetCandidatureCollectionController::class,
+        openapiContext: [
+            'summary' => "Récupération des candidatures créées par l'utilisateur connecté",
+            'description' => "Permet la récupération des candidatures créées par l'utilisateur connecté.",
+            'responses' => [
+                '200' => ['description' => 'Candidature(s) trouvée(s)'],
+                '401' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette candidature)"],
+                '403' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette candidature)"],
+            ],
+        ],
+        normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']]
+    )])]
 #[Get(normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']],
-    security: "(is_granted('ROLE_ENTREPRISE') && object.getIdStage().getAuthor() == user)
-                || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
+    security: "(is_granted('ROLE_ENTREPRISE') && object.getIdStage().getAuthor() == user) || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
 class Candidature
 {
     #[ORM\Id]
