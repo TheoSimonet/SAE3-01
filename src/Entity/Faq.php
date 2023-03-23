@@ -13,11 +13,29 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Post;
+use App\Controller\CreateEventController;
+
 
 
 
 #[ORM\Entity(repositoryClass: FaqRepository::class)]
-#[ApiResource(normalizationContext: ['groups' => ['get_Faq']], order: ['title' => 'ASC'])]
+#[ApiResource(operations: [
+    new Post(
+        uriTemplate: '/faqs',
+        controller: CreateEventController::class,
+        openapiContext: [
+            'summary' => "Création d'une faq",
+            'description' => "Permet la création d'une faq par un utilisateur enseignant ou administrateur.",
+            'responses' => [
+                '201' => ['description' => 'Ressource crée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à créer cette ressource (vous devez être enseignant ou administrateur)"],
+            ],
+        ],
+        denormalizationContext: ['groups' => ['set_Faq']],
+        security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN)"
+    )], normalizationContext: ['groups' => ['get_Faq', 'get_Faq']], order: ['question' => 'ASC'])]
+
 #[ApiFilter(OrderFilter::class, properties: ['question', 'reponse'], arguments: ['orderParameterName' => 'order'])]
 #[ApiFilter(SearchFilter::class, properties: ['question' => 'partial', 'reponse' => 'partial'])]
 #[Get(normalizationContext: ['groups' => ['get_Faq']])]
