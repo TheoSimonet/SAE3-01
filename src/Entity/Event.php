@@ -26,7 +26,7 @@ use ApiPlatform\Metadata\Put;
 #[ORM\Entity(repositoryClass: EventRepository::class)]
 #[ApiResource(operations: [
     new Post(
-        uriTemplate: '/event',
+        uriTemplate: '/events',
         controller: CreateEventController::class,
         openapiContext: [
             'summary' => "Création d'un event",
@@ -40,7 +40,7 @@ use ApiPlatform\Metadata\Put;
         security: "is_granted('ROLE_ENSEIGNANT')"
     ),
     new Delete(
-        uriTemplate: '/event/{id}',
+        uriTemplate: '/events/{id}',
         controller: DeleteEventController::class,
         openapiContext: [
             'summary' => "Suppression d'un event",
