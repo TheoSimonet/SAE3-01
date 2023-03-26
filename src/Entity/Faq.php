@@ -30,7 +30,7 @@ use ApiPlatform\Metadata\Delete;
         uriTemplate: '/faqs',
         controller: CreateFaqController::class,
         openapiContext: [
-            'summary' => "Création d'un event",
+            'summary' => "Création d'une Faq",
             'description' => "Permet la création d'un event par un utilisateur enseignant.",
             'responses' => [
                 '201' => ['description' => 'Ressource crée'],
@@ -44,11 +44,11 @@ use ApiPlatform\Metadata\Delete;
         uriTemplate: '/faqs/{id}',
         controller: DeleteFaqController::class,
         openapiContext: [
-            'summary' => "Suppression d'un event",
-            'description' => "Permet la suppression d'un event par un enseignant.",
+            'summary' => "Suppression d'une Faq",
+            'description' => "Permet la suppression d'une Faq par un administrateur.",
             'responses' => [
                 '204' => ['description' => 'Ressource supprimée'],
-                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être enseignant)"],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être administrateur)"],
             ],
         ],
         security: "is_granted('ROLE_ENSEIGNANT') || is_granted('ROLE_ADMIN')"
