@@ -2,13 +2,32 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use App\Controller\GetSelectionCollectionController;
 use App\Repository\SelectionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SelectionRepository::class)]
+#[ApiResource(operations: [
+    new GetCollection(
+        uriTemplate: '/selections',
+        controller: GetSelectionCollectionController::class,
+        openapiContext: [
+            'summary' => "Récupération des sélections effectuées par l'utilisateur connecté",
+            'description' => "Permet la récupération des sélections effectuées par l'utilisateur connecté.",
+            'responses' => [
+                '200' => ['description' => 'Sélection(s) trouvée(s)'],
+                '401' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette sélection)"],
+                '403' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette sélection)"],
+            ],
+        ],
+        paginationEnabled: false,
+        normalizationContext: ['groups' => ['get_Selection', 'get_Projet', 'get_User']],
+    )])]
 #[Get(normalizationContext: ['groups' => ['get_Selection', 'get_Projet', 'get_User']],
     security: "(is_granted('ROLE_ENSEIGNANT') && object.getIdProjet().getAuthor() == user) || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
 class Selection
