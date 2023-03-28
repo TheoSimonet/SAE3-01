@@ -25,6 +25,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 '403' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette candidature)"],
             ],
         ],
+        paginationEnabled: false,
         normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']]
     )])]
 #[Get(normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']],
