@@ -3,8 +3,11 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use App\Controller\DeleteCandidatureController;
+use App\Controller\DeleteSelectionController;
 use App\Controller\GetCandidatureCollectionController;
 use App\Repository\CandidatureRepository;
 use Doctrine\DBAL\Types\Types;
@@ -25,7 +28,21 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 '403' => ['description' => "Vous n'êtes pas autorisé à voir cette ressource (vous devez être le créateur de cette candidature)"],
             ],
         ],
+        paginationEnabled: false,
         normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']]
+    ),
+    new Delete(
+        uriTemplate: '/candidatures/{id}',
+        controller: DeleteCandidatureController::class,
+        openapiContext: [
+            'summary' => "Suppression d'une candidature à un stage",
+            'description' => "Permet la suppression d'une candidature à un stage par son auteur.",
+            'responses' => [
+                '204' => ['description' => 'Ressource supprimée'],
+                '403' => ['description' => "Vous n'êtes pas autorisé à supprimer cette ressource (vous devez être l'auteur de la candidature)"],
+            ],
+        ],
+        security: "is_granted('ROLE_ETUDIANT')"
     )])]
 #[Get(normalizationContext: ['groups' => ['get_Candidature', 'get_Stage', 'get_User']],
     security: "(is_granted('ROLE_ENTREPRISE') && object.getIdStage().getAuthor() == user) || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
