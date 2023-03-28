@@ -13,6 +13,7 @@ use App\Controller\GetSelectionCollectionController;
 use App\Repository\SelectionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: SelectionRepository::class)]
@@ -61,6 +62,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
     )])]
 #[Get(normalizationContext: ['groups' => ['get_Selection', 'get_Projet', 'get_User']],
     security: "(is_granted('ROLE_ENSEIGNANT') && object.getIdProjet().getAuthor() == user) || (is_granted('ROLE_ETUDIANT') && object.getIdUser().getId() == user.getId())")]
+#[UniqueEntity(
+    fields: ['idProjet', 'idUser'],
+)]
 class Selection
 {
     #[ORM\Id]
