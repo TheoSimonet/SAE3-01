@@ -40,5 +40,4 @@ class SecurityController extends AbstractController
             'email' => $user->getEmail(),
         ]);
     }
-
 }
