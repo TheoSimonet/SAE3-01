@@ -75,7 +75,6 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => ['get_User']],
             denormalizationContext: ['groups' => ['login']],
         ),
-
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
