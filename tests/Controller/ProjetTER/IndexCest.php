@@ -10,7 +10,7 @@ class IndexCest
 {
     public function constainsWhenAdmin(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'root@example.com',
+        $user = UserFactory::createOne([
             'password' => 'admin',
             'roles' => ['ROLE_ADMIN'],
             'firstname' => 'admin',
@@ -32,7 +32,7 @@ class IndexCest
 
     public function redirectionWhenUser(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'teddy.ping@example.com',
+        $user = UserFactory::createOne([
             'password' => 'teddy',
             'roles' => ['ROLE_USER'],
             'firstname' => 'teddy',
@@ -48,7 +48,7 @@ class IndexCest
 
     public function constainsWhenTeacher(ControllerTester $I)
     {
-        $user = UserFactory::createOne(['email' => 'root@example.com',
+        $user = UserFactory::createOne([
             'password' => 'admin',
             'roles' => ['ROLE_ENSEIGNANT'],
             'firstname' => 'admin',

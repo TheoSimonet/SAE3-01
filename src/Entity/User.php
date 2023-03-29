@@ -2,6 +2,14 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use App\Controller\GetMeController;
+use App\Controller\SecurityController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -9,17 +17,82 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(
+            uriTemplate: '/me',
+            controller: GetMeController::class,
+            openapiContext: [
+                'summary' => "Récupérer l'utilisateur courant",
+                'description' => "Permet de récupérer l'utilisateur courant ou de retourner une erreur si aucun utilisateur n'est connecté.",
+                'responses' => [
+                    '200' => ['description' => "Récupération de l'utilisateur courant : OK"],
+                    '401' => ['description' => "/!\ Pas d'utilisateur courant"],
+                ],
+            ],
+            paginationEnabled: false,
+            normalizationContext: ['groups' => ['get_Me', 'get_User']],
+            security: "is_granted('ROLE_USER')"
+        ),
+        new Post(
+            uriTemplate: '/login',
+            controller: SecurityController::class,
+            openapiContext: [
+                'summary' => "Authentification d'un utilisateur",
+                'description' => "Permet à un utilisateur de s'authentifier.",
+                'responses' => [
+                    '200' => ['description' => 'Authentification réussie'],
+                    '401' => ['description' => 'Authentification échouée'],
+                ],
+                'requestBody' => [
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'username' => [
+                                        'type' => 'string',
+                                        'example' => 'test@gmail.com',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'MonMotDePasse',
+                                    ],
+                                ],
+                            ],
+                            'example' => [
+                                'username' => 'test@gmail.com',
+                                'password' => 'MonMotDePasse',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
+            normalizationContext: ['groups' => ['get_User']],
+            denormalizationContext: ['groups' => ['login']],
+        ),
+
+    ],
+    normalizationContext: ['groups' => ['get_User']])]
+#[Get(normalizationContext: ['groups' => ['get_User']])]
+#[Put(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
+#[Patch(denormalizationContext: ['groups' => ['set_User']], security: "is_granted('IS_AUTHENTICATED_FULLY') && object == user")]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['get_User'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Groups(['get_User', 'set_User', 'login'])]
+    #[Assert\Email]
     private ?string $email = null;
 
     #[ORM\Column]
@@ -29,15 +102,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
+    #[Groups(['set_User', 'login'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
+    #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $firstname = null;
 
     #[ORM\Column(length: 40)]
+    #[Groups(['get_User', 'set_User'])]
+    #[Assert\Regex('/^[^<>&"]+$/')]
     private ?string $lastname = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['get_User', 'set_User'])]
     private ?string $phone = null;
 
     #[ORM\OneToMany(mappedBy: 'idUser', targetEntity: Candidature::class, orphanRemoval: true)]
