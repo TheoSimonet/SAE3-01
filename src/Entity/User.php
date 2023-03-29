@@ -48,10 +48,34 @@ use Symfony\Component\Validator\Constraints as Assert;
                     '200' => ['description' => 'Authentification réussie'],
                     '401' => ['description' => 'Authentification échouée'],
                 ],
+                'requestBody' => [
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'username' => [
+                                        'type' => 'string',
+                                        'example' => 'test@gmail.com',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'MonMotDePasse',
+                                    ],
+                                ],
+                            ],
+                            'example' => [
+                                'username' => 'test@gmail.com',
+                                'password' => 'MonMotDePasse',
+                            ],
+                        ],
+                    ],
+                ],
             ],
             normalizationContext: ['groups' => ['get_User']],
             denormalizationContext: ['groups' => ['login']],
         ),
+
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
