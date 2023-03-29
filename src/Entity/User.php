@@ -6,6 +6,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\GetMeController;
 use App\Repository\UserRepository;
@@ -36,6 +37,45 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             security: "is_granted('ROLE_USER')"
         ),
+        new Post(
+            uriTemplate: '/login',
+            controller: SecurityController::class,
+            openapiContext: [
+                'summary' => "Authentification d'un utilisateur",
+                'description' => "Permet à un utilisateur de s'authentifier.",
+                'responses' => [
+                    '200' => ['description' => 'Authentification réussie'],
+                    '401' => ['description' => 'Authentification échouée'],
+                ],
+                'requestBody' => [
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'username' => [
+                                        'type' => 'string',
+                                        'example' => 'test@gmail.com',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'MonMotDePasse',
+                                    ],
+                                ],
+                            ],
+                            'example' => [
+                                'username' => 'test@gmail.com',
+                                'password' => 'MonMotDePasse',
+                            ],
+                        ],
+                    ],
+                ],
+
+            ],
+            normalizationContext: ['groups' => ['get_User']],
+            denormalizationContext: ['groups' => ['login']],
+        ),
+
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
@@ -51,7 +91,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Groups(['get_User', 'set_User'])]
+    #[Groups(['get_User', 'set_User', 'login'])]
     #[Assert\Email]
     private ?string $email = null;
 
@@ -62,7 +102,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['set_User'])]
+    #[Groups(['set_User', 'login'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
