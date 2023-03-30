@@ -40,11 +40,8 @@ class SecurityController extends AbstractController
             'email' => $user->getEmail(),
         ]);
     }
+    
 
-    /**
-     * Permet de déconnecter un utilisateur
-     * @return void
-     */
     #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
     public function APILogout()
     {
