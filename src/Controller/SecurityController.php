@@ -31,7 +31,7 @@ class SecurityController extends AbstractController
     }
 
     #[Route(path: '/api/login', name: 'api_login', methods: ['POST'])]
-    public function ApiLogin()
+    public function APILogin()
     {
         $user = $this->getUser();
 
@@ -39,5 +39,10 @@ class SecurityController extends AbstractController
             'id' => $user->getId(),
             'email' => $user->getEmail(),
         ]);
+    }
+    
+    #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
+    public function APILogout()
+    {
     }
 }
