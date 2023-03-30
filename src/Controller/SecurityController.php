@@ -41,6 +41,10 @@ class SecurityController extends AbstractController
         ]);
     }
 
+    /**
+     * Permet de déconnecter un utilisateur
+     * @return void
+     */
     #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
     public function APILogout()
     {
