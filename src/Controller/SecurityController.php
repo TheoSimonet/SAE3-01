@@ -45,6 +45,4 @@ class SecurityController extends AbstractController
     public function APILogout()
     {
     }
-
-
 }
