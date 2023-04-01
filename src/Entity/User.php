@@ -6,8 +6,10 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Controller\GetMeController;
+use App\Controller\SecurityController;
 use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -36,6 +38,57 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => ['get_Me', 'get_User']],
             security: "is_granted('ROLE_USER')"
         ),
+        new Post(
+            uriTemplate: '/login',
+            controller: SecurityController::class,
+            openapiContext: [
+                'tags' => ['Authentification'],
+                'summary' => "Authentification d'un utilisateur",
+                'description' => "Permet à un utilisateur de s'authentifier.",
+                'responses' => [
+                    '200' => ['description' => 'Authentification réussie'],
+                    '401' => ['description' => 'Authentification échouée'],
+                ],
+                'requestBody' => [
+                    'content' => [
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'username' => [
+                                        'type' => 'string',
+                                        'example' => 'test@gmail.com',
+                                    ],
+                                    'password' => [
+                                        'type' => 'string',
+                                        'example' => 'MonMotDePasse',
+                                    ],
+                                ],
+                            ],
+                            'example' => [
+                                'username' => 'test@gmail.com',
+                                'password' => 'MonMotDePasse',
+                            ],
+                        ],
+                    ],
+                ],
+
+            ],
+            normalizationContext: ['groups' => ['get_User']],
+            denormalizationContext: ['groups' => ['login']],
+        ),
+        new Post(
+            uriTemplate: '/logout',
+            controller: SecurityController::class,
+            openapiContext: [
+                'tags' => ['Authentification'],
+                'summary' => "Déconnexion d'un utilisateur",
+                'description' => "Permet à un utilisateur de se déconnecter.",
+                'responses' => [
+                    '200' => ['description' => 'Déconnexion réussie'],
+                ],
+            ],
+        )
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
