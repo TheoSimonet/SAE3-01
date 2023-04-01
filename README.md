@@ -36,3 +36,5 @@ Correction du code :
 
 Lancement des tests :
 * ``composer test:codeception``
+
+test-push dépôt distant
