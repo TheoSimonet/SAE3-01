@@ -42,6 +42,7 @@ use Symfony\Component\Validator\Constraints as Assert;
             uriTemplate: '/login',
             controller: SecurityController::class,
             openapiContext: [
+                'tags' => ['Authentification'],
                 'summary' => "Authentification d'un utilisateur",
                 'description' => "Permet à un utilisateur de s'authentifier.",
                 'responses' => [
@@ -75,6 +76,18 @@ use Symfony\Component\Validator\Constraints as Assert;
             normalizationContext: ['groups' => ['get_User']],
             denormalizationContext: ['groups' => ['login']],
         ),
+        new Post(
+            uriTemplate: '/logout',
+            controller: SecurityController::class,
+            openapiContext: [
+                'tags' => ['Authentification'],
+                'summary' => "Déconnexion d'un utilisateur",
+                'description' => "Permet à un utilisateur de se déconnecter.",
+                'responses' => [
+                    '200' => ['description' => 'Déconnexion réussie'],
+                ],
+            ],
+        )
     ],
     normalizationContext: ['groups' => ['get_User']])]
 #[Get(normalizationContext: ['groups' => ['get_User']])]
@@ -174,7 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -182,7 +195,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
