@@ -53,4 +53,20 @@ class SecurityController extends AbstractController
     {
         return new Response('', Response::HTTP_NO_CONTENT);
     }
+
+    #[Route(path: '/api/login', name: 'api_login', methods: ['POST'])]
+    public function APILogin()
+    {
+        $user = $this->getUser();
+
+        return $this->json([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+        ]);
+    }
+
+    #[Route(path: '/api/logout', name: 'api_logout', methods: ['POST'])]
+    public function APILogout()
+    {
+    }
 }

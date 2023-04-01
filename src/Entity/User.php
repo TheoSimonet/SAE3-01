@@ -72,7 +72,6 @@ use Symfony\Component\Validator\Constraints as Assert;
                         ],
                     ],
                 ],
-
             ],
             normalizationContext: ['groups' => ['get_User']],
             denormalizationContext: ['groups' => ['login']],
@@ -104,7 +103,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
-    #[Groups(['get_User', 'set_User'])]
+    #[Groups(['get_User', 'set_User', 'login'])]
     #[Assert\Email]
     private ?string $email = null;
 
@@ -115,7 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      */
     #[ORM\Column]
-    #[Groups(['set_User'])]
+    #[Groups(['set_User', 'login'])]
     private ?string $password = null;
 
     #[ORM\Column(length: 30)]
@@ -188,7 +187,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -196,7 +195,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUsername(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
